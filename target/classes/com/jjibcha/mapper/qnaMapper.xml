@@ -24,7 +24,7 @@
 	   		)
    		)
    		where rnum between #{startRow} and #{endRow}
-   		]]> 
+   		]]> <!--  -->
   	</select>
   	
   	<!-- 전체 데이터 가져오기 -->
