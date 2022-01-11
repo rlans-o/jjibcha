@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.QnAMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.qnaMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.QnAMapper">
+  	
+  	<select id="qna" resultType="com.jjibcha.vo.QnAVO" parameterType="java.lang.Integer">
+<!--   		CDATA는 mybatis가 처리하지 않고 그대로 넘긴다. -->
+   		<![CDATA[
+   		select *
+   		from(
+   			select rownum rnum, qna_no, qna_title, qna_writer, qna_writerDate, qna_count
+	   		from(  
+		   		select qna_no, qna_title, qna_writer, qna_writerDate, qna_count
+		   		from qna 
+		   		order by qna_no desc 
+	   		)
+   		)
+   		where rnum between #{startRow} and #{endRow}
+   		]]> 
+  	</select>
+  	
+  	<!-- 전체 데이터 가져오기 -->
+  	<select id="getRow" resultType="java.lang.Integer">
+   		<![CDATA[
+   		select count(*)
+   		from qna
+   		]]> 
+  	</select>
+  	
+  	<insert id="write" >
+   		<![CDATA[  
+   		insert into qna(qna_no, qna_title, qna_content, qna_writer, qna_pw)
+   		values(#{qna_no}, #{qna_title}, #{qna_content}, #{qna_writer}, #{qna_pw})   		
+   		]]> 
+  	</insert>
+  	
+  	<select id="view" resultType="com.jjibcha.vo.QnAVO">
+   		<![CDATA[  
+   		select qna_no, qna_title, qna_content, qna_writer, qna_writerDate, qna_count
+   		from qna 
+   		where qna_no = #{qna_no}
+   		]]> 
+  	</select>
+  	
+  	<!-- 조회수 1 증가 -->
+  	<update id="increase">
+  		<![CDATA[
+  		update qna
+  		set qna_count = qna_count + 1
+  		where qna_no = #{qna_no}
+  		]]>
+  	</update>
+  	
+  	<!-- 게시판 글수정 -->
+  	<update id="update" >
+  		<![CDATA[
+  		update qna
+  		set qna_title = #{qna_title}, qna_content = #{qna_content}, qna_writer = #{qna_writer}
+  		where qna_no = #{qna_no} and qna_pw = #{qna_pw}
+  		]]>
+  	</update>
+  	
+  	<!-- 게시판 글삭제 -->
+  	<delete id="delete" >
+  		<![CDATA[
+  		delete from qna
+  		where qna_no = #{qna_no} and qna_pw = #{qna_pw}
+  		]]>
+  	</delete>
+  	
+  </mapper>
