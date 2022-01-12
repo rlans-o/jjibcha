@@ -11,9 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jjibcha.service.QnAService;
-
+import com.jjibcha.vo.PagingVO;
 import com.jjibcha.vo.QnAVO;
 
 
@@ -30,12 +31,27 @@ public class QnAController {
 	// QnA 게시판 페이지
 	   @RequestMapping(value = "/QnA/list.do", method = RequestMethod.GET)
 	   // PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
-		public String getQnA(Model model, HttpServletRequest request) throws Exception {
+		public String getQnA(Model model, HttpServletRequest request, PagingVO vo
+												, @RequestParam(value = "nowPage", required = false)String nowPage
+												, @RequestParam(value = "cntPerPage", required = false)String cntPerPage) throws Exception {
 		   logger.info("getQnA");
+		   
+		   int total = service.getRow();
+		   if(nowPage == null && cntPerPage == null) {
+			   nowPage = "1";
+			   cntPerPage = "5";
+		   } else if (nowPage == null) {
+			   nowPage = "1";
+		   } else if (cntPerPage == null) {
+			   cntPerPage = "5";
+		   }
+		   
+		   vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		   
 		   // model에 데이터를 담으면 request에 데이터가 담기게 된다.
 		   // jsp에서 꺼내 쓸때는 ${qna} == ${requestScope.qna}
-		   model.addAttribute("list", service.qna());
+		   model.addAttribute("paging", vo);
+		   model.addAttribute("list", service.qna(vo));
 		   
 		   return "/qna/QnA";
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.jjibcha.vo.PagingVO;
 import com.jjibcha.vo.QnAVO;
 
 
@@ -13,7 +14,7 @@ import com.jjibcha.vo.QnAVO;
 public interface QnAMapper {
 
 	// qna list - 전체 데이터 구하기
-	public List<QnAVO> qna();
+	public List<QnAVO> qna(PagingVO vo);
 	public Integer getRow();
 	
 	// view - 조회수 1증가

@@ -10,25 +10,18 @@
   			- src/main/resources -->
   
   <mapper namespace="com.jjibcha.mapper.QnAMapper">
-  	
-  	<select id="qna" resultType="com.jjibcha.vo.QnAVO" parameterType="java.lang.Integer">
-<!--   		CDATA는 mybatis가 처리하지 않고 그대로 넘긴다. -->
-   		<![CDATA[
-   		select *
-   		from(
-   			select rownum rnum, qna_no, qna_title, qna_writer, qna_writerDate, qna_count
-	   		from(  
-		   		select qna_no, qna_title, qna_writer, qna_writerDate, qna_count
-		   		from qna 
-		   		order by qna_no desc 
-	   		)
-   		)
-   		where rnum between #{startRow} and #{endRow}
-   		]]>
-  	</select>
+  	  	
+<!-- 페이징 처리 후 게시글 조회 -->
+<select id="qna" resultType="com.jjibcha.vo.QnAVO">
+	SELECT *
+FROM qna
+ORDER BY qna_no DESC
+LIMIT #{start}, #{end}
+
+</select>
   	
   	<!-- 전체 데이터 가져오기 -->
-  	<select id="getRow" resultType="java.lang.Integer">
+  	<select id="getRow" resultType="int">
    		<![CDATA[
    		select count(*)
    		from qna
