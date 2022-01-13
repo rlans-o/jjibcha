@@ -42,7 +42,7 @@
 			<div id="in_header">
 
 				<div id="logo">
-					<a href="index"><img src="/resources/image/jjibchalogo.png" alt="" /></a>
+					<a href="/index"><img src="/resources/image/jjibchalogo.png" alt="" /></a>
 				</div>
 				<ul id="menu_wrap">
 					<li><a href="#">BEST</a></li>
@@ -50,7 +50,7 @@
 					<li><a href="#">TABLE</a></li>
 					<li><a href="#">CHAIR</a></li>
 					<li><a href="/QnA/list.do">QnA</a></li>
-					<li><a href="#">Review</a></li>
+					<li><a href="/Review/list.do">Review</a></li>
 				</ul>
 				
 				<ul id="menu_login">

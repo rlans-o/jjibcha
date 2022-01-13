@@ -1,22 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<%@ include file="../layout/header.jsp"%>
 
 <script type="text/javascript">
 	$(function () {
@@ -36,8 +24,15 @@
 	});
 </script>
 
-<body>
-<div class="container">
+<style>
+
+.allblock {
+	margin-top: 200px;
+}
+
+</style>
+
+<div class="allblock">
 	<h1>게시판 글보기</h1>
 	<table class="table">
 		<tr>
@@ -69,9 +64,9 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<a href="QnA/update.do?qna_no=${vo.qna_no}" class="btn btn-primary">수정</a>
+				<a href="/Review/update.do?qna_no=${vo.qna_no}" class="btn btn-primary">수정</a>
 				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
-				<a href="QnA/list.do" class="btn btn-primary">리스트</a>
+				<a href="/Review/list.do" class="btn btn-primary">리스트</a>
 			</td>
 		</tr>
 	</table>
@@ -79,10 +74,9 @@
 
 <!-- 삭제를 위한 form tag -->
 
-<form action="QnA/delete.do" method="post" id="deleteForm">
+<form action="/Review/delete.do" method="post" id="deleteForm">
 	<input type="hidden" name="qna_no" value="${vo.qna_no }" />
 	<input type="hidden" name="qna_pw" id="deletePw" />
 </form>
 
-</body>
-</html>
+	<%@ include file="../layout/footer.jsp"%>

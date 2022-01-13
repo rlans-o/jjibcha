@@ -1,22 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<%@ include file="../layout/header.jsp"%>
 
 <script type="text/javascript">
 	$(function () {
@@ -36,9 +24,16 @@
 	});
 </script>
 
-<body>
-<div class="container">
-	<h1>게시판 글보기</h1>
+<style>
+
+.allblock {
+	margin-top: 200px;
+}
+
+</style>
+
+<div class="allblock">
+	<h1 align="center">게시판 글보기</h1>
 	<table class="table">
 		<tr>
 			<th>번호</th>
@@ -84,5 +79,4 @@
 	<input type="hidden" name="qna_pw" id="deletePw" />
 </form>
 
-</body>
-</html>
+	<%@ include file="../layout/footer.jsp"%>

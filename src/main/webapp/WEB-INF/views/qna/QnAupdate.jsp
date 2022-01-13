@@ -1,21 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>글수정</title>
-</head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<%@ include file="../layout/header.jsp"%>
 
 <script type="text/javascript">
 $(function () {
@@ -25,9 +13,17 @@ $(function () {
 });
 </script>
 
+<style>
+
+.allblock {
+	margin-top: 200px;
+}
+
+</style>
+
 <body>
-<div class="container">
-	<h1>QnA 글 수정</h1>
+<div class="allblock">
+	<h1 align="center">QnA 글 수정</h1>
 	<form method="post" >
 	
 		<div class="form-group">
@@ -59,12 +55,12 @@ $(function () {
 			required="required" pattern=".{3,50}" maxlength="50"> 
 		</div>
 		
-		<button>수정</button>
-		<button type="reset">새로입력</button>
-		<button type="button" class="cancelBtn">취소</button>
+		<button class="btn btn-primary">수정</button>
+		<button type="reset" class="btn btn-primary">새로입력</button>
+		<button type="button" class="cancelBtn" class="btn btn-primary">취소</button>
 	
 	</form>
 	
 </div>
-</body>
-</html>
+
+	<%@ include file="../layout/footer.jsp"%>

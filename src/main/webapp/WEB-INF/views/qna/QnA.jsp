@@ -1,50 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>QnA</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<style type="text/css">
+<%@ include file="../layout/header.jsp"%>
+
+<style>
+
+.allblock {
+	margin-top: 200px;
+}
+
 .dataRow:hover {
 	background: #ccc;
 	cursor: pointer;
 }
+
 </style>
 
-</head>
-<body>
-	
+
+	<div class="allblock" >
 	<h1 align="center">QnA 게시판</h1>
-	
-	<div class="panel-heading" style="font-size: 20px; color: blue;">
 
+<!-- 검색 기능 -->
+<div>
+  <form class="navbar-form">
+    <div class="input-group">
+     <div class="form-group navbar-left">
+      <select name="key" class="form-control">
+       <!-- selected="select" or selected -->
+       <option value="t" ${(paging.key == "t")? " selected ":"" }>제목</option>
+       <option value="c" ${(paging.key == "c")? " selected ":"" }>내용</option>
+       <option value="w" ${(paging.key == "w")? " selected ":"" }>작성자</option>
+       <option value="tc" ${(paging.key == "tc")? " selected ":"" }>제목/내용</option>
+       <option value="tw" ${(paging.key == "tw")? " selected ":"" }>제목/작성자</option>
+       <option value="cw" ${(paging.key == "cw")? " selected ":"" }>내용/작성자</option>
+       <option value="tcw" ${(paging.key == "tcw")? " selected ":"" }>전체</option>
+      </select>
 
-		<select id="gubun">
-			<option value="1">제목</option>
-			<option value="2">작성자</option>
-			<option value="3">제목+작성자</option>
-		</select> <input type="text" id="keyword" />
-		<button id="search" class="btn btn-defalut" onclick="fnSearch()">search</button>
-	</div>
+       <input type="text" class="form-control" placeholder="Search" name="word" value="${paging.word }">
+
+</div>
+
+      <div class="input-group-btn">
+
+        <button class="btn btn-default" type="submit">
+
+          <i class="glyphicon glyphicon-search"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+ </div>
 	
 	<div style="float: right;">
 		<select id="cntPerPage" name="sel" onchange="selChange()">
@@ -120,6 +133,10 @@
 			<a href="/QnA/list.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 	</div>
+	
+	</div>
+	
+	
 
 
 	<script type="text/javascript">
@@ -169,6 +186,6 @@
 
 		}
 	</script>
+	
+	<%@ include file="../layout/footer.jsp"%>
 
-</body>
-</html>
