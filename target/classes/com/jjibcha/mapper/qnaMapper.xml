@@ -19,7 +19,7 @@
 		from qna
 		<include refid="search" />
 		order by qna_no desc
-		limit #{start}, #{end}
+		limit #{startRow}, #{endRow}
 	</select>
   	
   	<!-- 전체 데이터 가져오기 : 검색 적용 -->
@@ -33,40 +33,40 @@
   	<sql id="search">
   	<!-- 검색처리를 하는 부분 -->
 	  <if test="word !=null and word != ''.toString">
-	   
+	   where ( 2 = 1
 	   <!-- 2글자 이상인 경우 : String 취급,
 	     한 글자인 경우:char 취급 => toString()를 이용해서 문자열로 만듬-->
 	   <if test="key == 't'.toString()">
-	    <!-- concat(문자열, 문자열) : 2개만 연결,
-	      "||" : 문자열 이어 붙이는 연산자 -->
-	       and qna_title like concat ('%',#{word}'%')
+	 
+	       or qna_title like concat('%', #{word}, '%')
 	   </if>
 	   <if test="key == 'c'.toString()">
-	          and qna_content like concat ('%',#{word}'%')
+	          or qna_content like concat('%', #{word}, '%')
 	   </if>
 	   <if test="key == 'w'.toString()">
-	          and qna_writer like concat ('%',#{word}'%')
+	          or qna_writer like concat('%', #{word}, '%')
 	   </if>
 	   <if test="key == 'tc'.toString()">
-	          and (qna_title like concat ('%',#{word}'%')
-	          or qna_content like concat ('%',#{word}'%'))
+	          or qna_title like concat('%', #{word}, '%')
+	          or qna_content like concat('%', #{word}, '%')
 	   </if>
 	   <if test="key == 'tw'.toString()">
-	          and (qna_title like concat ('%',#{word}'%')
-	          or qna_writer like concat ('%',#{word}'%'))
+	          or qna_title like concat('%', #{word}, '%')
+	          or qna_writer like concat('%', #{word}, '%')
 	   </if>
 	   <if test="key == 'cw'.toString()">
-	          and (qna_content like concat ('%',#{word}'%')
-	          or qna_writer like concat ('%',#{word}'%'))
+	          or qna_content like concat('%', #{word}, '%')
+	          or qna_writer like concat('%', #{word}, '%')
 	   </if>
-	   <if test="key == 'tcw'.toString()">
-	          and (qna_title like concat ('%',#{word}'%')
-	          or qna_content like concat ('%',#{word}'%')
-	          or qna_writer like concat ('%',#{word}'%'))
+	   <if test="key == 'all'">
+	          or qna_title like concat('%', #{word}, '%')
+	          or qna_content like concat('%', #{word}, '%')
+	          or qna_writer like concat('%', #{word}, '%')
 	   </if>
 	   )
 	  </if>
   	</sql>
+ 
   	
   	<insert id="write" >
    		<![CDATA[  

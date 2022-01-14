@@ -178,7 +178,14 @@
 		</dependency>
 		
 		<!-- 페이지 관련 -->
-	
+		
+		<dependency>
+			<groupId>net.webjjang</groupId>
+			<artifactId>pageObject</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/pageObject.jar</systemPath>
+		</dependency>
 		
 		<!-- DB -->
 

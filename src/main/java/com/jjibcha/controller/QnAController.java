@@ -5,17 +5,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jjibcha.service.QnAService;
-import com.jjibcha.vo.PagingVO;
 import com.jjibcha.vo.QnAVO;
+
+import net.webjjang.util.PageObject;
 
 
 
@@ -31,27 +29,15 @@ public class QnAController {
 	// QnA 게시판 페이지
 	   @RequestMapping(value = "/QnA/list.do", method = RequestMethod.GET)
 	   // PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
-		public String getQnA(Model model, HttpServletRequest request, PagingVO vo
-												, @RequestParam(value = "nowPage", required = false)String nowPage
-												, @RequestParam(value = "cntPerPage", required = false)String cntPerPage) throws Exception {
+		public String getQnA(Model model, HttpServletRequest request, PageObject pageObject) throws Exception {
 		   logger.info("getQnA");
-		   
-		   int total = service.getRow();
-		   if(nowPage == null && cntPerPage == null) {
-			   nowPage = "1";
-			   cntPerPage = "5";
-		   } else if (nowPage == null) {
-			   nowPage = "1";
-		   } else if (cntPerPage == null) {
-			   cntPerPage = "5";
-		   }
-		   
-		   vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		   
+		
 		   // model에 데이터를 담으면 request에 데이터가 담기게 된다.
-		   // jsp에서 꺼내 쓸때는 ${qna} == ${requestScope.qna}
-		   model.addAttribute("paging", vo);
-		   model.addAttribute("list", service.qna(vo));
+		   // jsp에서 꺼내 쓸때는 ${list} == ${requestScope.list}		   
+		   model.addAttribute("list", service.qna(pageObject));
+		   // 하단 부분의 페이지네이션 처리를 위해서 pageObject가 필요함
+		   // 2페이지 이상이되면 페이지네이션을 표시한다.
+		   model.addAttribute("pageObject", pageObject);
 		   
 		   return "/qna/QnA";
 		}

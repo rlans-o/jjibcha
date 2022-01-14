@@ -2,14 +2,15 @@ package com.jjibcha.service;
 
 import java.util.List;
 
-import com.jjibcha.vo.PagingVO;
 import com.jjibcha.vo.QnAVO;
+
+import net.webjjang.util.PageObject;
 
 
 public interface QnAService {
 
 	// list
-	public List<QnAVO> qna(PagingVO vo) throws Exception;
+	public List<QnAVO> qna(PageObject pageObject) throws Exception;
 	public int getRow();
 	
 	// view

@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jjibcha.mapper.QnAMapper;
-import com.jjibcha.vo.PagingVO;
+
 import com.jjibcha.vo.QnAVO;
+
+import net.webjjang.util.PageObject;
 
 
 
@@ -24,11 +26,12 @@ public class QnAServiceImpl implements QnAService {
 	private QnAMapper mapper;
 	
 	@Override
-	public List<QnAVO> qna(PagingVO vo) throws Exception {
+	public List<QnAVO> qna(PageObject pageObject) throws Exception {
 		
 		// getRow() 메서드를 이용해서 전체데이터를 셋팅하면 계산이 되어진다.
-		
-		return mapper.qna(vo);
+		pageObject.setTotalRow(mapper.getRow());
+		log.info("pageobject", pageObject);
+		return mapper.qna(pageObject);
 	}
 	
 	@Override
