@@ -10,8 +10,8 @@ import net.webjjang.util.PageObject;
 public interface QnAService {
 
 	// list
-	public List<QnAVO> qna(PageObject pageObject) throws Exception;
-	public int getRow();
+	public List<QnAVO> list(PageObject pageObject) throws Exception;
+	public int getRow(PageObject pageObject);
 	
 	// view
 	public QnAVO view(int qna_no, int inc);

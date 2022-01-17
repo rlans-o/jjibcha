@@ -21,6 +21,21 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 파일 업로드 관련 -->
+	<beans:bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<!-- upload를 위한 설정 : 한글 엔코딩 -->
+			<beans:property name="defaultEncoding" value="utf-8" />
+			<!-- upload를 위한 설정 : 전체 파일들의 크기의 합 : 약 1G -->
+			<beans:property name="maxUploadSize" value="1048575600" />
+			<!-- upload를 위한 설정 : 파일한개의 최대 크기 : 약 20M -->
+			<beans:property name="maxUploadSizePerFile" value="20971520" />
+			<!-- upload를 위한 설정 : 올라오는 파일의 임시적으로 저장하는 위치 -->
+			<beans:property name="uploadTempDir" value="file:C:/upload/tmp" /> <!-- temp이기때문에 잠시 저장 -->
+			<!-- upload를 위한 설정 : 올라오는 파일이 작은 경우 메모리를 사용하게 되는데 메모리를 사용하는 최대 파일의 크기 : 약 10M -->
+			<beans:property name="maxInMemorySize" value="10485756" />
+	</beans:bean>
+	
 	<context:component-scan base-package="com.jjibcha" />
 	
 	

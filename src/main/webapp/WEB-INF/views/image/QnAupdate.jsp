@@ -49,6 +49,12 @@ $(function () {
 			required="required" pattern="[가-하a-zA-Z]{2,10}" maxlength="10" value="${vo.qna_writer }"> 
 		</div>
 		
+		<div class="form-group">
+			<label for="qna_pw">비밀번호(확인용) :</label>
+			<input type="password" class="form-control" id="qna_pw" name="qna_pw"
+			required="required" pattern=".{3,50}" maxlength="50"> 
+		</div>
+		
 		<button class="btn btn-primary">수정</button>
 		<button type="reset" class="btn btn-primary">새로입력</button>
 		<button type="button" class="cancelBtn" class="btn btn-primary">취소</button>

@@ -14,7 +14,7 @@
   	<!-- 게시판 리스트 : 검색 적용 -->
   	
 	<!-- 페이징 처리 후 게시글 조회 -->
-	<select id="qna" resultType="com.jjibcha.vo.QnAVO">
+	<select id="list" resultType="com.jjibcha.vo.QnAVO">
    		select *
 		from qna
 		<include refid="search" />

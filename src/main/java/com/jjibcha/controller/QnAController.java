@@ -34,7 +34,7 @@ public class QnAController {
 		
 		   // model에 데이터를 담으면 request에 데이터가 담기게 된다.
 		   // jsp에서 꺼내 쓸때는 ${list} == ${requestScope.list}		   
-		   model.addAttribute("list", service.qna(pageObject));
+		   model.addAttribute("list", service.list(pageObject));
 		   // 하단 부분의 페이지네이션 처리를 위해서 pageObject가 필요함
 		   // 2페이지 이상이되면 페이지네이션을 표시한다.
 		   model.addAttribute("pageObject", pageObject);
