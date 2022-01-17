@@ -30,10 +30,10 @@ public class ImageController {
 	private ImageService service; 
 	
 	// QnA 게시판 페이지
-	   @RequestMapping(value = "/QnA/list.do", method = RequestMethod.GET)
+	   @RequestMapping(value = "/Image/list.do", method = RequestMethod.GET)
 	   // PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
 		public String getQnAList(Model model, HttpServletRequest request, PageObject pageObject) throws Exception {
-		   log.info("getQnA");
+		   log.info("getImage");
 		
 		   // model에 데이터를 담으면 request에 데이터가 담기게 된다.
 		   // jsp에서 꺼내 쓸때는 ${list} == ${requestScope.list}		   
