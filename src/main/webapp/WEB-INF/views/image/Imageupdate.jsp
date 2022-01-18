@@ -27,33 +27,28 @@ $(function () {
 	<form method="post" >
 	
 		<div class="form-group">
-			<label for="title">번호 : </label>
+			<label for="image_no">번호 : </label>
 			<input type="text" class="form-control" id="no" name="no" 
-			readonly="readonly" value="${vo.qna_no} "> 
+			readonly="readonly" value="${vo.image_no} "> 
 		</div>
 		
 		<div class="form-group">
-			<label for="qna_title">제목 : </label>
-			<input type="text" class="form-control" id="qna_title" name="qna_title" 
-			required="required" pattern=".{4,100}" maxlength="100" value="${vo.qna_title }"> 
+			<label for="image_title">제목 : </label>
+			<input type="text" class="form-control" id="image_title" name="image_title" 
+			required="required" pattern=".{4,100}" maxlength="100" value="${vo.image_title }"> 
 		</div>
 		
 		<div class="form-group">
-			<label for="qna_content">내용 :</label>
-			<textarea class="form-control" rows="5" id="qna_content" name="qna_content">${vo.qna_content }</textarea>
+			<label for="image_content">내용 :</label>
+			<textarea class="form-control" rows="5" id="image_content" name="image_content">${vo.image_content }</textarea>
 		</div>
 		
 		<div class="form-group">
-			<label for="qna_writer">작성자 :</label>
-			<input type="text" class="form-control" id="qna_writer" name="qna_writer"
-			required="required" pattern="[가-하a-zA-Z]{2,10}" maxlength="10" value="${vo.qna_writer }"> 
+			<label for="image_writer">작성자 :</label>
+			<input type="text" class="form-control" id="image_writer" name="image_writer"
+			required="required" pattern="[가-하a-zA-Z]{2,10}" maxlength="10" value="${vo.image_writer }"> 
 		</div>
 		
-		<div class="form-group">
-			<label for="qna_pw">비밀번호(확인용) :</label>
-			<input type="password" class="form-control" id="qna_pw" name="qna_pw"
-			required="required" pattern=".{3,50}" maxlength="50"> 
-		</div>
 		
 		<button class="btn btn-primary">수정</button>
 		<button type="reset" class="btn btn-primary">새로입력</button>

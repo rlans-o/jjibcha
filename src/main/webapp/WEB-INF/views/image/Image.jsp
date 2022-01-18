@@ -68,12 +68,12 @@
 					<c:when test="${list.size()>0 }">
 						<c:forEach items="${list }" var="list">
 							<tr class="dataRow">
-								<td class="qna_no">${list.qna_no}</td>
-								<td>${list.fileNmae}</td>
-								<td>${list.qna_title }</td>
-								<td>${list.qna_writer }</td>
+								<td class="image_no">${list.image_no}</td>
+								<td>${list.fileName}</td>
+								<td>${list.image_title }</td>
+								<td>${list.image_writer }</td>
 								<td>
-									<fmt:formatDate value="${list.qna_writerDate }"
+									<fmt:formatDate value="${list.image_writerDate }"
 									pattern="yyyy.MM.dd"/>
 								</td>
 							</tr>
@@ -90,12 +90,12 @@
 			</table>
 		</div>
 
-		<a href="/QnA/write.do" class="btn btn-primary">등록</a>
+		<a href="/Image/write.do" class="btn btn-primary">등록</a>
 	</div>
 	
 	<c:if test="${pageObject.totalPage > 1 }">
 		<!-- 전체 페이지가 2페이지 이상이면 보여주는 부분 -->
-		<pageNav:pageNav pageObject="${pageObject }" listURI="/QnA/list.do" />
+		<pageNav:pageNav pageObject="${pageObject }" listURI="/Image/list.do" />
 	</c:if>
 	</div>
 	
@@ -107,43 +107,11 @@
 	$(function () {
 		$(".dataRow").click(function () {
 			// 글번호 찾기
-			var qna_no = $(this).find(".qna_no").text();
-			location = "/QnA/view.do?qna_no="+ qna_no + "&inc=1";
+			var image_no = $(this).find(".image_no").text();
+			location = "/Image/view.do?image_no="+ image_no + "&inc=1";
 		});
 	});
-	
-		
-		function fnSearch() {
 
-			var keyword = $("#keyword").val();
-			var gubun = $("#gubun").val();
-
-			var pageView = "list_table";
-
-			if (keyword == '') {
-				alert("한글자 이상 검색어를 입력하세요");
-
-				return;
-
-			}
-
-			$.ajax({
-
-				type : "post",
-				url : "/QnA/list.do",
-				dataType : "html",
-				data : {
-					keyword : keyword,
-					pageView : pageView,
-					gubun : gubun
-				}
-
-			}).done(function(data) {
-
-
-			});
-
-		}
 	</script>
 	
 	<%@ include file="../layout/footer.jsp"%>

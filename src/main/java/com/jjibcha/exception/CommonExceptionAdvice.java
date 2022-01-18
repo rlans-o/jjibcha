@@ -16,11 +16,11 @@ public class CommonExceptionAdvice {
 	// 예외를 처리하는 메소드 - 예외의 종류가 Exception인 것을 처리한다.
 	@ExceptionHandler(Exception.class)
 	public String exception(Exception ex, Model model) {
-		
+	
 		log.error("Exception.." + ex.getMessage());
 		model.addAttribute("exception",ex);
 		
 		return "error_page";
 	} 
-	
+
 }

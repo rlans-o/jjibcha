@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ReviewMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.reviewMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.ReviewMapper">
+  	
+  	<!-- 게시판 리스트 : 검색 적용 -->
+  	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="list" resultType="com.jjibcha.vo.ReviewVO">
+   		select *
+		from review
+		<include refid="search" />
+		order by review_no desc
+		limit #{startRow}, #{endRow}
+	</select>
+  	
+  	<!-- 전체 데이터 가져오기 : 검색 적용 -->
+  	<select id="getRow" resultType="int">
+   		select count(*)
+   		from review
+		<include refid="search" />
+  	</select>
+  	
+  	<!-- 검색에 사용되는 조건 처리문 -->
+  	<sql id="search">
+  	<!-- 검색처리를 하는 부분 -->
+	  <if test="word !=null and word != ''.toString">
+	   where ( 2 = 1
+	   <!-- 2글자 이상인 경우 : String 취급,
+	     한 글자인 경우:char 취급 => toString()를 이용해서 문자열로 만듬-->
+	   <if test="key == 't'.toString()">
+	 
+	       or review_title like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'c'.toString()">
+	          or review_content like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'w'.toString()">
+	          or review_writer like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'tc'.toString()">
+	          or review_title like concat('%', #{word}, '%')
+	          or review_content like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'tw'.toString()">
+	          or review_title like concat('%', #{word}, '%')
+	          or review_writer like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'cw'.toString()">
+	          or review_content like concat('%', #{word}, '%')
+	          or review_writer like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'all'">
+	          or review_title like concat('%', #{word}, '%')
+	          or review_content like concat('%', #{word}, '%')
+	          or review_writer like concat('%', #{word}, '%')
+	   </if>
+	   )
+	  </if>
+  	</sql>
+ 
+  	
+  	<insert id="write" >
+   		<![CDATA[  
+   		insert into review(review_no, review_title, review_content, review_writer, review_pw)
+   		values(#{review_no}, #{review_title}, #{review_content}, #{review_writer}, #{review_pw})   		
+   		]]> 
+  	</insert>
+  	
+  	<select id="view" resultType="com.jjibcha.vo.ReviewVO">
+   		<![CDATA[  
+   		select review_no, review_title, review_content, review_writer, review_writerDate, review_count
+   		from review 
+   		where review_no = #{review_no}
+   		]]> 
+  	</select>
+  	
+  	<!-- 조회수 1 증가 -->
+  	<update id="increase">
+  		<![CDATA[
+  		update review
+  		set review_count = review_count + 1
+  		where review_no = #{review_no}
+  		]]>
+  	</update>
+  	
+  	<!-- 게시판 글수정 -->
+  	<update id="update" >
+  		<![CDATA[
+  		update review
+  		set review_title = #{review_title}, review_content = #{review_content}, review_writer = #{review_writer}
+  		where review_no = #{review_no} and review_pw = #{review_pw}
+  		]]>
+  	</update>
+  	
+  	<!-- 게시판 글삭제 -->
+  	<delete id="delete" >
+  		<![CDATA[
+  		delete from review
+  		where review_no = #{review_no} and review_pw = #{review_pw}
+  		]]>
+  	</delete>
+  	
+  </mapper>

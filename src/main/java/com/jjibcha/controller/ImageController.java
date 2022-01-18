@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +28,13 @@ public class ImageController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ImageController.class);
 	
+	@Autowired
 	private ImageService service; 
 	
-	// QnA 게시판 페이지
+	// Image 게시판 페이지
 	   @RequestMapping(value = "/Image/list.do", method = RequestMethod.GET)
 	   // PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
-		public String getQnAList(Model model, HttpServletRequest request, PageObject pageObject) throws Exception {
+		public String getImageList(Model model, HttpServletRequest request, PageObject pageObject){
 		   log.info("getImage");
 		
 		   // model에 데이터를 담으면 request에 데이터가 담기게 된다.
@@ -42,31 +44,31 @@ public class ImageController {
 		   // 2페이지 이상이되면 페이지네이션을 표시한다.
 		   model.addAttribute("pageObject", pageObject);
 		   
-		   return "/qna/QnA";
+		   return "/image/Image";
 		}
 	   
-	// QnA 게시판 글보기 get
-	   @RequestMapping(value = "/QnA/view.do", method = RequestMethod.GET)
-		public String getQnAview(Model model, int image_no) {
-		   log.info("getQnAview");
+	// Image 게시판 글보기 get
+	   @RequestMapping(value = "/Image/view.do", method = RequestMethod.GET)
+		public String getImageview(Model model, int image_no) {
+		   log.info("getImageview");
 		   
 		   model.addAttribute("vo", service.view(image_no));
 		   
-		   return "/qna/QnAview";
+		   return "/image/Imageview";
 		}
 	   
-	   // QnA 게시판 글쓰기 get
-	   @RequestMapping(value = "/QnA/write.do", method = RequestMethod.GET)
-		public String getQnAwrite() {
-		   log.info("getQnAwrite");
+	   // Image 게시판 글쓰기 get
+	   @RequestMapping(value = "/Image/write.do", method = RequestMethod.GET)
+		public String getImagewrite() {
+		   log.info("getImagewrite");
 		   
-		   return "/qna/QnAwrite";
+		   return "/image/Imagewrite";
 		}
 	   
-	   // QnA 게시판 글쓰기 post
-	   @RequestMapping(value = "/QnA/write.do", method = RequestMethod.POST)
-		public String postQnAwrite(ImageVO vo, MultipartFile imageFile) {
-		   log.info("postQnAwrite");
+	   // Image 게시판 글쓰기 post
+	   @RequestMapping(value = "/Image/write.do", method = RequestMethod.POST)
+		public String postImagewrite(ImageVO vo, MultipartFile imageFile) {
+		   log.info("postImagewrite");
 		   
 		// 저장할 위치
 		   String path = "c:\\upload\\tmp\\";
@@ -75,38 +77,38 @@ public class ImageController {
 		   
 		   service.write(vo);
 		   
-		   return "redirect:/QnA/list.do";
+		   return "redirect:/Image/list.do";
 		}
 	   
-	   // QnA 게시판 글수정 get
-	   @RequestMapping(value = "/QnA/update.do", method = RequestMethod.GET)
-		public String getQnAupdate(Model model, int image_no) {
-		   log.info("getQnAupdate");
+	   // Image 게시판 글수정 get
+	   @RequestMapping(value = "/Image/update.do", method = RequestMethod.GET)
+		public String getImageupdate(Model model, int image_no) {
+		   log.info("getImageupdate");
 		   
 		// 데이터를 가져오기 위해서 view() 호출: inc = 0
 		   model.addAttribute("vo", service.view(image_no));
 		   
-		   return "/qna/QnAupdate";
+		   return "/image/Imageupdate";
 		}
 	   
-	   // QnA 게시판 글수정 post
-	   @RequestMapping(value = "/QnA/update.do", method = RequestMethod.POST)
-		public String postQnAupdate(ImageVO vo) {
-		   log.info("postQnAupdate");
+	   // Image 게시판 글수정 post
+	   @RequestMapping(value = "/Image/update.do", method = RequestMethod.POST)
+		public String postImageupdate(ImageVO vo) {
+		   log.info("postImageupdate");
 		   
 		   service.update(vo);
 		   
-		   return "redirect:/QnA/view.do?image_no=" + vo.getImage_no() + "&inc=0";
+		   return "redirect:/Image/view.do?image_no=" + vo.getImage_no() + "&inc=0";
 		}
 	   
-	// QnA 게시판 글삭제 post
-	   @RequestMapping(value = "/QnA/delete.do", method = RequestMethod.POST)
-		public String getQnAdelete(ImageVO vo) {
-		   log.info("getQnAdelete");
+	// Image 게시판 글삭제 post
+	   @RequestMapping(value = "/Image/delete.do", method = RequestMethod.POST)
+		public String getImagedelete(ImageVO vo) {
+		   log.info("getImagedelete");
 		   
 		   service.delete(vo);
 		   
-		   return "redirect:/QnA/list.do";
+		   return "redirect:/Image/list.do";
 		}
 	
 	// 파일 업로드에 대한 처리 메서드

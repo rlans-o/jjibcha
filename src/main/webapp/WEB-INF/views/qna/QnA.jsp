@@ -111,39 +111,7 @@
 			location = "/QnA/view.do?qna_no="+ qna_no + "&inc=1";
 		});
 	});
-	
-		
-		function fnSearch() {
 
-			var keyword = $("#keyword").val();
-			var gubun = $("#gubun").val();
-
-			var pageView = "list_table";
-
-			if (keyword == '') {
-				alert("한글자 이상 검색어를 입력하세요");
-
-				return;
-
-			}
-
-			$.ajax({
-
-				type : "post",
-				url : "/QnA/list.do",
-				dataType : "html",
-				data : {
-					keyword : keyword,
-					pageView : pageView,
-					gubun : gubun
-				}
-
-			}).done(function(data) {
-
-
-			});
-
-		}
 	</script>
 	
 	<%@ include file="../layout/footer.jsp"%>

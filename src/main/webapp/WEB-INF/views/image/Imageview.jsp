@@ -9,10 +9,10 @@
 <script type="text/javascript">
 	$(function () {
 		$("#deleteBtn").click(function () {
-			var qna_pw = prompt("비밀번호 입력 : ");
+			var image_pw = prompt("비밀번호 입력 : ");
 			
-			if (qna_pw.length >= 4) {
-				$("#deletePw").val(qna_pw); // pw value값을 등록시킴
+			if (image_pw.length >= 4) {
+				$("#deletePw").val(image_pw); // pw value값을 등록시킴
 				$("#deleteForm").submit();
 				return;
 			}
@@ -37,11 +37,11 @@
 	<table class="table">
 		<tr>
 			<th>번호</th>
-			<td>${vo.qna_no }</td>
+			<td>${vo.image_no }</td>
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td>${vo.qna_title }</td>
+			<td>${vo.image_title }</td>
 		</tr>
 		<tr>
 			<th>이미지</th>
@@ -49,22 +49,22 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><pre style="border: none;">${vo.qna_content }</pre></td>
+			<td><pre style="border: none;">${vo.image_content }</pre></td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${vo.qna_writer }</td>
+			<td>${vo.image_writer }</td>
 		</tr>
 		<tr>
 			<th>작성일</th>
 			<td>
-				<fmt:formatDate value="${vo.qna_writerDate }"
+				<fmt:formatDate value="${vo.image_writerDate }"
 				pattern="yyyy.MM.dd"/>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<a href="QnA/update.do?qna_no=${vo.qna_no}" class="btn btn-primary">수정</a>
+				<a href="QnA/update.do?image_no=${vo.image_no}" class="btn btn-primary">수정</a>
 				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
 				<a href="QnA/list.do" class="btn btn-primary">리스트</a>
 			</td>

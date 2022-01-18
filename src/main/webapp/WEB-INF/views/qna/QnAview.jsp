@@ -64,9 +64,9 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<a href="QnA/update.do?qna_no=${vo.qna_no}" class="btn btn-primary">수정</a>
+				<a href="/QnA/update.do?qna_no=${vo.qna_no}" class="btn btn-primary">수정</a>
 				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
-				<a href="QnA/list.do" class="btn btn-primary">리스트</a>
+				<a href="/QnA/list.do" class="btn btn-primary">리스트</a>
 			</td>
 		</tr>
 	</table>
@@ -74,7 +74,7 @@
 
 <!-- 삭제를 위한 form tag -->
 
-<form action="QnA/delete.do" method="post" id="deleteForm">
+<form action="/QnA/delete.do" method="post" id="deleteForm">
 	<input type="hidden" name="qna_no" value="${vo.qna_no }" />
 	<input type="hidden" name="qna_pw" id="deletePw" />
 </form>

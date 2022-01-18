@@ -10,7 +10,7 @@ import net.webjjang.util.PageObject;
 public interface ImageService {
 
 	// list
-	public List<ImageVO> list(PageObject pageObject) throws Exception;
+	public List<ImageVO> list(PageObject pageObject);
 	public int getRow(PageObject pageObject);
 	
 	// view
