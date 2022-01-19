@@ -33,7 +33,7 @@
 </style>
 
 <div class="allblock">
-	<h1 align="center">이미지 게시판 글보기</h1>
+	<h1 align="center">Image 게시판 글보기</h1>
 	<table class="table">
 		<tr>
 			<th>번호</th>

@@ -69,7 +69,7 @@
 						<c:forEach items="${list }" var="list">
 							<tr class="dataRow">
 								<td class="image_no">${list.image_no}</td>
-								<td>${list.fileName}</td>
+								<td><img src="${list.fileName}"  style="height: 80px; width: 80px;"/></td>
 								<td>${list.image_title }</td>
 								<td>${list.image_writer }</td>
 								<td>
@@ -105,6 +105,17 @@
 	<script type="text/javascript">
 	
 	$(function () {
+		
+		<c:if test="${processResult == 'write success'}">
+			// 쓰기 메시지 처리
+			alert("작성하신 글이 등록되었습니다.");
+		</c:if>
+		
+		<c:if test="${processResult == 'delete success'}">
+			// 삭제 메시지 처리
+			alert("글 삭제가 정상적으로 삭제되었습니다.");
+		</c:if>
+		
 		$(".dataRow").click(function () {
 			// 글번호 찾기
 			var image_no = $(this).find(".image_no").text();

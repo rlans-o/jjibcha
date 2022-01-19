@@ -23,7 +23,7 @@ $(function () {
 
 <body>
 <div class="allblock">
-	<h1 align="center">QnA 글 수정</h1>
+	<h1 align="center">Image 글 수정</h1>
 	<form method="post" >
 	
 		<div class="form-group">

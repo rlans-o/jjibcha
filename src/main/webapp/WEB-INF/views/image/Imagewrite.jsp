@@ -14,7 +14,7 @@
 </style>
 
 <div class="allblock">
-	<h1 align="center">QnA 글쓰기</h1>
+	<h1 align="center">Image 글쓰기</h1>
 	<form method="post"  enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="image_title">제목 : </label>
