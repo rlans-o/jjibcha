@@ -178,6 +178,14 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- sitemesh 레이아웃 관련 -->
+		
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+		
 		<!-- 페이지 관련 -->
 		
 		<dependency>

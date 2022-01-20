@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="pageNav" tagdir="/WEB-INF/tags" %>
-<%@ include file="../layout/header.jsp"%>
+
 
 <style>
 
@@ -114,5 +114,5 @@
 
 	</script>
 	
-	<%@ include file="../layout/footer.jsp"%>
+
 

@@ -4,12 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-<%@ include file="../views/layout/header.jsp"%>
-
-
-
-
-
 	<section id="section_1">
                 
                 <video autoplay muted loop>
@@ -23,6 +17,3 @@
                     </p>
                 </div>
     </section>
-
-
-<%@ include file="../views/layout/footer.jsp"%>

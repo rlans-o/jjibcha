@@ -3,9 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-<%@ include file="../layout/header.jsp"%>
-
 <style>
 
 .allblock {
@@ -21,7 +18,7 @@
 
 
 	<div class="allblock">
-	<h1 align="center">QnA 게시판</h1>
+	<h1 align="center">Review 게시판</h1>
 
 <!-- 검색 기능 -->	
 <div>
@@ -116,4 +113,3 @@
 		}
 	</script>
 
-	<%@ include file="../layout/footer.jsp"%>

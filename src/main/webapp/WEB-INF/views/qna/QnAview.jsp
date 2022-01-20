@@ -4,8 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<%@ include file="../layout/header.jsp"%>
-
 <script type="text/javascript">
 	$(function () {
 		$("#deleteBtn").click(function () {
@@ -78,5 +76,3 @@
 	<input type="hidden" name="qna_no" value="${vo.qna_no }" />
 	<input type="hidden" name="qna_pw" id="deletePw" />
 </form>
-
-	<%@ include file="../layout/footer.jsp"%>

@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-<%@ include file="../layout/header.jsp"%>
-
 <script type="text/javascript">
 $(function () {
 	$(".cancelBtn").click(function () {
@@ -57,5 +54,3 @@ $(function () {
 	</form>
 	
 </div>
-
-	<%@ include file="../layout/footer.jsp"%>

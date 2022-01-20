@@ -3,9 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-<%@ include file="../layout/header.jsp"%>
-
 <script type="text/javascript">
 	$(function () {
 		$("#deleteBtn").click(function () {
@@ -78,5 +75,3 @@
 	<input type="hidden" name="image_no" value="${vo.image_no }" />
 	<input type="hidden" name="fileName" id="fileName" />
 </form>
-
-	<%@ include file="../layout/footer.jsp"%>

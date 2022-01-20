@@ -50,6 +50,19 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<!-- 한글 인코딩 End -->
+	
+	<!-- sitemesh 레이아웃 -->
+	
+	<filter>
+	   <filter-name>sitemesh</filter-name>
+	   <filter-class>
+	   		com.opensymphony.sitemesh.webapp.SiteMeshFilter
+	   </filter-class>
+	  </filter>
+	  <filter-mapping>
+	   <filter-name>sitemesh</filter-name>
+	   <url-pattern>/*</url-pattern>
+	 </filter-mapping>
 
 
 </web-app>
