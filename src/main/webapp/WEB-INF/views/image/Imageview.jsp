@@ -71,7 +71,7 @@
 
 <!-- 삭제를 위한 form tag -->
 
-<form action="QnA/delete.do" method="post" id="deleteForm">
+<form action="/QnA/delete.do" method="post" id="deleteForm">
 	<input type="hidden" name="image_no" value="${vo.image_no }" />
 	<input type="hidden" name="fileName" id="fileName" />
 </form>
