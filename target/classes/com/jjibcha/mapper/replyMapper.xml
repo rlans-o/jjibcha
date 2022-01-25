@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ReplyMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.qnaMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.ReplyMapper">
+  	
+  	<!-- 게시판 리스트 : 검색 적용 -->
+  	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="list" resultType="com.jjibcha.vo.ReplyVO">
+   		select *
+		from qna_reply
+		where no = #{no}
+		order by rno desc
+		limit #{startRow}, #{endRow}
+	</select>
+  	
+  	<!-- 전체 데이터 가져오기 : 검색 적용 -->
+  	<select id="getRow" resultType="int">
+   		select count(*)
+   		from qna_reply
+   		where no = #{no}
+  	</select>
+  	
+  	<!-- 댓글 쓰기 -->
+  	<insert id="write" >
+   		<![CDATA[  
+   		insert into qna_reply(rno, no, content, writer)
+   		values(#{rno}, #{no}, #{content}, #{writer})   		
+   		]]> 
+  	</insert>
+  	
+  	<!-- 댓글 수정 -->
+  	<update id="update" >
+  		<![CDATA[
+  		update qna_reply
+  		set title = #{title}, content = #{content}, writer = #{writer}
+  		where no = #{no} and pw = #{pw}
+  		]]>
+  	</update>
+  	
+  	<!-- 댓글 삭제 -->
+  	<delete id="delete" >
+  		<![CDATA[
+  		delete from qna_reply
+  		where no = #{no} and pw = #{pw}
+  		]]>
+  	</delete>
+  	
+  </mapper>
