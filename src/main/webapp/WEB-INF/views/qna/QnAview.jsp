@@ -9,6 +9,37 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+		// 댓글 리스트는 이벤트가 없더라도 뿌려야 한다.
+		getList(1);
+		
+		// 댓글 리스트를 가져오는 함수 선언 - 호출을 해야 실행된다.
+		function getList(page) {
+			// 기본 페이지 처리
+			if(!page) page = 1;
+			
+			// 데이터 수집
+			var pageInfo = {};
+			pageInfo.page = page;
+			pageInfo.no = $("#no").text();
+			
+			// ajax 객체 호출 처리 - get방식으로 처리할 거라면 body에 안들어가고 url에 포함이 되기 때문에
+			replyService.list(pageInfo,
+					// 성공했을 때의 함수 - callback함수
+					function (result) {
+						alert("리스트 가져오기 성공");
+						
+						// 샘플 데이터 찍어보기 - [], [], []
+						//alert(result[0].rno);
+						
+						// 데이터가 많으므로 반복문 처리를 한다.
+						$(result).each(function(idx, vo){
+							
+						});
+					});
+			
+		}
+		
 		$("#deleteBtn").click(function() {
 			var qna_pw = prompt("비밀번호 입력 : ");
 
@@ -33,8 +64,15 @@
 					reply.writer = $("#writer").val();
 					
 					// 처리 - JSON형식의 문자열로 변환
-					replyService.add(JSON.stringify(reply), function() {
-						alert("댓글쓰기 완료");
+					replyService.add(JSON.stringify(reply), 
+						function() {
+						
+							// 모달창 입력 란은 비운다. - 데이터가 없는 것으로 셋팅한다.
+							$("#content").val("");
+							$("#writer").val("");
+							// 모달창 안보이기 - 성공시 닫기
+							$("#myModal").modal("hide");
+							alert("댓글쓰기 완료");
 					});
 				});
 
@@ -83,16 +121,34 @@
 
 	<!-- 댓글처리를 위한 div  -->
 	<div>
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">댓글
+		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">댓글
 			쓰기</button>
+	</div>
+	
+	<!-- 댓글 리스트 -->
+	
+	<div id="replyListDiv" >
+	  <ul class="list-group">
+	  		<li class="list-group-item rowData">
+	  			<span class="rno">번호</span>. 내용 입력
+	  			<hr/>
+	  			이름(작성일)
+	  			<span class="badge">
+	  				<button class="replyUpdateBtn btn btn-default">수정</button>
+					<button class="replyDeleteBtn btn btn-default">삭제</button>
+	  			</span>
+	  		</li>
+	  		<li class="list-group-item">Second item</li>
+	  		<li class="list-group-item">Third item</li>
+		</ul>
 	</div>
 
 </div>
 
 <!-- 삭제를 위한 form tag -->
 <form action="/QnA/delete.do" method="post" id="deleteForm">
-	<input type="hidden" name="qna_no" value="${vo.qna_no }" /> <input type="hidden" name="qna_pw"
-		id="deletePw" />
+	<input type="hidden" name="qna_no" value="${vo.qna_no }" /> 
+	<input type="hidden" name="qna_pw" id="deletePw" />
 </form>
 
 <!-- Modal -->

@@ -10,19 +10,17 @@
   			- src/main/resources -->
   
   <mapper namespace="com.jjibcha.mapper.ReplyMapper">
-  	
-  	<!-- 게시판 리스트 : 검색 적용 -->
-  	
-	<!-- 페이징 처리 후 게시글 조회 -->
+  
+	<!-- 댓글 리스트 -->
 	<select id="list" resultType="com.jjibcha.vo.ReplyVO">
    		select *
 		from qna_reply
 		where no = #{no}
 		order by rno desc
-		limit #{startRow}, #{endRow}
+		limit #{pageObject.startRow}, #{pageObject.endRow}
 	</select>
   	
-  	<!-- 전체 데이터 가져오기 : 검색 적용 -->
+  	<!-- 전체 데이터 가져오기  -->
   	<select id="getRow" resultType="int">
    		select count(*)
    		from qna_reply

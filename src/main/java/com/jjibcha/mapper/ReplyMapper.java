@@ -1,6 +1,7 @@
 package com.jjibcha.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,7 +16,9 @@ import net.webjjang.util.PageObject;
 public interface ReplyMapper {
 
 	//list
-	public List<ReplyVO> list(PageObject pageObject);
+	// pageObject와 no가 포함된 Map을 넘겨줄 것이다.
+	public List<ReplyVO> list(Map<String, Object> pageInfo);
+	public int getRow(int no);
 	
 	// write
 	public Integer write(ReplyVO vo);
