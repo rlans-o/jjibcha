@@ -40,7 +40,7 @@
   		<![CDATA[
   		update qna_reply
   		set title = #{title}, content = #{content}, writer = #{writer}
-  		where no = #{no} and pw = #{pw}
+  		where no = #{no}
   		]]>
   	</update>
   	

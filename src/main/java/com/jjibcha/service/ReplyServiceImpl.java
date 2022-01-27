@@ -45,7 +45,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public Integer update(int rno) {
+	public Integer update(ReplyVO vo) {
 
 		return null;
 	}

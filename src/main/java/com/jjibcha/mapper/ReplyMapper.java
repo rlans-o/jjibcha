@@ -24,7 +24,7 @@ public interface ReplyMapper {
 	public Integer write(ReplyVO vo);
 	
 	// update
-	public Integer update(int rno);
+	public Integer update(ReplyVO vo);
 		
 	// delete
 	public Integer delete(int rno);	

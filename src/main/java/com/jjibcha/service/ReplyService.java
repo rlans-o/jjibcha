@@ -14,7 +14,7 @@ public interface ReplyService {
 	// 댓글 내용이 간단하므로 리스트에 내용을 다 표시하기 때문에 댓글보기가 필요없다.
 	public Integer write(ReplyVO vo);
 	
-	public Integer update(int rno);
+	public Integer update(ReplyVO vo);
 	
 	public Integer delete(int rno);
 	
