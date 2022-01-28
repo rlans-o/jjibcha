@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +21,12 @@ import com.jjibcha.service.ImageService;
 import com.jjibcha.util.FileUtil;
 import com.jjibcha.vo.ImageVO;
 
+import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
 
 @Controller
+@Log4j
 public class ImageController {
-	
-	private static final Logger log = LoggerFactory.getLogger(ImageController.class);
 	
 	@Autowired
 	private ImageService service; 

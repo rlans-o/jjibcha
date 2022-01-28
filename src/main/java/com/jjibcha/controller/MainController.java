@@ -1,9 +1,5 @@
 package com.jjibcha.controller;
 
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,13 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.jjibcha.service.ImageService;
 import com.jjibcha.service.QnAService;
 
+import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
 
 
 @Controller
+@Log4j
 public class MainController {
 
-private static final Logger log = LoggerFactory.getLogger(MainController.class);
+
 	
 	@Autowired
 	private QnAService qnaService;

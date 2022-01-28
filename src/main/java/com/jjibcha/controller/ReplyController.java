@@ -1,9 +1,6 @@
 package com.jjibcha.controller;
 
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jjibcha.service.ReplyService;
 import com.jjibcha.vo.ReplyVO;
 
+import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
 
 //@RestController는 순수한 데이터를 전달할때 사용한다.
 @RestController
+@Log4j
 public class ReplyController {
-
-	private static final Logger log = LoggerFactory.getLogger(ReplyController.class);
 	
 	@Autowired
 	private ReplyService replyService;
@@ -42,7 +39,7 @@ public class ReplyController {
 		)
 		public ResponseEntity<List<ReplyVO>> list(PageObject pageObject, int no) {
 			
-			log.info("listpageObject", pageObject);
+			log.info(pageObject);
 			
 			List<ReplyVO> list = replyService.list(pageObject, no);
 			log.info("Reply list : " + list);
@@ -65,7 +62,7 @@ public class ReplyController {
 	// 데이터를 그대로 받아서 처리하기 위해 (@RequestBody ReplyVO vo)로 선언
 	public ResponseEntity<String> update(@RequestBody ReplyVO vo) {
 		
-		log.info("", vo);
+		log.info(vo);
 		
 		int insertCount = replyService.update(vo);
 		log.info("Reply Insert Count : " + insertCount);
@@ -86,7 +83,7 @@ public class ReplyController {
 		// 데이터를 그대로 받아서 처리하기 위해 (@RequestBody ReplyVO vo)로 선언
 		public ResponseEntity<String> write(@RequestBody ReplyVO vo) {
 			
-			log.info("", vo);
+			log.info(vo);
 			
 			int insertCount = replyService.write(vo);
 			log.info("Reply Insert Count : " + insertCount);
