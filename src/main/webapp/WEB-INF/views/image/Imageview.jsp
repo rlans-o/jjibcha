@@ -42,7 +42,8 @@
 		</tr>
 		<tr>
 			<th>이미지</th>
-			<td>${vo.fileName }</td>
+			<td><img src="${vo.fileName }"
+								alt="Lights" style="width: 100%; height: 150px;"></td>
 		</tr>
 		<tr>
 			<th>내용</th>
@@ -71,7 +72,7 @@
 
 <!-- 삭제를 위한 form tag -->
 
-<form action="/QnA/delete.do" method="post" id="deleteForm">
+<form action="/Image/delete.do" method="post" id="deleteForm">
 	<input type="hidden" name="image_no" value="${vo.image_no }" />
 	<input type="hidden" name="fileName" id="fileName" />
 </form>

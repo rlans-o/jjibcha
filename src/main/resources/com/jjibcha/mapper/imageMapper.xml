@@ -69,10 +69,10 @@
  
   	
   	<insert id="write" >
-   		<![CDATA[  
+ 
    		insert into image(image_no, image_title, image_content, image_writer, fileName)
    		values(#{image_no}, #{image_title}, #{image_content}, #{image_writer}, #{fileName})   		
-   		]]> 
+   		 
   	</insert>
   	
   	<select id="view" resultType="com.jjibcha.vo.ImageVO">
