@@ -26,16 +26,6 @@ public class MainController {
 	@Autowired
 	private ImageService imageService;
 
-	@Autowired(required = true)
-	BCryptPasswordEncoder passEncoder;
-	
-	@Bean
-	BCryptPasswordEncoder passwordEncoder() {
-
-	    return new BCryptPasswordEncoder();
-	}
-	
-
 	
 	// 메인 페이지
 	@GetMapping("/index")

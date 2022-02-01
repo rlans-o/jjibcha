@@ -23,7 +23,10 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
-	<link href="/resources/css/index.css" type="text/css" rel="stylesheet" />
+<link href="/resources/css/index.css" type="text/css" rel="stylesheet" />
+
+<!-- daum 도로명주소 찾기 api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	
 <style type="text/css">
 header, footer {
@@ -108,9 +111,9 @@ article {
 					<ul class="nav navbar-nav navbar-right">
 						<!-- 로그인을 안한 경우의 메뉴 -->
 						<c:if test="${empty login }">
-							<li><a href="/member/writeForm.do"><span
+							<li><a href="/User/join.do"><span
 									class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-							<li><a href="/member/loginForm.do"><span
+							<li><a href="/User/login.do"><span
 									class="glyphicon glyphicon-log-in"></span> Login</a></li>
 						</c:if>
 						<!-- 로그인은 한 경우의 메뉴 -->

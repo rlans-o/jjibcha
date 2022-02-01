@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jjibcha.mapper.UserMapper">
+
+	<!-- 회원가입 -->
+	<insert id="Join">
+		insert into member 
+		(userID,
+		 userPassword, 
+		 userName, 
+		 userBirth, 
+		 userEmail, 
+		 userPhone,
+		 userOaddress, 
+		 userAddress, 
+		 userDetailaddress, 
+		 userPoint
+		 )
+		values(
+		#{userID},
+		#{userPassword},
+		#{userName},
+		#{userBrith},
+		#{userEmail},
+		#{userPhone},
+		#{userOaddress},
+		#{userAddress},
+		#{userDetailaddress},
+		0
+		)
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="Login"  resultType="com.jjibcha.vo.UserVO">
+		select  *
+		from user
+		where userID = #{userID}
+		and userPassword = #{userPassword}
+	</select>
+
+</mapper>
+
