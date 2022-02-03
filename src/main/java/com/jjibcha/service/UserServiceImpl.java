@@ -1,5 +1,7 @@
 package com.jjibcha.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +27,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO login(UserVO vo) {
+	public UserVO login(UserVO vo) throws Exception {
 
-		System.out.println("S : 컨트롤러에서 호출받으면 필요한 정보를 받아서 DAO로 전달");
-		UserVO returnDTO = null;
-		try {
-			returnDTO = mapper.login(vo.getUserID(), vo.getUserPassword());
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnDTO = null; //실행하다 문제가 생겼을때 해당 데이터를 보내지않겠다는 의미 = 예외처리
-		}
-		return returnDTO; //null이 반환되면 앞의 코드가 문제가 있다는 것을 바로 알수있다.
-
+		return mapper.login(vo);
+		
 	}
 	
 	

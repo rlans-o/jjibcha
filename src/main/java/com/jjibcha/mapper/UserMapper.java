@@ -1,5 +1,7 @@
 package com.jjibcha.mapper;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -15,6 +17,9 @@ public interface UserMapper {
 		public void join(UserVO vo) throws Exception;
 		
 		// 로그인//
-		public UserVO login(String userID, String userPassword) throws Exception;
+		public UserVO login(UserVO vo) throws Exception;
+		
+		
+		
 	
 }

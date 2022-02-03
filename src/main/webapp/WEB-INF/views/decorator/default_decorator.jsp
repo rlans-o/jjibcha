@@ -27,6 +27,11 @@
 
 <!-- daum 도로명주소 찾기 api -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 	
 <style type="text/css">
 header, footer {
@@ -110,17 +115,17 @@ article {
 					<!-- 오른쪽에 위치하는 메뉴바 -->
 					<ul class="nav navbar-nav navbar-right">
 						<!-- 로그인을 안한 경우의 메뉴 -->
-						<c:if test="${empty login }">
+						<c:if test="${empty member }">
 							<li><a href="/User/join.do"><span
 									class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 							<li><a href="/User/login.do"><span
 									class="glyphicon glyphicon-log-in"></span> Login</a></li>
 						</c:if>
 						<!-- 로그인은 한 경우의 메뉴 -->
-						<c:if test="${!empty login }">
-							<li id="welcome">${login.name}[${login.gradeName }]</li>
+						<c:if test="${!empty member }">
+							<li id="welcome">${member.mem_id}[${member.mem_name }]</li>
 							<li><a href="/member/view.do"> 내 정보 보기</a></li>
-							<li><a href="/member/logout.do"><span
+							<li><a href="/User/logout.do"><span
 									class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 						</c:if>
 					</ul>

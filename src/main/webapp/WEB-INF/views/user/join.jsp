@@ -12,56 +12,56 @@
 		</div>
 	</div>
 	<div class="col-sm-6 col-md-offset-3">
-		<form action="join.do" method="post" role="form" id="usercheck" name="user">
+		<form action="/User/join.do" method="post" role="form" id="usercheck" name="member">
 			<div class="form-group">
-				<label for="userID">아이디</label> <input type="text" class="form-control" id="userID" name="userID"
+				<label for="id">아이디</label> <input type="text" class="form-control" id="mem_id" name="mem_id"
 					placeholder="ID">
 				<div class="eheck_font" id="id_check"></div>
 			</div>
 			<div class="form-group">
-				<label for="userPassword">비밀번호</label> <input type="password" class="form-control" id="userPassword"
-					name="userPassword" placeholder="PASSWORD">
+				<label for="pw">비밀번호</label> <input type="password" class="form-control" id="mem_pw"
+					name="mem_pw" placeholder="PASSWORD">
 				<div class="eheck_font" id="pw_check"></div>
 			</div>
 			<div class="form-group">
-				<label for="userPassword2">비밀번호 확인</label> <input type="password" class="form-control" id="userPassword2"
-					name="userPassword2" placeholder="Confirm Password">
+				<label for="pw2">비밀번호 확인</label> <input type="password" class="form-control" id="mem_pw2"
+					name="mem_pw2" placeholder="Confirm Password">
 				<div class="eheck_font" id="pw2_check"></div>
 			</div>
 			<div class="form-group">
-				<label for="userName">이름</label> <input type="text" class="form-control" id="userName"
-					name="userName" placeholder="Name">
+				<label for="mem_name">이름</label> <input type="text" class="form-control" id="mem_name"
+					name="mem_name" placeholder="Name">
 				<div class="eheck_font" id="name_check"></div>
 			</div>
 			<div class="form-group">
-				<label for="userBirth">생년월일</label> <input type="tel" class="form-control" id="userBirth"
-					name="userBirth" placeholder="ex) 19990101">
+				<label for="mem_birth">생년월일</label> <input type="tel" class="form-control" id="mem_birth"
+					name="mem_birth" placeholder="ex) 19990101">
 				<div class="eheck_font" id="birth_check"></div>
 			</div>
 			<div class="form-group">
-				<label for="userEmail">이메일 주소</label> <input type="email" class="form-control" id="userEmail"
-					name="userEmail" placeholder="E-mail">
+				<label for="mem_email">이메일 주소</label> <input type="email" class="form-control" id="mem_email"
+					name="mem_email" placeholder="E-mail">
 				<div class="eheck_font" id="email_check"></div>
 			</div>
 			<div class="form-group">
-				<label for="userPhone">휴대폰 번호('-'없이 번호만 입력해주세요)</label> <input type="tel" class="form-control"
-					id="userPhone" name="userPhone" placeholder="Phone Number">
+				<label for="mem_phone">휴대폰 번호('-'없이 번호만 입력해주세요)</label> <input type="tel" class="form-control"
+					id="mem_phone" name="mem_phone" placeholder="Phone Number">
 				<div class="eheck_font" id="phone_check"></div>
 			</div>
 			
 			<div class="form-group">
 				<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호"
-					name="userOaddress" id="userOaddress" type="text" readonly="readonly">
+					name="mem_oaddress" id="mem_oaddress" type="text" readonly="readonly">
 				<button type="button" class="btn btn-default" onclick="execPostCode();">
 					<i class="fa fa-search"></i> 우편번호 찾기
 				</button>
 			</div>
 			<div class="form-group">
-				<input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="userAddress"
-					id="userAddress" type="text" readonly="readonly" />
+				<input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="mem_address"
+					id="mem_address" type="text" readonly="readonly" />
 			</div>
 			<div class="form-group">
-				<input class="form-control" placeholder="상세주소" name="userDetailaddress" id="userDetailaddress"
+				<input class="form-control" placeholder="상세주소" name="mem_detailaddress" id="mem_detailaddress"
 					type="text" />
 			</div>
 			<div class="form-group text-center">
@@ -72,5 +72,4 @@
 </article>
 
 
-<%-- <script src="${path}/resources/js/join.js"></script> --%>
-
+<script src="${path}/resources/js/join.js"></script>
