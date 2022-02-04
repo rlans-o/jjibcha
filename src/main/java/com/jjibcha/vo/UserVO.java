@@ -17,6 +17,8 @@ public class UserVO {
 	private int mem_point; // 회원 포인트는 쇼핑몰에서 물건을살때 일정금액의 %를 포인트로 적립해주는데 그것을 표현
 
 	private String result;    //생성or수정or삭제등의 결과를 넣을 변수
+	
+	private int adminCk;
 
 	
 	

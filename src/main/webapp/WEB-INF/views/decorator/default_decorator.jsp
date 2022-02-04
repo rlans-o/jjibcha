@@ -104,10 +104,8 @@ article {
 						<li><a href="/QnA/list.do">QnA</a></li>
 						<li><a href="/Review/list.do">REVIEW</a></li>
 						<!-- 회원관리는 관리자 권한으로 로그인하면 보인다. -->
-						<c:if test="${!empty login }">
-							<c:if test="${login.grade==9 }">
-								<li><a href="/member/list.do">회원관리</a></li>
-							</c:if>
+						<c:if test="${member.adminCk == 1 }">
+								<li><a href="/Admin/main.do">ADMIN</a></li>
 						</c:if>
 						<%-- 							<c:if test="${login.gradeNo==9 }"> --%>
 						<%-- 							</c:if> --%>
@@ -121,10 +119,13 @@ article {
 							<li><a href="/User/login.do"><span
 									class="glyphicon glyphicon-log-in"></span> Login</a></li>
 						</c:if>
-						<!-- 로그인은 한 경우의 메뉴 -->
-						<c:if test="${!empty member }">
+						<!-- 로그인을 한 경우의 메뉴 -->
+						<c:if test="${member != null }">
+<%-- 							<c:if test="${member.adminCk == 1 }"> --%>
+<!--                         <li><a href="/admin/main">관리자 페이지</a></li> -->
+<%--                     </c:if> --%>
 							<li id="welcome">${member.mem_id}[${member.mem_name }]</li>
-							<li><a href="/member/view.do"> 내 정보 보기</a></li>
+							<li><a href="/User/view.do"> 내 정보 보기</a></li>
 							<li><a href="/User/logout.do"><span
 									class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 						</c:if>

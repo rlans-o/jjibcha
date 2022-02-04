@@ -9,9 +9,10 @@
 		<!-- url 패턴 중에서 적용이 안되는(패턴의 충돌) 패턴이 있으면 *를 제거하고 적용하세요. -->
 		<pattern>/</pattern>
 		<pattern>/main/*</pattern>
-		<pattern>/member/*</pattern>
+		<pattern>/admin/*</pattern>
 		<pattern>/qna/*</pattern>
 		<pattern>/image/*</pattern>
+
 	</decorator>
 	
 	<!-- 관리자의 대한 요청 레이아웃 선언 -->

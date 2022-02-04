@@ -35,8 +35,8 @@
 				<div class="eheck_font" id="pw_check"></div>
 			</div>
 			
-			<c:if test="${result == 0 }">
-			<div class="login_warn"> 사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
+			<c:if test="${msg == 0 }">
+				<div class="login_warn"> 사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.</div>
 			</c:if>
 			<div class="form-group text-center">
 				<button type="button" class="btn btn-primary login_button">로그인</button>
