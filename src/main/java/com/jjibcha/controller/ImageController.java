@@ -58,7 +58,7 @@ public class ImageController {
 		}
 	   
 	   // Image 게시판 글쓰기 get
-	   @RequestMapping(value = "/Image/write.do", method = RequestMethod.GET)
+	   @RequestMapping(value = "/Admin/Image/write.do", method = RequestMethod.GET)
 		public String getImagewrite() {
 		   log.info("getImagewrite");
 		   
@@ -66,7 +66,7 @@ public class ImageController {
 		}
 	   
 	   // Image 게시판 글쓰기 post
-	   @RequestMapping(value = "/Image/write.do", method = RequestMethod.POST)
+	   @RequestMapping(value = "/Admin/Image/write.do", method = RequestMethod.POST)
 		public String postImagewrite(ImageVO vo, MultipartFile imageFile
 				, RedirectAttributes rttr, HttpServletRequest request) throws IllegalStateException, IOException {
 		   log.info("postImagewrite");
@@ -100,7 +100,7 @@ public class ImageController {
 		}
 	   
 	   // Image 게시판 글수정 get
-	   @RequestMapping(value = "/Image/update.do", method = RequestMethod.GET)
+	   @RequestMapping(value = "/Admin/Image/update.do", method = RequestMethod.GET)
 		public String getImageupdate(Model model, int image_no) {
 		   log.info("getImageupdate");
 		   
@@ -111,7 +111,7 @@ public class ImageController {
 		}
 	   
 	   // Image 게시판 글수정 post
-	   @RequestMapping(value = "/Image/update.do", method = RequestMethod.POST)
+	   @RequestMapping(value = "/Admin/Image/update.do", method = RequestMethod.POST)
 		public String postImageupdate(ImageVO vo, RedirectAttributes rttr) {
 		   log.info("postImageupdate");
 		   
@@ -124,7 +124,7 @@ public class ImageController {
 		}
 	   
 	// Image 게시판 글삭제 post
-	   @RequestMapping(value = "/Image/delete.do", method = RequestMethod.POST)
+	   @RequestMapping(value = "/Admin/Image/delete.do", method = RequestMethod.POST)
 		public String getImagedelete(ImageVO vo, RedirectAttributes rttr) {
 		   log.info("getImagedelete");
 		   

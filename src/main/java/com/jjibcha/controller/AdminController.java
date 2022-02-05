@@ -20,14 +20,7 @@ public class AdminController {
         return "admin/main";
     }
     
-    /* 상품 등록 페이지 접속 */
-    @RequestMapping(value = "/Admin/goodsEnroll.do", method = RequestMethod.GET)
-    public String goodsEnrollGET() throws Exception{
-        log.info("상품 등록 페이지 접속");
-        
-        return "admin/goodsEnroll";
-    }
-    
+   
     /* 상품 관리 페이지 접속 */
     @RequestMapping(value = "/Admin/goodsManage.do", method = RequestMethod.GET)
     public String goodsManageGET() throws Exception{
@@ -36,20 +29,6 @@ public class AdminController {
         return "admin/goodsManage";
     }
     
-    /* 작가 등록 페이지 접속 */
-    @RequestMapping(value = "/Admin/authorEnroll.do", method = RequestMethod.GET)
-    public String authorEnrollGET() throws Exception{
-        log.info("작가 등록 페이지 접속");
-        
-        return "admin/authorEnroll";
-    }
     
-    /* 작가 관리 페이지 접속 */
-    @RequestMapping(value = "/Admin/authorManage.do", method = RequestMethod.GET)
-    public String authorManageGET() throws Exception{
-        log.info("작가 관리 페이지 접속");
-        
-        return "admin/authorManage";
-    }    
 	
 }

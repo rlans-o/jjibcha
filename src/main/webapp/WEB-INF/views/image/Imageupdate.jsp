@@ -35,9 +35,16 @@ $(function () {
 			required="required" pattern=".{4,100}" maxlength="100" value="${vo.image_title }"> 
 		</div>
 		
+		
 		<div class="form-group">
 			<label for="image_content">내용 :</label>
 			<textarea class="form-control" rows="5" id="image_content" name="image_content">${vo.image_content }</textarea>
+		</div>
+		
+		<div class="form-group">
+			<label for="fileName">이미지 : </label>
+			<img src="${vo.fileName }" width="300px;" height="300px;">
+			<input type="file" class="form-control" id="fileName" name="fileName" > 
 		</div>
 		
 		<div class="form-group">

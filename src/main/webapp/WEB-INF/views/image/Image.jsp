@@ -90,7 +90,7 @@
 			</table>
 		</div>
 
-		<a href="/Image/write.do" class="btn btn-primary">등록</a>
+<!-- 		<a href="/Image/write.do" class="btn btn-primary">등록</a> -->
 	</div>
 	
 	<c:if test="${pageObject.totalPage > 1 }">

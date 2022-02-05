@@ -32,7 +32,7 @@
 		
 		<div class="form-group">
 			<label for="imageFile">이미지 : </label>
-			<input type="file" class="form-control" id="imageFile" name="imageFile"
+			<input type="file" multiple class="form-control" id="imageFile" name="imageFile"
 			required="required" > 
 		</div>
 		
@@ -41,4 +41,43 @@
 	</form>
 	
 </div>
+
+<script type="text/javascript">
+	
+/* 이미지 업로드 */
+$("input[type='file']").on("change", function(e){
+	let fileInput = $('input[name="fileName"]');
+	let fileList = fileInput[0].files;
+	let fileObj = fileList[0];
+
+	console.log("fileList : " + fileList);
+	console.log("fileObj : " + fileObj);
+	
+	console.log("fileName : " + fileObj.name);
+	console.log("fileSize : " + fileObj.size);
+	console.log("fileType(MimeType) : " + fileObj.type);
+	
+});
+
+/* var, method related with attachFile */
+let regex = new RegExp("(.*?)\.(jpg|png)$");
+let maxSize = 1048576; //1MB	
+
+function fileCheck(fileName, fileSize){
+
+	if(fileSize >= maxSize){
+		alert("파일 사이즈 초과");
+		return false;
+	}
+		  
+	if(!regex.test(fileName)){
+		alert("해당 종류의 파일은 업로드할 수 없습니다.");
+		return false;
+	}
+	
+	return true;		
+	
+}
+	
+</script>
 

@@ -87,7 +87,7 @@
   	<update id="update" >
   		<![CDATA[
   		update image
-  		set image_title = #{image_title}, image_content = #{image_content}, image_writer = #{image_writer}
+  		set image_title = #{image_title}, image_content = #{image_content}, image_writer = #{image_writer}, fileName = #{fileName}
   		where image_no = #{image_no}
   		]]>
   	</update>

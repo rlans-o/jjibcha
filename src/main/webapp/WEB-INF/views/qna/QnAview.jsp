@@ -201,8 +201,8 @@
 		</tr>
 		<tr>
 			<td colspan="2"><a href="/QnA/update.do?qna_no=${vo.qna_no}" class="btn btn-primary">수정</a>
-				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a> <a href="/QnA/list.do"
-				class="btn btn-primary">리스트</a></td>
+				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a> 
+				<a href="/QnA/list.do" class="btn btn-primary">리스트</a></td>
 		</tr>
 	</table>
 
