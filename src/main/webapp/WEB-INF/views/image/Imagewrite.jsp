@@ -2,12 +2,39 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<style>
+<style type="text/css">
 
-.allblock {
-	margin-top: 200px;
-}
-
+	.allblock {
+		margin-top: 200px;
+	}
+	#result_card img{
+		max-width: 100%;
+	    height: auto;
+	    display: block;
+	    padding: 5px;
+	    margin-top: 10px;
+	    margin: auto;	
+	}
+	#result_card {
+		position: relative;
+	}
+	.imgDeleteBtn{
+	    position: absolute;
+	    top: 0;
+	    right: 5%;
+	    background-color: #ef7d7d;
+	    color: wheat;
+	    font-weight: 900;
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    line-height: 26px;
+	    text-align: center;
+	    border: none;
+	    display: block;
+	    cursor: pointer;	
+	}
+	
 </style>
 
 <div class="allblock">
@@ -31,9 +58,11 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="imageFile">이미지 : </label>
-			<input type="file" multiple class="form-control" id="imageFile" name="imageFile"
+			<label for="fileName">이미지 : </label>
+			<input type="file" class="form-control" id="fileName" name="fileName"
 			required="required" > 
+			<div id="uploadResult">
+			</div>
 		</div>
 		
 		<button class="btn btn-primary">등록</button>
@@ -46,16 +75,32 @@
 	
 /* 이미지 업로드 */
 $("input[type='file']").on("change", function(e){
+	let formData = new FormData();
 	let fileInput = $('input[name="fileName"]');
 	let fileList = fileInput[0].files;
 	let fileObj = fileList[0];
 
-	console.log("fileList : " + fileList);
-	console.log("fileObj : " + fileObj);
+	if(!fileCheck(fileObj.name, fileObj.size)){
+		return false;
+	}
 	
-	console.log("fileName : " + fileObj.name);
-	console.log("fileSize : " + fileObj.size);
-	console.log("fileType(MimeType) : " + fileObj.type);
+	formData.append("fileName", fileObj);
+	
+	$.ajax({
+		url: '/Admin/Image/write.do',
+    	processData : false,
+    	contentType : false,
+    	data : formData,
+    	type : 'POST',
+    	dataType : 'json',
+    	success : function (result) {
+			console.log(result);
+			showUploadImage(result);
+		},
+		error : function(result) {
+			alert("이미지 파일이 아닙니다.")
+		}
+	});	
 	
 });
 
@@ -71,13 +116,36 @@ function fileCheck(fileName, fileSize){
 	}
 		  
 	if(!regex.test(fileName)){
-		alert("해당 종류의 파일은 업로드할 수 없습니다.");
+		alert(".jpg / .png 파일만 가능합니다.");
 		return false;
 	}
 	
 	return true;		
 	
 }
+
+/* 이미지 출력 */
+function showUploadImage(uploadResultArr){
+	
+	/* 전달받은 데이터 검증 */
+	if(!uploadResultArr || uploadResultArr.length == 0){return}
+	
+	let uploadResult = $("#uploadResult");
+	
+	let obj = uploadResultArr[0];
+	
+	let str = "";
+	
+	let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+	
+	str += "<div id='result_card'>";
+	str += "<img src='/display?fileName=" + fileCallPath +"'>";
+	str += "<div class='imgDeleteBtn'>x</div>";
+	str += "</div>";		
+	
+		uploadResult.append(str);     
+    
+}	
 	
 </script>
 
