@@ -42,8 +42,8 @@
 		</tr>
 		<tr>
 			<th>이미지</th>
-			<td><img src="${vo.fileName }"
-								alt="Lights" style="width: 100%; height: 150px;"></td>
+<%-- 			<td><img src="${vo.fileName }" --%>
+<!-- 								alt="Lights" style="width: 100%; height: 150px;"></td> -->
 		</tr>
 		<tr>
 			<th>내용</th>

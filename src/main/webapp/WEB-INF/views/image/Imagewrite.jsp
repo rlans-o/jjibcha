@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <style type="text/css">
 
@@ -58,9 +59,9 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="fileName">이미지 : </label>
-			<input type="file" class="form-control" id="fileName" name="fileName"
-			required="required" > 
+			<label for="">이미지 : </label>
+			<input type="file" class="form-control" id="fileItem" name="uploadFile"
+			required="required"  /> 
 			<div id="uploadResult">
 			</div>
 		</div>
@@ -75,30 +76,38 @@
 	
 /* 이미지 업로드 */
 $("input[type='file']").on("change", function(e){
-	let formData = new FormData();
-	let fileInput = $('input[name="fileName"]');
-	let fileList = fileInput[0].files;
-	let fileObj = fileList[0];
-
-	if(!fileCheck(fileObj.name, fileObj.size)){
-		return false;
+	
+	/* 이미지 존재시 삭제 */
+	if($(".imgDeleteBtn").length > 0){
+		deleteFile();
 	}
 	
-	formData.append("fileName", fileObj);
+	let formData = new FormData();
+	let fileInput = $('input[name="uploadFile"]');
+	let fileList = fileInput[0].files;
+	let fileObj = fileList[0];
+	
+// 	if(!fileCheck(fileObj.name, fileObj.size)){
+// 		return false;
+// 	}
+// 	alert("통과");
+	
+	formData.append("uploadFile", fileObj);
 	
 	$.ajax({
-		url: '/Admin/Image/write.do',
+		url: '/Admin/uploadAjaxAction',
     	processData : false,
     	contentType : false,
     	data : formData,
     	type : 'POST',
     	dataType : 'json',
-    	success : function (result) {
+    	success : function(result) {
 			console.log(result);
 			showUploadImage(result);
 		},
 		error : function(result) {
 			alert("이미지 파일이 아닙니다.")
+			
 		}
 	});	
 	
@@ -140,12 +149,44 @@ function showUploadImage(uploadResultArr){
 	
 	str += "<div id='result_card'>";
 	str += "<img src='/display?fileName=" + fileCallPath +"'>";
-	str += "<div class='imgDeleteBtn'>x</div>";
+	str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
 	str += "</div>";		
 	
 		uploadResult.append(str);     
     
-}	
+}
+
+/* 이미지 삭제 버튼 동작 */
+$("#uploadResult").on("click", ".imgDeleteBtn", function(e){
+	
+	deleteFile();
+	
+});
+
+/* 파일 삭제 메서드 */
+function deleteFile(){
+	
+	let targetFile = $(".imgDeleteBtn").data("file");
+	
+	let targetDiv = $("#result_card");
+	
+	$.ajax({
+		url: '/Admin/deleteFile',
+		data : {fileName : targetFile},
+		dataType : 'text',
+		type : 'POST',
+		success : function(result){
+			console.log(result);
+			
+			targetDiv.remove();
+			$("input[type='file']").val("");
+		},
+		error : function(result){
+			console.log(result);
+		}
+   });
+	
+}
 	
 </script>
 

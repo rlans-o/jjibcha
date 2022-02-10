@@ -12,6 +12,6 @@ public class ImageVO {
 	private String image_content;
 	private String image_writer;
 	private Date image_writerDate;
-	private String fileName;
+
 	
 }

@@ -39,8 +39,9 @@
 				<c:forEach items="${imageList}" var="vo">
 					<div class="col-md-3">
 						<div class="thumbnail dataRow">
-							<a href="/Image/view.do?image_no=${vo.image_no }"> <img src="${vo.fileName }"
-								alt="Lights" style="width: 100%; height: 200px;">
+							<a href="/Image/view.do?image_no=${vo.image_no }"> 
+<%-- 							<img src="${vo.fileName }" --%>
+<!-- 								alt="Lights" style="width: 100%; height: 200px;"> -->
 								<div class="caption">
 									<p>${vo.image_no }.${vo.image_title }</p>
 									${vo.image_writer } (
