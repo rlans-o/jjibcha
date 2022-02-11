@@ -39,31 +39,37 @@
 </style>
 
 <div class="allblock">
-	<h1 align="center">Image 글쓰기</h1>
+	<h1 align="center">상품 등록</h1>
 	<form method="post"  enctype="multipart/form-data">
 		<div class="form-group">
-			<label for="image_title">제목 : </label>
-			<input type="text" class="form-control" id="image_title" name="image_title" 
+			<label for="goods_name">상품 이름 : </label>
+			<input type="text" class="form-control" id="goods_name" name="goods_name" 
 			required="required" pattern=".{4,100}" maxlength="100"> 
 		</div>
 		
 		<div class="form-group">
-			<label for="image_content">내용 :</label>
-			<textarea class="form-control" rows="5" id="image_content" name="image_content"></textarea>
-		</div>
-		
-		<div class="form-group">
-			<label for="image_writer">작성자 :</label>
-			<input type="text" class="form-control" id="image_writer" name="image_writer"
-			required="required" pattern="[가-하a-zA-Z]{2,10}" maxlength="10"> 
-		</div>
-		
-		<div class="form-group">
-			<label for="">이미지 : </label>
+			<label>상품 이미지 : </label>
 			<input type="file" class="form-control" id="fileItem" name="uploadFile"
 			required="required"  /> 
 			<div id="uploadResult">
 			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="goods_price">가격 :</label>
+			<input type="text" class="form-control" id="goods_price" name="goods_price"
+			required="required" > 
+		</div>
+		
+		<div class="form-group">
+			<label for="goods_stock">상품 수량 :</label>
+			<input type="text" class="form-control" id="goods_stock" name="goods_stock"
+			required="required" >
+		</div>
+		
+		<div class="form-group">
+			<label for="goods_des">상품 설명 :</label>
+			<textarea class="form-control" id="goods_des" name="goods_des"></textarea>
 		</div>
 		
 		<button class="btn btn-primary">등록</button>
@@ -150,6 +156,9 @@ function showUploadImage(uploadResultArr){
 	str += "<div id='result_card'>";
 	str += "<img src='/display?fileName=" + fileCallPath +"'>";
 	str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+	str += "<input type='hidden' name='imageList[0].fileName' value='"+ obj.fileName +"'>";
+	str += "<input type='hidden' name='imageList[0].uuid' value='"+ obj.uuid +"'>";
+	str += "<input type='hidden' name='imageList[0].uploadPath' value='"+ obj.uploadPath +"'>";		
 	str += "</div>";		
 	
 		uploadResult.append(str);     

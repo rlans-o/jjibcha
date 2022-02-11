@@ -36,16 +36,16 @@
 		<div class="panel-body">
 			<div class="row">
 				<!-- 데이터가 있는 만큼 반복하는 시작 -->
-				<c:forEach items="${imageList}" var="vo">
+				<c:forEach items="${goodsList}" var="vo">
 					<div class="col-md-3">
 						<div class="thumbnail dataRow">
-							<a href="/Image/view.do?image_no=${vo.image_no }"> 
+							<a href="/Goods/view.do?goods_id=${vo.goods_id }"> 
 <%-- 							<img src="${vo.fileName }" --%>
 <!-- 								alt="Lights" style="width: 100%; height: 200px;"> -->
 								<div class="caption">
-									<p>${vo.image_no }.${vo.image_title }</p>
-									${vo.image_writer } (
-									<fmt:formatDate value="${vo.image_writerDate }" pattern="yyyy.MM.dd" />
+									<p>${vo.goods_id }.${vo.goods_name }</p>
+									(
+									<fmt:formatDate value="${vo.goods_date }" pattern="yyyy.MM.dd" />
 									)
 								</div>
 							</a>
@@ -154,8 +154,8 @@
 
 		// 		$(".dataRow").click(function() {
 		// 			// 글번호 찾기
-		// 			var image_no = $(this).find(".image_no").text();
-		// 			location = "/Image/view.do?image_no=" + image_no + "&inc=1";
+		// 			var goods_no = $(this).find(".goods_no").text();
+		// 			location = "/Image/view.do?goods_no=" + goods_no + "&inc=1";
 		// 		});
 	});
 </script>

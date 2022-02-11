@@ -100,7 +100,7 @@ article {
 					<ul class="nav navbar-nav">
 						<li><a href="/board/list.do"></a></li>
 						<li><a href="/qna/list.do">Table</a></li>
-						<li><a href="/Image/list.do">Chair</a></li>
+						<li><a href="/Goods/list.do">Chair</a></li>
 						<li><a href="/QnA/list.do">QnA</a></li>
 						<li><a href="/Review/list.do">REVIEW</a></li>
 						<!-- 회원관리는 관리자 권한으로 로그인하면 보인다. -->

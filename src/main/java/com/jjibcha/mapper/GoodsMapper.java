@@ -5,28 +5,31 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.jjibcha.vo.ImageVO;
+import com.jjibcha.vo.AttachImageVO;
+import com.jjibcha.vo.GoodsVO;
 
 import net.webjjang.util.PageObject;
 
 
 @Mapper
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public interface ImageMapper {
+public interface GoodsMapper {
 
 	// qna list - 전체 데이터 구하기
-	public List<ImageVO> list(PageObject pageObject);
+	public List<GoodsVO> list(PageObject pageObject);
 	public Integer getRow(PageObject pageObject);
 	
 	// view - 조회수 1증가
-	public ImageVO view(int qna_no);
+	public GoodsVO view(int qna_no);
 	
 	// write
-	public void write(ImageVO vo);
+	public void write(GoodsVO vo);
+	/* 이미지 등록 */
+	public void imageEnroll(AttachImageVO vo);
 	
 	// update
-	public void update(ImageVO vo);
+	public void update(GoodsVO vo);
 		
 	// delete - qna_no, qna_pw
-	public void delete(ImageVO vo);	
+	public void delete(GoodsVO vo);	
 }

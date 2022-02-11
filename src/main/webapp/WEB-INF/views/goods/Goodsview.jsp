@@ -6,10 +6,10 @@
 <script type="text/javascript">
 	$(function () {
 		$("#deleteBtn").click(function () {
-			var image_pw = prompt("비밀번호 입력 : ");
+			var goods_pw = prompt("비밀번호 입력 : ");
 			
-			if (image_pw.length >= 4) {
-				$("#deletePw").val(image_pw); // pw value값을 등록시킴
+			if (goods_pw.length >= 4) {
+				$("#deletePw").val(goods_pw); // pw value값을 등록시킴
 				$("#deleteForm").submit();
 				return;
 			}
@@ -33,38 +33,37 @@
 	<h1 align="center">Image 게시판 글보기</h1>
 	<table class="table">
 		<tr>
-			<th>번호</th>
-			<td>${vo.image_no }</td>
+			<th>상품 번호</th>
+			<td>${vo.goods_id }</td>
 		</tr>
 		<tr>
-			<th>제목</th>
-			<td>${vo.image_title }</td>
+			<th>상품 이름</th>
+			<td>${vo.goods_name }</td>
 		</tr>
 		<tr>
 			<th>이미지</th>
-<%-- 			<td><img src="${vo.fileName }" --%>
-<!-- 								alt="Lights" style="width: 100%; height: 150px;"></td> -->
+			<td><img src="${vo.fileName }"
+								alt="Lights" style="width: 100%; height: 150px;"></td>
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td><pre style="border: none;">${vo.image_content }</pre></td>
+			<th>상품 수량</th>
+			<td><pre style="border: none;">${vo.goods_stock }</pre></td>
 		</tr>
 		<tr>
-			<th>작성자</th>
-			<td>${vo.image_writer }</td>
+			<th>상품 설명</th>
+			<td><pre style="border: none;">${vo.goods_des }</pre></td>
 		</tr>
 		<tr>
-			<th>작성일</th>
+			<th>상품 등록일</th>
 			<td>
-				<fmt:formatDate value="${vo.image_writerDate }"
+				<fmt:formatDate value="${vo.goods_date }"
 				pattern="yyyy.MM.dd"/>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<a href="/Admin/Image/update.do?image_no=${vo.image_no}" class="btn btn-primary">수정</a>
+				<a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
 				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
-				<a href="/Image/list.do" class="btn btn-primary">리스트</a>
 			</td>
 		</tr>
 	</table>
@@ -72,7 +71,7 @@
 
 <!-- 삭제를 위한 form tag -->
 
-<form action="/Image/delete.do" method="post" id="deleteForm">
-	<input type="hidden" name="image_no" value="${vo.image_no }" />
+<form action="/Goods/delete.do" method="post" id="deleteForm">
+	<input type="hidden" name="goods_id" value="${vo.goods_id }" />
 	<input type="hidden" name="fileName" id="fileName" />
 </form>

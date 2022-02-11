@@ -56,11 +56,12 @@
 			<table class="table table-striped table-bordered table-hovor">
 				<thead>
 					<tr>
-						<th>번호</th>
+						<th>상품 번호</th>
+						<th>상품 이름</th>
 						<th>상품 이미지</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
+						<th>상품 가격</th>
+						<th>상품 수량</th>
+						<th>등록 일자</th>
 					</tr>
 				</thead>
 
@@ -68,12 +69,13 @@
 					<c:when test="${list.size()>0 }">
 						<c:forEach items="${list }" var="list">
 							<tr class="dataRow">
-								<td class="image_no">${list.image_no}</td>
-								<td><img src="${list.fileName}"  style="height: 80px; width: 80px;"/></td>
-								<td>${list.image_title }</td>
-								<td>${list.image_writer }</td>
+								<td class="goods_id">${list.goods_id}</td>
+								<td>${list.goods_name }</td>
+								<td>이미지</td>
+								<td>${list.goods_price }</td>
+								<td>${list.goods_stock }</td>
 								<td>
-									<fmt:formatDate value="${list.image_writerDate }"
+									<fmt:formatDate value="${list.goods_date }"
 									pattern="yyyy.MM.dd"/>
 								</td>
 							</tr>
@@ -95,7 +97,7 @@
 	
 	<c:if test="${pageObject.totalPage > 1 }">
 		<!-- 전체 페이지가 2페이지 이상이면 보여주는 부분 -->
-		<pageNav:pageNav pageObject="${pageObject }" listURI="/Image/list.do" />
+		<pageNav:pageNav pageObject="${pageObject }" listURI="/Goods/list.do" />
 	</c:if>
 	</div>
 	
@@ -118,8 +120,8 @@
 		
 		$(".dataRow").click(function () {
 			// 글번호 찾기
-			var image_no = $(this).find(".image_no").text();
-			location = "/Image/view.do?image_no="+ image_no + "&inc=1";
+			var goods_id = $(this).find(".goods_id").text();
+			location = "/Goods/view.do?goods_id="+ goods_id + "&inc=1";
 		});
 	});
 

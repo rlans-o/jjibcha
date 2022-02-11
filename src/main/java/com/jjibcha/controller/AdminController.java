@@ -14,6 +14,7 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jjibcha.service.GoodsService;
 import com.jjibcha.vo.AttachImageVO;
+import com.jjibcha.vo.GoodsVO;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -32,6 +35,9 @@ import net.coobird.thumbnailator.Thumbnails;
 @Controller
 @Log4j
 public class AdminController {
+	
+	@Autowired
+	private GoodsService goodsService;
 	
 	/* 관리자 메인 페이지 이동 */
     @RequestMapping(value="/Admin/main.do", method = RequestMethod.GET)
@@ -42,6 +48,28 @@ public class AdminController {
         
         return "admin/main";
     }
+    
+    // Goods 상품등록 get
+	   @RequestMapping(value = "/Admin/Goods/enroll.do", method = RequestMethod.GET)
+		public String getGoodsenroll() {
+		   log.info("getGoodsenroll");
+		   
+		   return "/admin/Goodsenroll";
+		}
+	   
+	// Goods 상품등록 post
+	   @RequestMapping(value = "/Admin/Goods/enroll.do", method = RequestMethod.POST)
+		public String postGoodsenroll(GoodsVO vo, RedirectAttributes rttr) {
+		   log.info("postGoodsenroll"+ vo);
+		   
+		   goodsService.write(vo);
+		   
+		   rttr.addFlashAttribute("enroll_result", vo.getGoods_name());
+		   
+		   return "redirect:/Goods/list.do";
+		}
+	   
+	   
     
  // 첨부 파일 업로드
 	   @RequestMapping(value = "/Admin/uploadAjaxAction", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

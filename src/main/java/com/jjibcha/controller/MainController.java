@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.jjibcha.service.ImageService;
+import com.jjibcha.service.GoodsService;
 import com.jjibcha.service.QnAService;
 
 import lombok.extern.log4j.Log4j;
@@ -24,7 +24,7 @@ public class MainController {
 	private QnAService qnaService;
 	
 	@Autowired
-	private ImageService imageService;
+	private GoodsService imageService;
 
 	
 	// 메인 페이지
@@ -37,7 +37,7 @@ public class MainController {
 				qnaService.list(pageObject));
 		
 		pageObject = new PageObject(1, 4);
-		model.addAttribute("imageList", 
+		model.addAttribute("goodsList", 
 				imageService.list(pageObject));
 		
 		return "index";

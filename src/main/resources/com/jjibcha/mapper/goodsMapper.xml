@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ImageMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.goodsMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.GoodsMapper">
+  	
+  	<!-- 상품 리스트 : 검색 적용 -->
+  	
+	<!-- 페이징 처리 후 상품 조회 -->
+	<select id="list" resultType="com.jjibcha.vo.GoodsVO">
+   		select *
+		from goods
+		<include refid="search" />
+		order by goods_id desc
+		limit #{startRow}, #{endRow}
+	</select>
+  	
+  	<!-- 전체 데이터 가져오기 : 검색 적용 -->
+  	<select id="getRow" resultType="int">
+   		select count(*)
+   		from goods
+		<include refid="search" />
+  	</select>
+  	
+  	<!-- 검색에 사용되는 조건 처리문 -->
+  	<sql id="search">
+  	<!-- 검색처리를 하는 부분 -->
+	  <if test="word !=null and word != ''.toString">
+	   where ( 2 = 1
+	   <!-- 2글자 이상인 경우 : String 취급,
+	     한 글자인 경우:char 취급 => toString()를 이용해서 문자열로 만듬-->
+	   <if test="key == 't'.toString()">
+	 
+	       or goods_name like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'c'.toString()">
+	          or goods_des like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'w'.toString()">
+	          or goods_writer like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'tc'.toString()">
+	          or goods_name like concat('%', #{word}, '%')
+	          or goods_des like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'tw'.toString()">
+	          or goods_name like concat('%', #{word}, '%')
+	          or goods_writer like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'cw'.toString()">
+	          or goods_content like concat('%', #{word}, '%')
+	          or goods_writer like concat('%', #{word}, '%')
+	   </if>
+	   <if test="key == 'all'">
+	          or goods_name like concat('%', #{word}, '%')
+	          or goods_des like concat('%', #{word}, '%')
+	          or goods_writer like concat('%', #{word}, '%')
+	   </if>
+	   )
+	  </if>
+  	</sql>
+ 
+  	
+  	<insert id="write" >
+  	
+  		<selectKey resultType="int" keyProperty="goods_id" order="AFTER">
+	  		
+	  	select LAST_INSERT_ID()
+	  		
+	  	</selectKey>
+ 
+   		insert into goods(goods_id, goods_name, goods_price, goods_stock, goods_des)
+   		values(#{goods_id}, #{goods_name}, #{goods_price}, #{goods_stock}, #{goods_des})   		
+   		 
+  	</insert>
+  	
+  	<!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+	
+		insert into goods_image(goods_id, fileName, uploadPath, uuid) 
+		values (#{goods_id}, #{fileName}, #{uploadPath}, #{uuid})
+
+	</insert>
+  	
+  	<select id="view" resultType="com.jjibcha.vo.GoodsVO">
+   		<![CDATA[  
+   		select goods_id, goods_name, goods_price, goods_stock, goods_des, goods_date, fileName
+   		from goods 
+   		where goods_id = #{goods_id}
+   		]]> 
+  	</select>
+  	
+  	<!-- 상품 수정 -->
+  	<update id="update" >
+  		<![CDATA[
+  		update goods
+  		set goods_name = #{goods_name}, goods_price = #{goods_price}, goods_stock = #{goods_stock}, goods_des = #{goods_des}, fileName = #{fileName}
+  		where goods_id = #{goods_id}
+  		]]>
+  	</update>
+  	
+  	<!-- 상품 파일수정 -->
+  	<update id="updatefileName" >
+  		<![CDATA[
+  		update goods
+  		set fileName = #{fileName}
+  		where goods_id = #{goods_id}
+  		]]>
+  	</update>
+  	
+  	<!-- 상품 삭제 -->
+  	<delete id="delete" >
+  		<![CDATA[
+  		delete from goods
+  		where goods_id = #{goods_id}
+  		]]>
+  	</delete>
+  	
+  </mapper>
