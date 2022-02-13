@@ -22,7 +22,7 @@ public interface GoodsService {
 	public void imageEnroll(AttachImageVO vo);
 	
 	// update
-	public void update(GoodsVO vo);
+	public int update(GoodsVO vo);
 	
 	// delete - no, pw
 	public void delete(GoodsVO vo);

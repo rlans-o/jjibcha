@@ -121,7 +121,7 @@
 		$(".dataRow").click(function () {
 			// 글번호 찾기
 			var goods_id = $(this).find(".goods_id").text();
-			location = "/Goods/view.do?goods_id="+ goods_id + "&inc=1";
+			location = "/Goods/view.do?goods_id="+ goods_id;
 		});
 	});
 

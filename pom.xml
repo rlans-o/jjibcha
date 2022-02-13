@@ -111,6 +111,20 @@
 		    <version>2.9.7</version>
 		</dependency>
 		
+		<!-- 배치 프로그램 Qurartz-->
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs -->
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz-jobs</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		
 		<!-- 패스워드 암호화 -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->

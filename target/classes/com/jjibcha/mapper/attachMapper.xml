@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ImageMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.goodsMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.AttachMapper">
+  	
+  	<select id="getAttachList" resultType="com.jjibcha.vo.AttachImageVO">
+	
+		select * from goods_image 
+		where goods_id = #{goods_id}
+	
+	</select>
+  	
+  </mapper>

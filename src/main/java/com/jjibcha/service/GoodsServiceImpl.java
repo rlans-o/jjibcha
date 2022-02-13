@@ -44,13 +44,13 @@ public class GoodsServiceImpl implements GoodsService {
 
 		return mapper.view(goods_id);
 	}
-	
+
 	@Transactional
 	@Override
 	public void write(GoodsVO vo) {
-		
+
 		log.info("(service) goodswrite");
-		
+
 		mapper.write(vo);
 
 		if (vo.getImageList() == null || vo.getImageList().size() <= 0) {
@@ -64,11 +64,26 @@ public class GoodsServiceImpl implements GoodsService {
 
 		});
 	}
-
+	
+	@Transactional
 	@Override
-	public void update(GoodsVO vo) {
-		// TODO Auto-generated method stub
-		mapper.update(vo);
+	public int update(GoodsVO vo) {
+		int result = mapper.update(vo);
+
+		if (result == 1 && vo.getImageList() != null && vo.getImageList().size() > 0) {
+
+			mapper.deleteImageAll(vo.getGoods_id());
+
+			vo.getImageList().forEach(attach -> {
+
+				attach.setGoods_id(vo.getGoods_id());
+				mapper.imageEnroll(attach);
+
+			});
+
+		}
+
+		return result;
 	}
 
 	@Override
@@ -80,7 +95,7 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void imageEnroll(AttachImageVO vo) {
 		mapper.imageEnroll(vo);
-		
+
 	}
 
 }
