@@ -15,21 +15,21 @@
 </style>
 
 <script type="text/javascript">
-// 	$(function () {
-// 		$("#deleteBtn").click(function () {
-// 			var goods_pw = prompt("비밀번호 입력 : ");
+	$(function () {
+		$("#deleteBtn").click(function () {
+			var goods_pw = prompt("비밀번호 입력 : ");
 			
-// 			if (goods_pw.length >= 4) {
-// 				$("#deletePw").val(goods_pw); // pw value값을 등록시킴
-// 				$("#deleteForm").submit();
-// 				return;
-// 			}
+			if (goods_pw.length >= 4) {
+				$("#deletePw").val(goods_pw); // pw value값을 등록시킴
+				$("#deleteForm").submit();
+				return;
+			}
 			
-// 			alert("비밀번호는 4자 이상 50자 이내로 입력하셔야 합니다.");
-// 			// 화면 이동을 막는다.
-// 			return false;
-// 		});
-// 	});
+			alert("비밀번호는 4자 이상 50자 이내로 입력하셔야 합니다.");
+			// 화면 이동을 막는다.
+			return false;
+		});
+	});
 	
 	$(document).ready(function() {
 		
@@ -121,11 +121,11 @@
 </div>
 
 <a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
-				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>                   
+<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>                   
 
 <!-- 삭제를 위한 form tag -->
 
-<form action="/Goods/delete.do" method="post" id="deleteForm">
+<form action="/Admin/Goods/delete.do" method="post" id="deleteForm">
 	<input type="hidden" name="goods_id" value="${vo.goods_id }" />
 	<input type="hidden" name="fileName" id="fileName" />
 </form>

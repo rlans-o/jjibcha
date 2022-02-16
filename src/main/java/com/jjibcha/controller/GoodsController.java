@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -104,13 +106,37 @@ public class GoodsController {
 
 	// Goods 게시판 글삭제 post
 	@RequestMapping(value = "/Admin/Goods/delete.do", method = RequestMethod.POST)
-	public String getGoodsdelete(GoodsVO vo, RedirectAttributes rttr) {
-		log.info("getGoodsdelete");
+	public String getGoodsdelete(int goods_id, RedirectAttributes rttr) {
+		log.info("Goodsdelete");
 
-		goodsService.delete(vo);
+		List<AttachImageVO> fileList = goodsService.getAttachInfo(goods_id);
+
+		if (fileList != null) {
+
+			List<Path> pathList = new ArrayList();
+
+			fileList.forEach(vo -> {
+
+				// 원본 이미지
+				Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName());
+				pathList.add(path);
+
+				// 섬네일 이미지
+				path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid() + "_" + vo.getFileName());
+				pathList.add(path);
+
+			});
+
+			pathList.forEach(path -> {
+				path.toFile().delete();
+			});
+
+		}
+
+		int result = goodsService.delete(goods_id);
 
 		// 글삭제 정상처리 표시 데이터 셋팅
-		rttr.addFlashAttribute("processResult", "delete success");
+		rttr.addFlashAttribute("delete_result", result);
 
 		return "redirect:/Goods/list.do";
 	}

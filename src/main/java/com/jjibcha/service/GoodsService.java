@@ -14,6 +14,9 @@ public interface GoodsService {
 	public List<GoodsVO> list(PageObject pageObject);
 	public int getRow(PageObject pageObject);
 	
+	/* 지정 상품 이미지 정보 얻기 */
+	public List<AttachImageVO> getAttachInfo(int goods_id);
+	
 	// view
 	public GoodsVO view(int goods_id);
 	
@@ -25,6 +28,6 @@ public interface GoodsService {
 	public int update(GoodsVO vo);
 	
 	// delete - no, pw
-	public void delete(GoodsVO vo);
+	public int delete(int goods_id);
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.mapper.GoodsMapper;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.GoodsVO;
@@ -22,27 +23,42 @@ public class GoodsServiceImpl implements GoodsService {
 
 	// @AllArgsConstructor를 이용해서 자동 DI 된다.
 	@Autowired
-	private GoodsMapper mapper;
+	private GoodsMapper goodsMapper;
+	
+	private AttachMapper attachMapper;
 
 	@Override
 	public List<GoodsVO> list(PageObject pageObject) {
 
 		// getRow() 메서드를 이용해서 전체데이터를 셋팅하면 계산이 되어진다.
-		pageObject.setTotalRow(mapper.getRow(pageObject));
+		pageObject.setTotalRow(goodsMapper.getRow(pageObject));
 		log.info("pageobject", pageObject);
-		return mapper.list(pageObject);
+
+		List<GoodsVO> list = goodsMapper.list(pageObject);
+
+		list.forEach(goods -> {
+
+			int goods_id = goods.getGoods_id();
+
+			List<AttachImageVO> imageList = attachMapper.getAttachList(goods_id);
+
+			goods.setImageList(imageList);
+
+		});
+
+		return list;
 	}
 
 	@Override
 	public int getRow(PageObject pageObject) {
 
-		return mapper.getRow(pageObject);
+		return goodsMapper.getRow(pageObject);
 	}
 
 	@Override
 	public GoodsVO view(int goods_id) {
 
-		return mapper.view(goods_id);
+		return goodsMapper.view(goods_id);
 	}
 
 	@Transactional
@@ -51,7 +67,7 @@ public class GoodsServiceImpl implements GoodsService {
 
 		log.info("(service) goodswrite");
 
-		mapper.write(vo);
+		goodsMapper.write(vo);
 
 		if (vo.getImageList() == null || vo.getImageList().size() <= 0) {
 			return;
@@ -60,24 +76,24 @@ public class GoodsServiceImpl implements GoodsService {
 		vo.getImageList().forEach(attach -> {
 
 			attach.setGoods_id(vo.getGoods_id());
-			mapper.imageEnroll(attach);
+			goodsMapper.imageEnroll(attach);
 
 		});
 	}
-	
+
 	@Transactional
 	@Override
 	public int update(GoodsVO vo) {
-		int result = mapper.update(vo);
+		int result = goodsMapper.update(vo);
 
 		if (result == 1 && vo.getImageList() != null && vo.getImageList().size() > 0) {
 
-			mapper.deleteImageAll(vo.getGoods_id());
+			goodsMapper.deleteImageAll(vo.getGoods_id());
 
 			vo.getImageList().forEach(attach -> {
 
 				attach.setGoods_id(vo.getGoods_id());
-				mapper.imageEnroll(attach);
+				goodsMapper.imageEnroll(attach);
 
 			});
 
@@ -87,15 +103,25 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void delete(GoodsVO vo) {
-		// TODO Auto-generated method stub
-		mapper.delete(vo);
+	@Transactional
+	public int delete(int goods_id) {
+
+		goodsMapper.deleteImageAll(goods_id);
+
+		return goodsMapper.delete(goods_id);
 	}
 
 	@Override
 	public void imageEnroll(AttachImageVO vo) {
-		mapper.imageEnroll(vo);
+		goodsMapper.imageEnroll(vo);
 
+	}
+
+	@Override
+	public List<AttachImageVO> getAttachInfo(int goods_id) {
+		log.info("getAttachInfo");
+
+		return goodsMapper.getAttachInfo(goods_id);
 	}
 
 }

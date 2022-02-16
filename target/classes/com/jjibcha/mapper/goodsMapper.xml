@@ -95,6 +95,13 @@
 		delete from goods_image where goods_id = #{goods_id}
 	
 	</delete>
+	
+	<!-- 지정 상품 이미지 정보 얻기 -->
+	<select id="getAttachInfo" resultType="com.jjibcha.vo.AttachImageVO">
+	
+		select * from goods_image where goods_id = #{goods_id}
+	
+	</select>
   	
   	<select id="view" resultType="com.jjibcha.vo.GoodsVO">
    		<![CDATA[  

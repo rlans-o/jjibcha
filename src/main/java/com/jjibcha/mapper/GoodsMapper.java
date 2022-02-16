@@ -29,6 +29,9 @@ public interface GoodsMapper {
 	/* 지정 상품 이미지 전체 삭제 */
 	public void deleteImageAll(int goods_id);
 	
+	/* 지정 상품 이미지 정보 얻기 */
+	public List<AttachImageVO> getAttachInfo(int goods_id);
+	
 	/* 어제자 날짜 이미지 리스트 */
 	public List<AttachImageVO> checkFileList();
 	
@@ -36,5 +39,5 @@ public interface GoodsMapper {
 	public int update(GoodsVO vo);
 		
 	// delete - qna_no, qna_pw
-	public void delete(GoodsVO vo);	
+	public int delete(int goods_id);	
 }
