@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ImageMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.goodsMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.CartMapper">
+  	
+  	<!-- 카트 추가 -->
+	<insert id="addCart">
+	
+		insert into cart(mem_id, goods_id, goods_count)
+		values(#{mem_id}, #{goods_id}, #{goods_count}) 
+	
+	</insert>
+	
+	
+	<!-- 카트 삭제 -->
+	<delete id="deleteCart">
+	
+		delete from cart where cart_id = #{cart_id}
+	
+	</delete>
+	
+	<!-- 카트 수량 수정 -->
+	<update id="modifyCount">
+	
+		update cart set goods_count=#{goods_count} where cart_id = #{cart_id}
+	
+	</update>
+	
+	
+	<!-- 카트 목록 -->
+	<select id="getCart" resultType="com.jjibcha.vo.CartVO">
+	
+		select a.cart_id, a.mem_id, a.goods_id, a.goods_count, b.goods_name, b.goods_price
+		from cart a left outer join goods b on a.goods_id = b.goods_id
+		where mem_id = #{mem_id}	
+	
+	</select>
+	
+	<!-- 카트 확인 -->
+	<select id="checkCart" resultType="com.jjibcha.vo.CartVO">
+	
+		select * from cart 
+		where mem_id = #{mem_id} and goods_id = #{goods_id}
+	
+	</select>
+  	
+  </mapper>
