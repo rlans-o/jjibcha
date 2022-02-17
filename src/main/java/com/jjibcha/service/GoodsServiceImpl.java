@@ -13,18 +13,20 @@ import com.jjibcha.mapper.GoodsMapper;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.GoodsVO;
 
+import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
 
 //@AllArgsConstructor // 생성자를 이용한 모든 속성을 자동 DI 시킨다.
 @Service
+@Log4j
 public class GoodsServiceImpl implements GoodsService {
 
-	private static final Logger log = LoggerFactory.getLogger(GoodsServiceImpl.class);
 
 	// @AllArgsConstructor를 이용해서 자동 DI 된다.
 	@Autowired
 	private GoodsMapper goodsMapper;
 	
+	@Autowired
 	private AttachMapper attachMapper;
 
 	@Override
@@ -32,18 +34,18 @@ public class GoodsServiceImpl implements GoodsService {
 
 		// getRow() 메서드를 이용해서 전체데이터를 셋팅하면 계산이 되어진다.
 		pageObject.setTotalRow(goodsMapper.getRow(pageObject));
-		log.info("pageobject", pageObject);
+		log.info(pageObject);
 
 		List<GoodsVO> list = goodsMapper.list(pageObject);
 
 		list.forEach(goods -> {
 
 			int goods_id = goods.getGoods_id();
-
+			log.info(goods_id);
 			List<AttachImageVO> imageList = attachMapper.getAttachList(goods_id);
-
+			
 			goods.setImageList(imageList);
-
+			log.info(imageList);
 		});
 
 		return list;
@@ -57,6 +59,9 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public GoodsVO view(int goods_id) {
+		
+		
+		
 
 		return goodsMapper.view(goods_id);
 	}

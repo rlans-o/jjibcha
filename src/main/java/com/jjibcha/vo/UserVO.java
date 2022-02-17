@@ -14,11 +14,9 @@ public class UserVO {
 	private String mem_oaddress; // 회원 우편번호
 	private String mem_address;  // 회원 주소
 	private String mem_detailaddress;  // 회원 상세 주소
-	private int mem_point; // 회원 포인트는 쇼핑몰에서 물건을살때 일정금액의 %를 포인트로 적립해주는데 그것을 표현
-
-	private String result;    //생성or수정or삭제등의 결과를 넣을 변수
+	private int mem_point; // 회원 포인트
 	
-	private int adminCk;
+	private int adminCk; // 관리자 구분(0:일반사용자, 1:관리자)
 
 	
 	

@@ -44,7 +44,7 @@
 	          or goods_des like concat('%', #{word}, '%')
 	   </if>
 	   <if test="key == 'w'.toString()">
-	          or goods_writer like concat('%', #{word}, '%')
+	          or goods_stock like concat('%', #{word}, '%')
 	   </if>
 	   <if test="key == 'tc'.toString()">
 	          or goods_name like concat('%', #{word}, '%')

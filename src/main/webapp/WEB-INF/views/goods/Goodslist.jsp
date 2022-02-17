@@ -3,6 +3,41 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="pageNav" tagdir="/WEB-INF/tags"%>
 
+<script type="text/javascript">
+	$(function() {
+
+		$(".dataRow").click(function() {
+			// 글번호 찾기
+			var goods_id = $(this).find(".goods_id").text();
+			location = "/Goods/view.do?goods_id=" + goods_id;
+		});
+	});
+	
+	$(document).ready(function() {
+		
+		/* 이미지 삽입 */
+		$(".image_wrap").each(function(i, obj){
+			
+			const bobj = $(obj);
+			
+			if (bobj.data("goods_id")) {
+				
+				const uploadPath = bobj.data("path");
+				const uuid = bobj.data("uuid");
+				const fileName = bobj.data("filename");
+				
+				const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+				
+				$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+				
+			} else {
+				alert("안돼")
+			}
+			
+		});
+		
+	});
+</script>
 
 <style>
 .allblock {
@@ -13,6 +48,18 @@
 	background: #ccc;
 	cursor: pointer;
 }
+
+/* 상품 이미지 관련 */
+		.image_wrap {
+		    width: 100%;
+		    height: 100%;
+		}	
+		.image_wrap img {
+		    max-width: 85%;
+		    height: auto;
+		    display: block;
+		}
+ 
 </style>
 
 
@@ -68,7 +115,7 @@
 								<td class="goods_id">${list.goods_id}</td>
 								<td>${list.goods_name }</td>
 								<td class="image">
-									<div class="image_wrap" data-bookid="${list.imageList[0].goods_id}"
+									<div class="image_wrap" data-goods_id="${list.imageList[0].goods_id}"
 										data-path="${list.imageList[0].uploadPath}" data-uuid="${list.imageList[0].uuid}"
 										data-filename="${list.imageList[0].fileName}">
 										<img>
@@ -104,34 +151,6 @@
 
 
 
-<script type="text/javascript">
-	$(function() {
 
-		$(".dataRow").click(function() {
-			// 글번호 찾기
-			var goods_id = $(this).find(".goods_id").text();
-			location = "/Goods/view.do?goods_id=" + goods_id;
-		});
-	});
-	
-	$(document).ready(function() {
-		
-		/* 이미지 삽입 */
-		$(".image_wrap").each(function(i, obj){
-			
-			const bobj = $(obj);
-			
-			const uploadPath = bobj.data("path");
-			const uuid = bobj.data("uuid");
-			const fileName = bobj.data("filename");
-			
-			const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
-			
-			$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
-			
-		});
-		
-	});
-</script>
 
 
