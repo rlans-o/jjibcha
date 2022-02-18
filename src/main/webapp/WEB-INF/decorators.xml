@@ -11,7 +11,7 @@
 		<pattern>/main/*</pattern>
 		<pattern>/admin/*</pattern>
 		<pattern>/qna/*</pattern>
-		<pattern>/image/*</pattern>
+		<pattern>/cart/*</pattern>
 
 	</decorator>
 	

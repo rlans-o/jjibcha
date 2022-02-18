@@ -98,9 +98,7 @@ article {
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li><a href="/board/list.do"></a></li>
-						<li><a href="/qna/list.do">Table</a></li>
-						<li><a href="/Goods/list.do">Chair</a></li>
+						<li><a href="/Goods/list.do">Goods</a></li>
 						<li><a href="/QnA/list.do">QnA</a></li>
 						<li><a href="/Review/list.do">REVIEW</a></li>
 						<!-- 회원관리는 관리자 권한으로 로그인하면 보인다. -->
@@ -121,13 +119,12 @@ article {
 						</c:if>
 						<!-- 로그인을 한 경우의 메뉴 -->
 						<c:if test="${member != null }">
-<%-- 							<c:if test="${member.adminCk == 1 }"> --%>
-<!--                         <li><a href="/admin/main">관리자 페이지</a></li> -->
-<%--                     </c:if> --%>
+							
 							<li id="welcome">${member.mem_id}[${member.mem_name }]</li>
 							<li><a href="/User/view.do"> 내 정보 보기</a></li>
 							<li><a href="/User/logout.do"><span
 									class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+							<li><a href="/Cart/${member.mem_id }">장바구니</a></li>		
 						</c:if>
 					</ul>
 				</div>

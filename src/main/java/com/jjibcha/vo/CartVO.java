@@ -20,6 +20,16 @@ public class CartVO {
 	private int goods_price;
 
 	// 추가
-	// private int goods_price;
+	 private int salePrice;
+	 private int totalPrice;
+	 private int point;
+	 private int totalPoint;
+	 
+	 public void initSaleTotal() {
+		 this.salePrice = (int) (this.goods_price);
+		 this.totalPrice = this.salePrice*this.goods_count;
+		 this.point = (int)(Math.floor(this.salePrice*0.05));
+		 this.totalPoint =this.point * this.goods_count;
+	 }
 
 }

@@ -155,6 +155,66 @@
 }
 </style>
 
+<div class="line"></div>
+<div class="content_top">
+	<div class="ct_left_area">
+		<div class="form_section_content">
+		<div id="uploadReslut"></div>
+	</div>
+	</div>
+	<div class="ct_right_area">
+		<div class="title">
+			<h1>${vo.goods_name}</h1>
+		</div>
+		<div class="line"></div>
+		<div class="author">
+			<span> . </span> <span>|</span> <span> . </span> <span>|</span> <span class="publeyear"> .
+			</span>
+		</div>
+		<div class="line"></div>
+		<div class="price">
+			<div class="discount_price">
+				판매가 : <span class="discount_price_number">${vo.goods_price }</span>
+			</div>
+			<div>
+				적립 포인트 : <span class="point_span"></span>원
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="button">
+			<div class="button_quantity">
+				주문수량 
+				<input type="text" class="quantity_input" value="1"> <span>
+					<button class="plus_btn">+</button>
+					<button class="minus_btn">-</button>
+				</span>
+			</div>
+			<div class="button_set">
+				<a class="btn_cart">장바구니 담기</a> 
+				<a class="btn_buy">바로구매</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="line"></div>
+<div class="content_middle">
+	<div class="goods__intro">.</div>
+	<div class="goods__content">${vo.goods_des }</div>
+</div>
+<div class="line"></div>
+<div class="content_bottom">리뷰</div>
+
+
+<a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
+<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
+
+<!-- 삭제를 위한 form tag -->
+
+<form action="/Admin/Goods/delete.do" method="post" id="deleteForm">
+	<input type="hidden" name="goods_id" value="${vo.goods_id }" /> <input type="hidden"
+		name="fileName" id="fileName" />
+</form>
+
 <script type="text/javascript">
 	$(function() {
 		$("#deleteBtn").click(function() {
@@ -208,16 +268,23 @@
 			uploadReslut.html(str);
 
 	});
-});
+	
+	/* 포인트 삽입 */
+	let salePrice = "${vo.goods_price}"
+	let point = salePrice*0.05;
+	point = Math.floor(point);
+	$(".point_span").text(point);
 	
 	// 수량 버튼 조작
 	let quantity = $(".quantity_input").val();
 	$(".plus_btn").on("click", function(){
 		$(".quantity_input").val(++quantity);
+		console.log(quantity)
 	});
 	$(".minus_btn").on("click", function(){
 		if(quantity > 1){
-			$(".quantity_input").val(--quantity);	
+			$(".quantity_input").val(--quantity);
+			console.log(quantity)
 		}
 	});
  
@@ -230,9 +297,9 @@
 	
 	// 장바구니 추가 버튼
 	$(".btn_cart").on("click", function(e){
-		form.bookCount = $(".quantity_input").val();
+		form.goods_count = $(".quantity_input").val();
 		$.ajax({
-			url: '/cart/add',
+			url: '/Cart/add',
 			type: 'POST',
 			data: form,
 			success: function(result){
@@ -252,6 +319,11 @@
 			alert("로그인이 필요합니다.");	
 		}
 	}
+	
+	
+}); // ready end
+	
+	
 
 	// $(document).ready(function() {
 
@@ -272,60 +344,3 @@
 
 	// });
 </script>
-
-<div class="line"></div>
-<div class="content_top">
-	<div class="ct_left_area">
-		<div class="form_section_content">
-		<div id="uploadReslut"></div>
-	</div>
-	</div>
-	<div class="ct_right_area">
-		<div class="title">
-			<h1>${vo.goods_name}</h1>
-		</div>
-		<div class="line"></div>
-		<div class="author">
-			<span> . </span> <span>|</span> <span> . </span> <span>|</span> <span class="publeyear"> .
-			</span>
-		</div>
-		<div class="line"></div>
-		<div class="price">
-			<div class="discount_price">
-				판매가 : <span class="discount_price_number">${vo.goods_price }</span>
-			</div>
-		</div>
-		<div class="line"></div>
-		<div class="button">
-			<div class="button_quantity">
-				주문수량 
-				<input type="text" class="quantity_input" value="1"> <span>
-					<button class="plus_btn">+</button>
-					<button class="minus_btn">-</button>
-				</span>
-			</div>
-			<div class="button_set">
-				<a class="btn_cart">장바구니 담기</a> 
-				<a class="btn_buy">바로구매</a>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="line"></div>
-<div class="content_middle">
-	<div class="goods__intro">.</div>
-	<div class="goods__content">${vo.goods_des }</div>
-</div>
-<div class="line"></div>
-<div class="content_bottom">리뷰</div>
-
-
-<a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
-<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
-
-<!-- 삭제를 위한 form tag -->
-
-<form action="/Admin/Goods/delete.do" method="post" id="deleteForm">
-	<input type="hidden" name="goods_id" value="${vo.goods_id }" /> <input type="hidden"
-		name="fileName" id="fileName" />
-</form>

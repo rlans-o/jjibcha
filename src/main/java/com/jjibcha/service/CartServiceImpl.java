@@ -45,4 +45,17 @@ public class CartServiceImpl implements CartService {
 		}
 	}
 
+	@Override
+	public List<CartVO> getCartList(String mem_id) {
+
+		List<CartVO> cart = cartMapper.getCart(mem_id);
+
+		for (CartVO vo : cart) {
+			vo.initSaleTotal();
+		}
+
+		return cart;
+
+	}
+
 }
