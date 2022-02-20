@@ -24,7 +24,7 @@ public class CartIntreceptor implements HandlerInterceptor {
 		UserVO uvo = (UserVO) session.getAttribute("member");
 
 		if (uvo == null) {
-			response.sendRedirect("/main");
+			response.sendRedirect("/index");
 			return false;
 		} else {
 			return true;

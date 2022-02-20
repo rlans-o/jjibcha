@@ -2,21 +2,13 @@ package com.jjibcha.service;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.mapper.CartMapper;
-import com.jjibcha.mapper.GoodsMapper;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.CartVO;
-import com.jjibcha.vo.GoodsVO;
-
 import lombok.extern.log4j.Log4j;
-import net.webjjang.util.PageObject;
 
 @Service
 @Log4j
@@ -24,6 +16,9 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	private CartMapper cartMapper;
+	
+	@Autowired
+	private AttachMapper attachMapper;
 
 	@Override
 	public int addCart(CartVO cart) {
@@ -52,10 +47,29 @@ public class CartServiceImpl implements CartService {
 
 		for (CartVO vo : cart) {
 			vo.initSaleTotal();
+			
+			/* 이미지 정보 얻기 */
+			int goods_id = vo.getGoods_id();
+			
+			List<AttachImageVO> imageList = attachMapper.getAttachList(goods_id);
+			
+			vo.setImageList(imageList);
 		}
 
 		return cart;
 
+	}
+
+	@Override
+	public int modifyCount(CartVO cart) {
+		
+		return cartMapper.modifyCount(cart);
+	}
+
+	@Override
+	public int deleteCart(int cart_id) {
+		
+		return cartMapper.deleteCart(cart_id);
 	}
 
 }

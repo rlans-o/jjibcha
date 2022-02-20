@@ -51,8 +51,8 @@
             <beans:bean id="AdminIntreceptor" class="com.jjibcha.interceptor.AdminInterceptor"></beans:bean>
         </interceptor>
         <interceptor>
-			<mapping path="/cart/**"/>
-			<exclude-mapping path="/cart/add"/>
+			<mapping path="/Cart/**"/>
+			<exclude-mapping path="/Cart/add"/>
 			<beans:bean id="CartIntreceptor" class="com.jjibcha.interceptor.CartIntreceptor"></beans:bean>
 		</interceptor>
     </interceptors>

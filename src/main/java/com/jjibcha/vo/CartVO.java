@@ -1,5 +1,7 @@
 package com.jjibcha.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -24,6 +26,9 @@ public class CartVO {
 	 private int totalPrice;
 	 private int point;
 	 private int totalPoint;
+	 
+	 /* 이미지 정보 */
+		private List<AttachImageVO> imageList;
 	 
 	 public void initSaleTotal() {
 		 this.salePrice = (int) (this.goods_price);
