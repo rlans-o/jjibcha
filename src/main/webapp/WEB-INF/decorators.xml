@@ -12,6 +12,7 @@
 		<pattern>/admin/*</pattern>
 		<pattern>/qna/*</pattern>
 		<pattern>/cart/*</pattern>
+		<pattern>/order/*</pattern>
 
 	</decorator>
 	

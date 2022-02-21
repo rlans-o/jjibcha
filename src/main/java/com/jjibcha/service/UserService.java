@@ -9,6 +9,7 @@ public interface UserService {
 	
 	public UserVO login(UserVO vo) throws Exception;
 
-	
+	/* 주문자 정보 */
+	public UserVO getMemberInfo(String mem_id);
 	
 }

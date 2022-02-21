@@ -31,4 +31,7 @@ public interface CartMapper {
 	/* 카트 확인 */
 	public CartVO checkCart(CartVO cart);
 	
+	/* 카트 제거(주문) */
+	public int deleteOrderCart(CartVO vo);	
+	
 }

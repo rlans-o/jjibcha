@@ -387,7 +387,7 @@
 				<input type="hidden" name="mem_id" value="${member.mem_id}">
 			</form>		
 			<!-- 주문 form -->
-			<form action="/order/${member.mem_id}" method="get" class="order_form">
+			<form action="/Order/${member.mem_id}" method="get" class="order_form">
 
 			</form>				
 						

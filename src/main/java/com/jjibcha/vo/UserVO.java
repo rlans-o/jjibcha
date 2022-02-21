@@ -14,7 +14,7 @@ public class UserVO {
 	private String mem_oaddress; // 회원 우편번호
 	private String mem_address;  // 회원 주소
 	private String mem_detailaddress;  // 회원 상세 주소
-	private int mem_point; // 회원 포인트
+	private int point; // 회원 포인트
 	
 	private int adminCk; // 관리자 구분(0:일반사용자, 1:관리자)
 

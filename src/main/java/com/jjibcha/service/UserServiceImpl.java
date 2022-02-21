@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void join(UserVO vo) throws Exception {
-		// 컨트롤러 -> 서비스 호출 -> DAO 호출 -> Mapper -> DB
+		// 컨트롤러 -> 서비스 호출 -> Mapper -> DB
 		System.out.println("S : 회원가입동작");
 		if (vo == null) {
 			// 처리
@@ -31,6 +31,12 @@ public class UserServiceImpl implements UserService {
 
 		return mapper.login(vo);
 		
+	}
+
+	@Override
+	public UserVO getMemberInfo(String mem_id) {
+		
+		return mapper.getMemberInfo(mem_id);
 	}
 	
 	

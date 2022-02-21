@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ImageMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.goodsMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.OrderMapper">
+  	
+  	<!-- 주문 상품 정보 -->
+	<select id="getGoodsInfo" resultType="com.jjibcha.vo.OrderPageItemVO">
+	
+		select goods_id, goods_name, goods_price
+		from goods where goods_id = #{goods_id}	
+	
+	</select>
+	
+	<select id="getOrderInfo" resultType="com.jjibcha.vo.OrderItemVO">
+	
+		select goods_id, goods_price
+		from goods where goods_id = #{goods_id}
+	
+	</select>
+	
+	<!-- 주문 테이블 등록 -->
+	<insert id="enrollOrder">
+	
+		insert into jjibcha_order(orderId, addressee, mem_id, mem_oaddress, mem_address, mem_detailaddress, orderState, deliveryCost, usePoint)
+    	values(#{orderId},#{addressee}, #{mem_id}, #{mem_oaddress}, #{mem_address}, #{mem_detailaddress}, '배송준비', #{deliveryCost}, #{usePoint})
+	
+	</insert>
+	
+	<!-- 주문 아이템 테이블 등록 -->
+	<insert id="enrollOrderItem">
+	
+		insert into jjibcha_orderItem(orderId, goods_id, goods_count, goods_price, savePoint)
+		values(#{orderId}, #{goods_id}, #{goods_count}, #{goods_price}, #{savePoint})
+	
+	</insert>
+	
+	<!-- 주문 금액 차감 -->
+	<update id="deductMoney">
+	
+		update user 
+		set point = #{point} 
+		where mem_id = #{mem_id}
+		
+	</update>
+	
+	<!-- 주문 재고 차감 -->
+	<update id="deductStock">
+	
+		update goods 
+		set goods_stock = #{goods_stock} 
+		where goods_id = #{goods_id}
+	
+	</update>
+	
+	<delete id="deleteOrderCart">
+	
+		delete from cart 
+		where mem_id = #{mem_id} and goods_id = #{goods_id}
+	
+	</delete>
+  	
+  </mapper>

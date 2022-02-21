@@ -208,11 +208,17 @@
 <a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
 <a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
 
+<!-- 주문 form -->
+			<form action="/Order/${member.mem_id}" method="get" class="order_form">
+				<input type="hidden" name="orders[0].goods_id" value="${vo.goods_id}">
+				<input type="hidden" name="orders[0].goods_count" value="">
+			</form>
+
 <!-- 삭제를 위한 form tag -->
 
 <form action="/Admin/Goods/delete.do" method="post" id="deleteForm">
-	<input type="hidden" name="goods_id" value="${vo.goods_id }" /> <input type="hidden"
-		name="fileName" id="fileName" />
+	<input type="hidden" name="goods_id" value="${vo.goods_id }" /> 
+	<input type="hidden" name="fileName" id="fileName" />
 </form>
 
 <script type="text/javascript">
@@ -319,6 +325,13 @@
 			alert("로그인이 필요합니다.");	
 		}
 	}
+	
+	/* 바로구매 버튼 */
+	$(".btn_buy").on("click", function(){
+		let goods_count = $(".quantity_input").val();
+		$(".order_form").find("input[name='orders[0].goods_count']").val(goods_count);
+		$(".order_form").submit();
+	});
 	
 	
 }); // ready end

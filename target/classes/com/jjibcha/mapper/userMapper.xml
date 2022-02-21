@@ -18,7 +18,7 @@
 		 mem_oaddress, 
 		 mem_address, 
 		 mem_detailaddress, 
-		 mem_point
+		 point
 		 )
 		values(
 		#{mem_id},
@@ -41,6 +41,15 @@
 		where mem_id = #{mem_id}
 <!-- 		and mem_pw = #{mem_pw} -->
 	</select>
+	
+	<!-- 주문자 정보 -->
+  	<select id="getMemberInfo" resultType="com.jjibcha.vo.UserVO">
+  	
+  		select mem_id, mem_name, mem_email, mem_oaddress, mem_address, mem_detailaddress, point 
+  		from user 
+  		where mem_id = #{mem_id}
+  	
+  	</select>
 
 </mapper>
 

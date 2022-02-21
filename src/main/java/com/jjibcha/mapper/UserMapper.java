@@ -13,13 +13,14 @@ import com.jjibcha.vo.UserVO;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public interface UserMapper {
 
-	// 회원가입
+		// 회원가입
 		public void join(UserVO vo) throws Exception;
 		
 		// 로그인//
 		public UserVO login(UserVO vo) throws Exception;
 		
-		
+		/* 주문자 주소 정보 */
+		public UserVO getMemberInfo(String mem_id);
 		
 	
 }
