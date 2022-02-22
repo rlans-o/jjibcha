@@ -14,6 +14,9 @@ public interface GoodsService {
 	public List<GoodsVO> list(PageObject pageObject);
 	public int getRow(PageObject pageObject);
 	
+	/* 상품 정보 */
+	public GoodsVO getGoodsInfo(int goods_id);
+	
 	/* 지정 상품 이미지 정보 얻기 */
 	public List<AttachImageVO> getAttachInfo(int goods_id);
 	

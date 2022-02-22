@@ -21,11 +21,10 @@ import net.webjjang.util.PageObject;
 @Log4j
 public class GoodsServiceImpl implements GoodsService {
 
-
 	// @AllArgsConstructor를 이용해서 자동 DI 된다.
 	@Autowired
 	private GoodsMapper goodsMapper;
-	
+
 	@Autowired
 	private AttachMapper attachMapper;
 
@@ -43,7 +42,7 @@ public class GoodsServiceImpl implements GoodsService {
 			int goods_id = goods.getGoods_id();
 			log.info(goods_id);
 			List<AttachImageVO> imageList = attachMapper.getAttachList(goods_id);
-			
+
 			goods.setImageList(imageList);
 			log.info(imageList);
 		});
@@ -59,9 +58,6 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public GoodsVO view(int goods_id) {
-		
-		
-		
 
 		return goodsMapper.view(goods_id);
 	}
@@ -127,6 +123,15 @@ public class GoodsServiceImpl implements GoodsService {
 		log.info("getAttachInfo");
 
 		return goodsMapper.getAttachInfo(goods_id);
+	}
+
+	@Override
+	public GoodsVO getGoodsInfo(int goods_id) {
+		
+		GoodsVO goodsInfo = goodsMapper.getGoodsInfo(goods_id);
+		goodsInfo.setImageList(goodsMapper.getAttachInfo(goods_id));
+
+		return goodsInfo;
 	}
 
 }

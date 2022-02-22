@@ -102,6 +102,12 @@
 		select * from goods_image where goods_id = #{goods_id}
 	
 	</select>
+	
+	<select id="getGoodsInfo" resultType="com.jjibcha.vo.GoodsVO">
+	
+		select * from goods where goods_id = #{goods_id}
+	
+	</select>
   	
   	<select id="view" resultType="com.jjibcha.vo.GoodsVO">
    		<![CDATA[  

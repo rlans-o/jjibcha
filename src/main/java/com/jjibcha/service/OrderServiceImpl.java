@@ -121,7 +121,7 @@ public class OrderServiceImpl implements OrderService {
 		/* 재고 변동 적용 */
 		for(OrderItemVO oit : ord.getOrders()) {
 			/* 변동 재고 값 구하기 */
-			GoodsVO goods = goodsMapper.view(oit.getGoods_id()); // 상품정보 수정요망 2022/02/21
+			GoodsVO goods = goodsMapper.getGoodsInfo(oit.getGoods_id());
 			goods.setGoods_stock(goods.getGoods_stock() - oit.getGoods_count());
 			/* 변동 값 DB 적용 */
 			orderMapper.deductStock(goods);
