@@ -33,6 +33,8 @@ import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.service.GoodsService;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.GoodsVO;
+import com.jjibcha.vo.OrderVO;
+
 import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
 
@@ -139,6 +141,22 @@ public class GoodsController {
 		rttr.addFlashAttribute("delete_result", result);
 
 		return "redirect:/Goods/list.do";
+	}
+
+	/* 주문 현황 페이지 */
+	@GetMapping("/OrderList")
+	public String orderListGET(PageObject pageObject, Model model) {
+
+		List<OrderVO> list = goodsService.getOrderList(pageObject);
+		
+		if (!list.isEmpty()) {
+			model.addAttribute("list", list);
+			model.addAttribute("pageObject", pageObject);
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+
+		return "/admin/OrderList";
 	}
 
 }

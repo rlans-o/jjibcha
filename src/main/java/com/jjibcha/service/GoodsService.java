@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.GoodsVO;
+import com.jjibcha.vo.OrderVO;
 
 import net.webjjang.util.PageObject;
 
@@ -32,5 +33,11 @@ public interface GoodsService {
 	
 	// delete - no, pw
 	public int delete(int goods_id);
+	
+	/* 주문 상품 리스트 */
+	public List<OrderVO> getOrderList(PageObject pageObject);
+	
+	/* 주문 총 갯수 */
+	public int getOrderTotal(PageObject pageObject);
 	
 }

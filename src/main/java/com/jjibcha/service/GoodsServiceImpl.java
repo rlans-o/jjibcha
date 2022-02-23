@@ -12,6 +12,7 @@ import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.mapper.GoodsMapper;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.GoodsVO;
+import com.jjibcha.vo.OrderVO;
 
 import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
@@ -132,6 +133,18 @@ public class GoodsServiceImpl implements GoodsService {
 		goodsInfo.setImageList(goodsMapper.getAttachInfo(goods_id));
 
 		return goodsInfo;
+	}
+
+	@Override
+	public List<OrderVO> getOrderList(PageObject pageObject) {
+	
+		return goodsMapper.getOrderList(pageObject);
+	}
+
+	@Override
+	public int getOrderTotal(PageObject pageObject) {
+		
+		return goodsMapper.getOrderTotal(pageObject);
 	}
 
 }
