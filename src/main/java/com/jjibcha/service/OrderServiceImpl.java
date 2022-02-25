@@ -17,6 +17,7 @@ import com.jjibcha.mapper.UserMapper;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.CartVO;
 import com.jjibcha.vo.GoodsVO;
+import com.jjibcha.vo.OrderCancelVO;
 import com.jjibcha.vo.OrderItemVO;
 import com.jjibcha.vo.OrderPageItemVO;
 import com.jjibcha.vo.OrderVO;
@@ -137,5 +138,50 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 	} // end
+	
+	// 주문취소
+	@Override
+	@Transactional
+	public void orderCancle(OrderCancelVO vo) {
+		
+		/* 주문, 주문상품 객체 */
+		/*회원*/
+			UserVO member = userMapper.getMemberInfo(vo.getMem_id());
+		/*주문상품*/
+			List<OrderItemVO> orvs = orderMapper.getOrderItemInfo(vo.getOrderId());
+			for(OrderItemVO orv : orvs) {
+				orv.initSaleTotal();
+			}
+		/* 주문 */
+			OrderVO orw = orderMapper.getOrder(vo.getOrderId());
+			orw.setOrders(orvs);
+			
+			orw.getOrderPriceInfo();
+			
+	/* 주문상품 취소 DB */
+			orderMapper.orderCancle(vo.getOrderId());
+			
+	/* 돈, 포인트, 재고 변환 */
+			/* 돈 */
+//			int calMoney = member.getMoney();
+//			calMoney += orw.getOrderFinalSalePrice();
+//			member.setMoney(calMoney);
+			
+			/* 포인트 */
+			int calPoint = member.getPoint();
+			calPoint = calPoint + orw.getUsePoint() - orw.getOrderSavePoint();
+			member.setPoint(calPoint);
+			
+				/* DB적용 */
+				orderMapper.deductMoney(member);
+				
+			/* 재고 */
+			for(OrderItemVO orv : orw.getOrders()) {
+				GoodsVO goods = goodsMapper.getGoodsInfo(orv.getGoods_id());
+				goods.setGoods_stock(goods.getGoods_stock() + orv.getGoods_count());
+				orderMapper.deductStock(goods);
+			}
+		
+	}
 
 }

@@ -143,20 +143,6 @@ public class GoodsController {
 		return "redirect:/Goods/list.do";
 	}
 
-	/* 주문 현황 페이지 */
-	@GetMapping("/OrderList")
-	public String orderListGET(PageObject pageObject, Model model) {
-
-		List<OrderVO> list = goodsService.getOrderList(pageObject);
-		
-		if (!list.isEmpty()) {
-			model.addAttribute("list", list);
-			model.addAttribute("pageObject", pageObject);
-		} else {
-			model.addAttribute("listCheck", "empty");
-		}
-
-		return "/admin/OrderList";
-	}
+	
 
 }

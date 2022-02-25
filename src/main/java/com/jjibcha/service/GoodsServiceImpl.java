@@ -138,6 +138,8 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public List<OrderVO> getOrderList(PageObject pageObject) {
 	
+		pageObject.setTotalRow(goodsMapper.getOrderTotal(pageObject));
+		
 		return goodsMapper.getOrderList(pageObject);
 	}
 

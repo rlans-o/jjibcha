@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,11 +28,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jjibcha.service.GoodsService;
+import com.jjibcha.service.OrderService;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.GoodsVO;
+import com.jjibcha.vo.OrderCancelVO;
+import com.jjibcha.vo.OrderVO;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
+import net.webjjang.util.PageObject;
 
 @Controller
 @Log4j
@@ -39,6 +44,9 @@ public class AdminController {
 
 	@Autowired
 	private GoodsService goodsService;
+	
+	@Autowired
+	private OrderService orderService;
 
 	/* 관리자 메인 페이지 이동 */
 	@RequestMapping(value = "/Admin/main.do", method = RequestMethod.GET)
@@ -234,6 +242,31 @@ public class AdminController {
 		log.info("상품 등록 페이지 접속");
 
 		return "admin/goodsManage";
+	}
+	
+	/* 주문 현황 페이지 */
+	@GetMapping("/Admin/orderList")
+	public String orderListGET(PageObject pageObject, Model model) {
+		
+		log.info("===========================getorderList");
+		
+		List<OrderVO> list = goodsService.getOrderList(pageObject);
+		log.info("list : "+list);
+		if (!list.isEmpty()) {
+			model.addAttribute("list", list);
+			model.addAttribute("pageObject", pageObject);
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+
+		return "/admin/OrderList";
+	}
+	
+	/* 주문삭제 */
+	@PostMapping("/orderCancle")
+	public String orderCanclePOST(OrderCancelVO vo) {
+		
+		return "";//"redirect:/Admin/orderList?word=" + dto.getKeyword() + "&amount=" + dto.getAmount() + "&pageNum=" + dto.getPageNum();
 	}
 
 }

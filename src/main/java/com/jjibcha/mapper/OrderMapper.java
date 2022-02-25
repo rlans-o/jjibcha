@@ -40,6 +40,15 @@ public interface OrderMapper {
 	
 	/* 카트 제거(주문) */
 	public int deleteOrderCart(CartVO vo);
+	
+	/* 주문 취소 */
+	public int orderCancle(String orderId);
+	
+	/* 주문 상품 정보(주문취소) */
+	public List<OrderItemVO> getOrderItemInfo(String orderId);
+	
+	/* 주문 정보(주문취소) */
+	public OrderVO getOrder(String orderId);
  
 	
 }

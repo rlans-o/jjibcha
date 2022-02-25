@@ -151,11 +151,11 @@
   	</delete>
   	
   	<!-- 주문 리스트 -->
-	<select id="getOrderList" resultType="com.vam.model.OrderDTO">	
+	<select id="getOrderList" resultType="com.jjibcha.vo.OrderVO">	
 			
-			select orderId, mem_id, orderstate, orderdate
+			select *
 		    from jjibcha_order 
-		    <if test="keyword != null">
+		    <if test="word != null">
 		    	where mem_id like concat('%',#{word}, '%')
 		    </if>
 		    order by orderdate desc
@@ -168,7 +168,7 @@
 	
 		select count(*) from jjibcha_order
 		
-	    <if test="keyword != null">
+	    <if test="word != null">
 	    	where mem_id like concat('%',#{word}, '%')
 	    </if>
 	
