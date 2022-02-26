@@ -16,7 +16,7 @@ import net.webjjang.util.PageObject;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public interface GoodsMapper {
 
-	// qna list - 전체 데이터 구하기
+	// goods list - 전체 데이터 구하기
 	public List<GoodsVO> list(PageObject pageObject);
 	public Integer getRow(PageObject pageObject);
 	
@@ -50,4 +50,7 @@ public interface GoodsMapper {
 	
 	/* 주문 총 갯수 */
 	public int getOrderTotal(PageObject pageObject);
+	
+	/* 상품 id 이름 */
+	public GoodsVO getBookIdName(int goods_id);
 }

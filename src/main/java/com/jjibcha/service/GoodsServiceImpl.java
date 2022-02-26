@@ -148,5 +148,11 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		return goodsMapper.getOrderTotal(pageObject);
 	}
+	
+	@Override
+	public GoodsVO getBookIdName(int goods_id) {
+		
+		return goodsMapper.getBookIdName(goods_id);
+	}
 
 }

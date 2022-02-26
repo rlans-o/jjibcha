@@ -173,5 +173,14 @@
 	    </if>
 	
 	</select>
+	
+	<select id="getBookIdName" resultType="com.jjibcha.vo.GoodsVO">
+	
+		select goods_id, goods_name 
+		from goods 
+		where goods_id = #{goods_id}
+	
+	
+	</select>
   	
   </mapper>

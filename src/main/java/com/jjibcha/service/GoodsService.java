@@ -40,4 +40,7 @@ public interface GoodsService {
 	/* 주문 총 갯수 */
 	public int getOrderTotal(PageObject pageObject);
 	
+	/* 상품 id 이름 */
+	public GoodsVO getBookIdName(int goods_id);
+	
 }

@@ -11,45 +11,12 @@
   
   <mapper namespace="com.jjibcha.mapper.ReplyMapper">
   
-	<!-- 댓글 리스트 -->
-	<select id="list" resultType="com.jjibcha.vo.ReplyVO">
-   		select *
-		from qna_reply
-		where no = #{no}
-		order by rno desc
-		limit #{pageObject.startRow}, #{pageObject.endRow}
-	</select>
+	<!-- 댓글등록 -->
+  	<insert id="enrollReply">
   	
-  	<!-- 전체 데이터 가져오기  -->
-  	<select id="getRow" resultType="int">
-   		select count(*)
-   		from qna_reply
-   		where no = #{no}
-  	</select>
+  		insert into reply(goods_id, mem_id, content, rating) 
+  		values(#{goods_id}, #{mem_id}, #{content}, #{rating})
   	
-  	<!-- 댓글 쓰기 -->
-  	<insert id="write" >
-   		<![CDATA[  
-   		insert into qna_reply(rno, no, content, writer)
-   		values(#{rno}, #{no}, #{content}, #{writer})   		
-   		]]> 
   	</insert>
-  	
-  	<!-- 댓글 수정 -->
-  	<update id="update" >
-  		<![CDATA[
-  		update qna_reply
-  		set title = #{title}, content = #{content}, writer = #{writer}
-  		where no = #{no}
-  		]]>
-  	</update>
-  	
-  	<!-- 댓글 삭제 -->
-  	<delete id="delete" >
-  		<![CDATA[
-  		delete from qna_reply
-  		where no = #{no} and pw = #{pw}
-  		]]>
-  	</delete>
   	
   </mapper>

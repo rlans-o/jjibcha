@@ -26,71 +26,10 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
-	// 댓글 리스트
-		// ResponseEntity : 데이터와 서버의 처리상태를 함께 넘겨준다.
-		@GetMapping(value = "/ajax/replyList.do",
-				// 헤더 확인 - view.jsp의 ajax 셋팅
-				//contentType : "application/json; charset=utf-8",
-				consumes = "application/json",
-				// 리턴해주는 데이터의 타입
-				produces = {MediaType.APPLICATION_XML_VALUE,
-										MediaType.APPLICATION_JSON_UTF8_VALUE
-										}
-		)
-		public ResponseEntity<List<ReplyVO>> list(PageObject pageObject, int no) {
-			
-			log.info(pageObject);
-			
-			List<ReplyVO> list = replyService.list(pageObject, no);
-			log.info("Reply list : " + list);
-			
-			return (list != null && list.size() > 0)
-					? new ResponseEntity<>(list, HttpStatus.OK)
-					:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	
-	// 댓글 수정
-	// ResponseEntity : 데이터와 서버의 처리상태를 함께 넘겨준다.
-	@RequestMapping(
-			method = {RequestMethod.PUT, RequestMethod.PATCH},
-			value = "/ajax/replyUpdate.do",
-			// 헤더 확인 - view.jsp의 ajax 셋팅
-			//contentType : "application/json; charset=utf-8",
-			consumes = "application/json",
-			// 리턴해주는 데이터의 타입
-			produces = {MediaType.TEXT_PLAIN_VALUE})
-	// 데이터를 그대로 받아서 처리하기 위해 (@RequestBody ReplyVO vo)로 선언
-	public ResponseEntity<String> update(@RequestBody ReplyVO vo) {
-		
-		log.info(vo);
-		
-		int insertCount = replyService.update(vo);
-		log.info("Reply Insert Count : " + insertCount);
-		
-		return (insertCount == 1)
-				? new ResponseEntity<String>("success.write", HttpStatus.OK)
-				:  new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+	/* 댓글 등록 */
+	@PostMapping("/Reply/enroll")
+	public void enrollReplyPOST(ReplyVO vo) {
+		replyService.enrollReply(vo);
 	}
-	
-	// 댓글 쓰기
-		// ResponseEntity : 데이터와 서버의 처리상태를 함께 넘겨준다.
-		@PostMapping(value = "/ajax/replyWrite.do",
-				// 헤더 확인 - view.jsp의 ajax 셋팅
-				//contentType : "application/json; charset=utf-8",
-				consumes = "application/json",
-				// 리턴해주는 데이터의 타입
-				produces = {MediaType.TEXT_PLAIN_VALUE})
-		// 데이터를 그대로 받아서 처리하기 위해 (@RequestBody ReplyVO vo)로 선언
-		public ResponseEntity<String> write(@RequestBody ReplyVO vo) {
-			
-			log.info(vo);
-			
-			int insertCount = replyService.write(vo);
-			log.info("Reply Insert Count : " + insertCount);
-			
-			return (insertCount == 1)
-					? new ResponseEntity<String>("success.write", HttpStatus.OK)
-					:  new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	
 }

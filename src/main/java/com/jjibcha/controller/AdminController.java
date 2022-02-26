@@ -263,10 +263,12 @@ public class AdminController {
 	}
 	
 	/* 주문삭제 */
-	@PostMapping("/orderCancle")
+	@PostMapping("/Admin/orderCancle")
 	public String orderCanclePOST(OrderCancelVO vo) {
 		
-		return "";//"redirect:/Admin/orderList?word=" + dto.getKeyword() + "&amount=" + dto.getAmount() + "&pageNum=" + dto.getPageNum();
+		orderService.orderCancle(vo);
+		
+		return "redirect:/Admin/orderList?word=" + vo.getWord() + "&page=" + vo.getPage() + "&perPageNum=" + vo.getPerPageNum();
 	}
 
 }

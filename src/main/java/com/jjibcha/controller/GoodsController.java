@@ -143,6 +143,14 @@ public class GoodsController {
 		return "redirect:/Goods/list.do";
 	}
 
-	
+	/* 리뷰 쓰기 */
+	@GetMapping("/replyEnroll/{mem_id}")
+	public String replyEnrollWindowGET(@PathVariable("mem_id")String mem_id, int goods_id, Model model) {
+		GoodsVO goods = goodsService.getBookIdName(goods_id);
+		model.addAttribute("goodsInfo", goods);
+		model.addAttribute("mem_id", mem_id);
+		
+		return "/replyEnroll";
+	}
 
 }

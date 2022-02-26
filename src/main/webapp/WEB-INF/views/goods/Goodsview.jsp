@@ -153,6 +153,102 @@
 	min-height: 400px;
 	background-color: #e7dbdb;
 }
+
+ /* 리뷰쓰기 버튼 */
+  .reply_button_wrap{
+  	padding : 10px;
+  }
+  .reply_button_wrap button{
+	background-color: #365fdd;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 5px 12px;
+    cursor: pointer;  
+  }
+  .reply_button_wrap button:hover{
+  	background-color: #1347e7;
+  }
+  
+  /* 리뷰 영역 */
+  	.content_bottom{
+  		width: 80%;
+  		margin : auto;
+  	}
+	.reply_content_ul{
+		list-style: none;
+	}
+	.comment_wrap{
+		position: relative;
+    	border-bottom: 1px dotted #d4d4d4;
+    	padding: 14px 0 10px 0;	
+    	font-size: 12px;
+	}
+		/* 리뷰 머리 부분 */
+		.reply_top{
+			padding-bottom: 10px;
+		}
+		.id_span{
+			padding: 0 15px 0 3px;
+		    font-weight: bold;		
+		}
+		.date_span{
+			padding: 0 15px 0;
+		}
+		/* 리뷰 컨텐트 부분 */
+		.reply_bottom{
+			padding-bottom: 10px;
+		}
+		
+	
+	/* 리뷰 선 */
+	.reply_line{
+		width : 80%;
+		margin : auto;
+		border-top:1px solid #c6c6cf;  	
+	}
+	
+	/* 리뷰 제목 */
+	.reply_subject h2{
+		padding: 15px 0 5px 5px;
+	}
+  
+  /* 리뷰 없는 경우 div */
+  .reply_not_div{
+  	text-align: center;
+  }
+  .reply_not_div span{
+	display: block;
+    margin-top: 30px;
+    margin-bottom: 20px; 
+  }
+  
+  /* 리뷰 수정 삭제 버튼 */
+  .update_reply_btn{
+ 	font-weight: bold;
+    background-color: #b7b399;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 5px 0 30px;
+    border-radius: 6px;
+    color: white; 
+    cursor: pointer;
+  }
+  .delete_reply_btn{
+ 	font-weight: bold;
+    background-color: #e7578f;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 6px;
+    color: white; 
+  	cursor: pointer;
+  }
 </style>
 
 <div class="line"></div>
@@ -202,7 +298,18 @@
 	<div class="goods__content">${vo.goods_des }</div>
 </div>
 <div class="line"></div>
-<div class="content_bottom">리뷰</div>
+<div class="content_bottom">
+	<div class="reply_subject">
+		<h2>리뷰</h2>
+	</div>
+	
+	<c:if test="${member != null}">
+		<div class="reply_button_wrap">
+			<button>리뷰 쓰기</button>
+		</div>	
+	</c:if>
+
+</div>
 
 
 <a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
@@ -356,4 +463,20 @@
 	// 	}
 
 	// });
+	
+/* 리뷰쓰기 */
+$(".reply_button_wrap").on("click", function(e){
+	
+	e.preventDefault();	
+	
+	const mem_id = '${member.mem_id}';
+	const goods_id = '${vo.goods_id}';
+
+	let popUrl = "/replyEnroll/" + mem_id + "?goods_id=" + goods_id;
+	console.log(popUrl);
+	let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+	
+	window.open(popUrl,"리뷰 쓰기",popOption);
+
+});
 </script>

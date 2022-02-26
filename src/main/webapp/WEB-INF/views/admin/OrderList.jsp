@@ -148,11 +148,20 @@ ul{
 
 }
 
-
-
 /* float 속성 해제 */
 .clearfix{
 	clear: both;
+}
+
+.delete_btn{
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    cursor: pointer;
+    background-color: #f7564b;	
+}
+.delete_btn:hover{
+	background-color : #da190b;
 }
 </style>
 
@@ -186,7 +195,11 @@ ul{
 						<td><c:out value="${list.mem_id}"></c:out></td>
 						<td><fmt:formatDate value="${list.orderDate}" pattern="yyyy-MM-dd" /></td>
 						<td><c:out value="${list.orderState}" /></td>
-						<td></td>
+						<td>
+							<c:if test="${list.orderState == '배송준비' }">
+								<button class="delete_btn" data-orderid="${list.orderId}">취소</button>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -198,17 +211,6 @@ ul{
 		</c:if>
 
 	</div>
-
-	<!-- 검색 영역 -->
-<!-- 	<div class="search_wrap"> -->
-<!-- 		<form id="searchForm" action="/Admin/orderList" method="get"> -->
-<!-- 			<div class="search_input"> -->
-<!-- 				<input type="text" class="form-control" placeholder="Search" name="word" -->
-<%-- 					value="${pageObject.word }"> --%>
-<!-- 				<button class='btn search_btn'>검 색</button> -->
-<!-- 			</div> -->
-<!-- 		</form> -->
-<!-- 	</div> -->
 	
 	<!-- 검색 기능 -->
 	<div>
@@ -235,6 +237,14 @@ ul{
 	<pageNav:pageNav pageObject="${pageObject }" listURI="/Admin/orderList" />
 </c:if>
 
+<form id="deleteForm" action="/Admin/orderCancle" method="post">
+	<input type="hidden" name="orderId">
+	<input type="hidden" name="perPageNum" value="${pageObject.perPageNum}">
+	<input type="hidden" name="page" value="${pageObject.page}">
+	<input type="hidden" name="word" value="${pageObject.word}">
+	<input type="hidden" name="mem_id" value="${member.mem_id}">
+</form>
+
 <script type="text/javascript">
 
 let searchForm = $('#searchForm');
@@ -252,6 +262,16 @@ $("#searchForm button").on("click", function(e){
 	
 	searchForm.submit();
 	
+});
+
+$(".delete_btn").on("click", function(e){
+	
+	e.preventDefault();
+	
+	let id = $(this).data("orderid");
+	
+	$("#deleteForm").find("input[name='orderId']").val(id);
+	$("#deleteForm").submit();
 });
 
 </script>
