@@ -472,11 +472,27 @@ $(".reply_button_wrap").on("click", function(e){
 	const mem_id = '${member.mem_id}';
 	const goods_id = '${vo.goods_id}';
 
-	let popUrl = "/replyEnroll/" + mem_id + "?goods_id=" + goods_id;
-	console.log(popUrl);
-	let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
-	
-	window.open(popUrl,"리뷰 쓰기",popOption);
+	$.ajax({
+		data : {
+			goods_id : goods_id,
+			mem_id : mem_id
+		},
+		url : '/Reply/check',
+		type : 'POST',
+		success : function(result){
+			
+			if(result === '1'){
+				alert("이미 등록된 리뷰가 존재 합니다.")
+			} else if(result === '0'){
+				let popUrl = "/replyEnroll/" + mem_id + "?goods_id=" + goods_id;
+				console.log(popUrl);
+				let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes";
+				
+				window.open(popUrl,"리뷰 쓰기",popOption);							
+			}
+			
+		}
+	});
 
 });
 </script>

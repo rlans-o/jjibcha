@@ -150,9 +150,9 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
-	public GoodsVO getBookIdName(int goods_id) {
+	public GoodsVO getGoodsidName(int goods_id) {
 		
-		return goodsMapper.getBookIdName(goods_id);
+		return goodsMapper.getGoodsidName(goods_id);
 	}
 
 }

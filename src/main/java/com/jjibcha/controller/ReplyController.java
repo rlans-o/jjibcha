@@ -32,4 +32,12 @@ public class ReplyController {
 		replyService.enrollReply(vo);
 	}
 	
+	/* 댓글 체크 */
+	/* mem_id, goods_id 파라미터 */
+	/* 존재 : 1 / 존재x : 0 */
+	@PostMapping("/Reply/check")
+	public String replyCheckPOST(ReplyVO vo) {
+		return replyService.checkReply(vo);
+	}
+	
 }

@@ -19,4 +19,30 @@
   	
   	</insert>
   	
+  	<select id="checkReply" resultType="integer">
+	
+		select replyId from reply 
+		where mem_id = #{mem_id} and goods_id = #{goods_id}
+	
+	</select>
+	
+	<!-- 댓글 페이징 -->
+  	<select id="getReplyList" resultType="com.jjibcha.vo.ReplyVO">
+		  		
+		select replyId, goods_id, mem_id, content, rating, regDate
+		from reply
+		where goods_id = #{goods_id}
+		order by regDate desc  		
+  		limit #{startRow}, #{endRow}
+  		
+  	</select>
+  	
+  	<select id="getReplyTotal" resultType="int">
+  	
+  		select count(*)
+  		from reply
+  		where goods_id = #{goods_id}
+  	
+  	</select>
+  	
   </mapper>

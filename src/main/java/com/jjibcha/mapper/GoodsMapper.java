@@ -52,5 +52,5 @@ public interface GoodsMapper {
 	public int getOrderTotal(PageObject pageObject);
 	
 	/* 상품 id 이름 */
-	public GoodsVO getBookIdName(int goods_id);
+	public GoodsVO getGoodsidName(int goods_id);
 }

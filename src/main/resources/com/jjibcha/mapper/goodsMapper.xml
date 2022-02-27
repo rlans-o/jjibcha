@@ -174,7 +174,7 @@
 	
 	</select>
 	
-	<select id="getBookIdName" resultType="com.jjibcha.vo.GoodsVO">
+	<select id="getGoodsidName" resultType="com.jjibcha.vo.GoodsVO">
 	
 		select goods_id, goods_name 
 		from goods 
