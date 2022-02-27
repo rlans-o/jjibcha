@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jjibcha.mapper.ReplyMapper;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
+import com.jjibcha.vo.PageVO;
 import com.jjibcha.vo.ReplyPageVO;
 import com.jjibcha.vo.ReplyVO;
 
@@ -41,12 +43,13 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public ReplyPageVO replyList(ReplyVO vo) {
+	public ReplyPageVO replyList(Criteria cri) {
 		
 		ReplyPageVO rpv = new ReplyPageVO();
 
-		rpv.setList(replyMapper.getReplyList(vo));
-//		rpv.setPageInfo(new PageObject(vo, replyMapper.getReplyTotal(vo.getGoods_id())));
+		rpv.setList(replyMapper.getReplyList(cri));
+		rpv.setPageInfo(new PageVO(cri, replyMapper.getReplyTotal(cri.getGoods_id())));
+		
 
 		return rpv;
 	}

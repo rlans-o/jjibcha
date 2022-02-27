@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jjibcha.service.ReplyService;
+import com.jjibcha.vo.Criteria;
+import com.jjibcha.vo.ReplyPageVO;
 import com.jjibcha.vo.ReplyVO;
 
 import lombok.extern.log4j.Log4j;
@@ -38,6 +40,12 @@ public class ReplyController {
 	@PostMapping("/Reply/check")
 	public String replyCheckPOST(ReplyVO vo) {
 		return replyService.checkReply(vo);
+	}
+	
+	/* 댓글 페이징 */
+	@GetMapping(value="/Reply/list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ReplyPageVO replyListPOST(Criteria cri) {
+		return replyService.replyList(cri);
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.ReplyVO;
 
@@ -23,7 +24,7 @@ public interface ReplyMapper {
 	public Integer checkReply(ReplyVO vo);
 	
 	/* 댓글 페이징 */
-	public List<ReplyVO> getReplyList(ReplyVO vo);
+	public List<ReplyVO> getReplyList(Criteria cri);
 	
 	/* 댓글 총 갯수(페이징) */
 	public int getReplyTotal(int goods_id);
