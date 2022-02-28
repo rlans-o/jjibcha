@@ -6,10 +6,10 @@ import lombok.Data;
 public class Criteria {
 	
 	/* 현재 페이지 번호 */
-	private int perPageNum;
+	private int pageNum;
 	
 	/* 페이지 표시 개수 */
-	private int page;
+	private int amount;
 	
 	/* 검색 타입 */
 	private String type;
@@ -27,9 +27,9 @@ public class Criteria {
 	private int goods_id;
 	
 	/* Criteria 생성자 */
-	public Criteria(int perPageNum, int page) {
-		this.perPageNum = perPageNum;
-		this.page = page;
+	public Criteria(int pageNum, int amount) {
+		this.pageNum = pageNum;
+		this.amount = amount;
 	}
 	
 	/* Criteria 기본 생성자 */

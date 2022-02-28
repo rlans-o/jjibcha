@@ -31,9 +31,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.service.GoodsService;
+import com.jjibcha.service.ReplyService;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.OrderVO;
+import com.jjibcha.vo.ReplyVO;
 
 import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
@@ -47,6 +49,9 @@ public class GoodsController {
 
 	@Autowired
 	private GoodsService goodsService;
+	
+	@Autowired
+	private ReplyService replyService;
 
 	// Goods 페이지
 	@RequestMapping(value = "/Goods/list.do", method = RequestMethod.GET)
@@ -151,6 +156,17 @@ public class GoodsController {
 		model.addAttribute("mem_id", mem_id);
 		
 		return "/replyEnroll";
+	}
+	
+	/* 리뷰 수정 팝업창 */
+	@GetMapping("/replyUpdate")
+	public String replyUpdateWindowGET(ReplyVO vo, Model model) {
+		GoodsVO goods = goodsService.getGoodsidName(vo.getGoods_id());
+		model.addAttribute("goodsInfo", goods);
+		model.addAttribute("replyInfo", replyService.getUpdateReply(vo.getReplyId()));
+		model.addAttribute("mem_id", vo.getMem_id());
+		
+		return "/replyUpdate";
 	}
 
 }

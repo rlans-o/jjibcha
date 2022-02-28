@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class ReplyPageVO {
 
-	private List<ReplyVO> list;
-	private PageVO pageInfo;
+	List<ReplyVO> list;
+	PageVO pageInfo;
 	
 }

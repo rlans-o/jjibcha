@@ -29,4 +29,13 @@ public interface ReplyMapper {
 	/* 댓글 총 갯수(페이징) */
 	public int getReplyTotal(int goods_id);
 	
+	/* 댓글 수정 */
+	public int updateReply(ReplyVO vo);
+	
+	/* 댓글 한개 정보(수정페이지) */
+	public ReplyVO getUpdateReply(int replyId);
+	
+	/* 댓글 삭제 */
+	public int deleteReply(int replyId);
+	
 }

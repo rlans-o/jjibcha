@@ -44,14 +44,35 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override
 	public ReplyPageVO replyList(Criteria cri) {
-		
+
 		ReplyPageVO rpv = new ReplyPageVO();
 
 		rpv.setList(replyMapper.getReplyList(cri));
 		rpv.setPageInfo(new PageVO(cri, replyMapper.getReplyTotal(cri.getGoods_id())));
-		
 
 		return rpv;
+	}
+
+	@Override
+	public int updateReply(ReplyVO vo) {
+
+		int result = replyMapper.updateReply(vo);
+
+		return result;
+	}
+
+	@Override
+	public ReplyVO getUpdateReply(int replyId) {
+
+		return replyMapper.getUpdateReply(replyId);
+	}
+
+	@Override
+	public int deleteReply(ReplyVO vo) {
+		
+		int result = replyMapper.deleteReply(vo.getReplyId());
+
+		return result;
 	}
 
 }

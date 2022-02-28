@@ -6,10 +6,10 @@ import lombok.Data;
 public class PageVO {
 
 	/* 페이지 시작 번호 */
-	private int startRow;
+	private int pageStart;
 	
 	/* 페이지 끝 번호 */
-	private int endRow;
+	private int pageEnd;
 	
 	/* 이전, 다음 버튼 존재 유무 */
 	private boolean next, prev;
@@ -28,24 +28,24 @@ public class PageVO {
 		this.total = total;
 		
 		/* 페이지 끝 번호 */
-		this.endRow = (int)(Math.ceil(cri.getPerPageNum()/10.0))*10;
+		this.pageEnd = (int)(Math.ceil(cri.getPageNum()/10.0))*10;
 		
 		/* 페이지 시작 번호 */
-		this.startRow = this.endRow - 9;
+		this.pageStart = this.pageEnd - 9;
 		
 		/* 전체 마지막 페이지 번호 */
-		int realEnd = (int)(Math.ceil(total*1.0/cri.getPage()));
+		int realEnd = (int)(Math.ceil(total*1.0/cri.getAmount()));
 		
 		/* 페이지 끝 번호 유효성 체크 */
-		if(realEnd < endRow) {
-			this.endRow = realEnd;
+		if(realEnd < pageEnd) {
+			this.pageEnd = realEnd;
 		}
 		
 		/* 이전 버튼 값 초기화 */
-		this.prev = this.startRow > 1;
+		this.prev = this.pageStart > 1;
 		
 		/* 다음 버튼 값 초기화 */
-		this.next = this.endRow < realEnd;
+		this.next = this.pageEnd < realEnd;
 		
 	}
 	

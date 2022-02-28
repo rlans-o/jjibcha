@@ -44,7 +44,7 @@ body {
 	line-height: 18px;
 }
 
-.enroll_btn {
+.update_btn {
 	display: inline-block;
 	width: 130px;
 	background-color: #7b8ed1;
@@ -98,7 +98,7 @@ textarea {
 </style>
 
 <div class="wrapper_div">
-	<div class="subject_div">리뷰 등록</div>
+	<div class="subject_div">리뷰 수정</div>
 	<div class="input_wrap">
 		<div class="goodsName_div">
 			<h2>${goodsInfo.goods_name}</h2>
@@ -120,49 +120,64 @@ textarea {
 		</div>
 		<div class="content_div">
 			<h4>리뷰</h4>
-			<textarea name="content"></textarea>
+			<textarea name="content">${replyInfo.content }</textarea>
 		</div>
 	</div>
 </div>
 
 <div class="btn_wrap">
 	<a class="cancel_btn">취소</a>
-	<a class="enroll_btn">등록</a>
+	<a class="update_btn">수정</a>
 </div>
 
 <script>
+	
+	$(document).ready(function() {
+		
+		let rating = '${replyInfo.rating}';		
+		
+		$("option").each(function(i,obj){
+			if(rating === $(obj).val()){
+				$(obj).attr("selected", "selected");
+			}
+		});	
+		
+	});
+	
 	/* 취소 버튼 */
-	$(".cancel_btn").on("click", function(e) {
+	$(".cancel_btn").on("click", function(e){
 		window.close();
 	});
 	
-	/* 등록 버튼 */
-	$(".enroll_btn").on("click", function(e){
-
-		const goods_id = '${goodsInfo.goods_id}';
+	/* 수정 버튼 */
+	$(".update_btn").on("click", function(e){
+		
+		const replyId = '${replyInfo.replyId}';
+		const goods_id = '${replyInfo.goods_id}';
 		const mem_id = '${mem_id}';
 		const rating = $("select").val();
 		const content = $("textarea").val();
-
+		
 		const data = {
+				replyId : replyId,
 				goods_id : goods_id,
 				mem_id : mem_id,
 				rating : rating,
 				content : content
-		}		
+		}
 		
 		$.ajax({
 			data : data,
 			type : 'POST',
-			url : '/Reply/enroll',
-			success : function(result){
+			url : '/Reply/update',
+			success : function(result) {
 				
-				/* 댓글 초기화 */
-				$(opener.location).attr("href", "javascript:replyListInit();");
+				$(opener.location).attr("href", "javascript:replyListInit");
 				window.close();
+				
 			}
-			
-		});		
+		});
 		
 	});
+	
 </script>

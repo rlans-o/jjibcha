@@ -29,11 +29,11 @@
 	<!-- 댓글 페이징 -->
   	<select id="getReplyList" resultType="com.jjibcha.vo.ReplyVO">
 		  		
-		select replyId, goods_id, mem_id, content, rating, regDate
+		select *
 		from reply
 		where goods_id = #{goods_id}
 		order by regDate desc  		
-  		limit #{startRow}, #{endRow}
+  		limit #{pageNum}, #{amount}
   		
   	</select>
   	
@@ -44,5 +44,28 @@
   		where goods_id = #{goods_id}
   	
   	</select>
+  	
+  	<!-- 댓글수정 -->
+  	<update id="updateReply">
+  	
+  		update reply set content = #{content}, rating = #{rating}
+  		where replyId = #{replyId}
+  		
+  	</update>
+  	
+  	<select id="getUpdateReply" resultType="com.jjibcha.vo.ReplyVO">
+	
+		select * from reply
+		where replyId = #{replyId}
+		
+	</select>
+	
+	<!-- 댓글 삭제 -->
+  	<delete id="deleteReply">
+  	
+  		delete from reply
+  		where replyId = #{replyId}
+  		
+  	</delete>
   	
   </mapper>

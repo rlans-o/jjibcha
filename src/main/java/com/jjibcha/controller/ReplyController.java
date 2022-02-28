@@ -48,4 +48,16 @@ public class ReplyController {
 		return replyService.replyList(cri);
 	}
 	
+	/* 댓글 수정 */
+	@PostMapping("/Reply/update")
+	public void replyModifyPOST(ReplyVO vo) {
+		replyService.updateReply(vo);
+	}
+	
+	/* 댓글 삭제 */
+	@PostMapping("/Reply/delete")
+	public void replyDeletePOST(ReplyVO vo) {
+		replyService.deleteReply(vo);
+	}
+	
 }
