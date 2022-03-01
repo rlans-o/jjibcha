@@ -15,6 +15,7 @@ public class GoodsVO {
 	private String goods_des; // 설명
 	private Date goods_date; // 등록 일자
 	private String cateCode; // 분류
+	private double ratingAvg;	
 	
 	/* 이미지 정보 */
 	private List<AttachImageVO> imageList;

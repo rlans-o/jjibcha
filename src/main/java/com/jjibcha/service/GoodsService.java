@@ -43,4 +43,6 @@ public interface GoodsService {
 	/* 상품 id 이름 */
 	public GoodsVO getGoodsidName(int goods_id);
 	
+	
+	
 }

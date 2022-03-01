@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.ReplyVO;
+import com.jjibcha.vo.UpdateReplyVO;
 
 import net.webjjang.util.PageObject;
 
@@ -37,5 +38,11 @@ public interface ReplyMapper {
 	
 	/* 댓글 삭제 */
 	public int deleteReply(int replyId);
+	
+	/* 평점 평균 구하기 */
+	public Double getRatingAverage(int goods_id);
+	
+	/* 평점 평균 반영하기 */
+	public int updateRating(UpdateReplyVO vo);
 	
 }

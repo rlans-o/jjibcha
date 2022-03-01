@@ -53,4 +53,7 @@ public interface GoodsMapper {
 	
 	/* 상품 id 이름 */
 	public GoodsVO getGoodsidName(int goods_id);
+	
+	
+	
 }

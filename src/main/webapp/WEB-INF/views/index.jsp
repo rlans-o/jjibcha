@@ -2,68 +2,118 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<section id="section_1">
-
-	<video autoplay muted loop>
-		<source src="/resources/video/vid1.mp4" />
-	</video>
-
-	<div id="title_wrap">
-		<h1>J J I B C H A</h1>
-		<p>E M O T I O N A L &nbsp; C A M P I N G</p>
-	</div>
-</section>
-
-
 <style>
-.allblock {
-	margin-top: 200px;
+
+.slick-prev{
+	left: 160px;
+    z-index: 1;
+}
+.slick-next{
+	right: 160px;
+    z-index: 1;
 }
 
-.dataRow:hover {
-	background: #ccc;
-	cursor: pointer;
+.slide_div img{
+	margin: auto;
+}
+.slide_div_wrap{
+	padding: 15px 0 15px 0;
+    background: #e6e9f6;
+}
+.image_wrap img{
+	max-width: 85%;
+    height: auto;
+    display: block;
+	margin: auto;    
+}
+
+.ls_wrap{
+    margin: 30px 0 30px 0;
+    padding: 0 10px 0 10px;
+}
+.ls_div_content{
+	width: 80%;
+    margin: auto;
+    height: 275px;
+    border: 1px solid #dadada;
+}
+.image_wrap{
+	width: 80%;
+    height: 60%;
+    margin: auto;
+    padding: 5% 0 5% 0;
+    display: flex;
+    align-items: center;    
+}
+.ls_category{
+	text-align: center;
+    font-size: 13px;
+    color: #3e74ab;
+}
+.ls_rating{
+	text-align: center;
+    font-size: 13px;
+    color: #e15b6e;
+}
+.ls_goods_name{
+	text-align: center;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+}
+.ls_div_subject{
+	font-weight: bold;
+	font-size: 26px;
+	padding-bottom: 10px;
 }
 </style>
 
+<div class="content_area">
 
-<div class="allblock">
-	<h1 align="center">Image 게시판</h1>
-
-	<!-- 이미지게시판 리스트 -->
-	<div class="panel panel-danger">
-		<div class="panel-heading">이미지</div>
-		<div class="panel-body">
-			<div class="row">
-				<!-- 데이터가 있는 만큼 반복하는 시작 -->
-				<c:forEach items="${goodsList}" var="vo">
-					<div class="col-md-3">
-						<div class="thumbnail dataRow">
-							<a href="/Goods/view.do?goods_id=${vo.goods_id }"> 
-<%-- 							<img src="${vo.fileName }" --%>
-<!-- 								alt="Lights" style="width: 100%; height: 200px;"> -->
-								<div class="caption">
-									<p>${vo.goods_id }.${vo.goods_name }</p>
-									(
-									<fmt:formatDate value="${vo.goods_date }" pattern="yyyy.MM.dd" />
-									)
-								</div>
-							</a>
-						</div>
-					</div>
-				</c:forEach>
-				<!-- 데이터 끝 -->
+	<div class="slide_div_wrap">
+		<div class="slide_div">
+			<div>
+				<a> <img src="../resources/img/1.jpg">
+				</a>
+			</div>
+			<div>
+				<a> <img src="../resources/img/2.jpg">
+				</a>
+			</div>
+			<div>
+				<a> <img src="../resources/img/3.jpg">
+				</a>
 			</div>
 		</div>
 	</div>
+	
+</div> <!-- content_div end -->
 
-
-
+<div class="ls_wrap">
+	<div class="ls_div_subject">상품</div>
+	<div class="ls_div">
+		<c:forEach items="${goodsList}" var="ls">
+			<a href="/goods/Goodsview/${ls.goods_id}">
+				<div class="ls_div_content_wrap">
+					<div class="ls_div_content">
+						<div class="image_wrap" data-goods_id="${ls.imageList[0].goods_id}"
+							data-path="${ls.imageList[0].uploadPath}" data-uuid="${ls.imageList[0].uuid}"
+							data-filename="${ls.imageList[0].fileName}">
+							<img>
+						</div>
+						<div class="ls_category">카테이름</div>
+						<div class="ls_rating">${ls.ratingAvg}</div>
+						<div class="ls_goods_name">${ls.goods_name}</div>
+					</div>
+				</div>
+			</a>
+		</c:forEach>
+	</div>
 </div>
 
 <div class="jumbotron">
   <div class="container text-center">
-    <h1>My Portfolio</h1>      
+    <h1>Welcome jjibcha</h1>      
     <p>Some text that represents "Me"...</p>
   </div>
 </div>
@@ -158,6 +208,40 @@
 		// 			location = "/Image/view.do?goods_no=" + goods_no + "&inc=1";
 		// 		});
 	});
+	
+$(document).ready(function(){
+	
+	$(".slide_div").slick({
+				dots: true,
+				autoplay : true,
+				autoplaySpeed: 5000
+	});
+	
+});
+
+$(".ls_div").slick({
+	slidesToShow: 4,
+	slidesToScroll: 4
+});
+
+/* 이미지 삽입 */
+$(".image_wrap").each(function(i, obj){
+	
+	const bobj = $(obj);
+	
+	if(bobj.data("goods_id")){
+		const uploadPath = bobj.data("path");
+		const uuid = bobj.data("uuid");
+		const fileName = bobj.data("filename");
+		
+		const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+		
+		$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+	} else {
+		$(this).find("img").attr('src', '/resources/img/noimg.png');
+	}
+	
+});
 </script>
 
 

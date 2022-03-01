@@ -24,7 +24,7 @@ public class MainController {
 	private QnAService qnaService;
 	
 	@Autowired
-	private GoodsService imageService;
+	private GoodsService goodsService;
 
 	
 	// 메인 페이지
@@ -38,7 +38,8 @@ public class MainController {
 		
 		pageObject = new PageObject(1, 4);
 		model.addAttribute("goodsList", 
-				imageService.list(pageObject));
+				goodsService.list(pageObject));
+		
 		
 		return "index";
 	}

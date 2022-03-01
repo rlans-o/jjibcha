@@ -13,6 +13,7 @@ import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.PageVO;
 import com.jjibcha.vo.ReplyPageVO;
 import com.jjibcha.vo.ReplyVO;
+import com.jjibcha.vo.UpdateReplyVO;
 
 import net.webjjang.util.PageObject;
 
@@ -26,6 +27,8 @@ public class ReplyServiceImpl implements ReplyService {
 	public int enrollReply(ReplyVO vo) {
 
 		int result = replyMapper.enrollReply(vo);
+		
+		setRating(vo.getGoods_id());
 
 		return result;
 	}
@@ -57,6 +60,8 @@ public class ReplyServiceImpl implements ReplyService {
 	public int updateReply(ReplyVO vo) {
 
 		int result = replyMapper.updateReply(vo);
+		
+		setRating(vo.getGoods_id());
 
 		return result;
 	}
@@ -69,10 +74,31 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override
 	public int deleteReply(ReplyVO vo) {
-		
+
 		int result = replyMapper.deleteReply(vo.getReplyId());
 
+		setRating(vo.getGoods_id());
+		
 		return result;
+	}
+
+	public void setRating(int goods_id) {
+
+		Double ratingAvg = replyMapper.getRatingAverage(goods_id);
+
+		if (ratingAvg == null) {
+			ratingAvg = 0.0;
+		}
+		
+		ratingAvg = (double) (Math.round(ratingAvg*10));
+		ratingAvg = ratingAvg / 10;
+
+		UpdateReplyVO urv = new UpdateReplyVO();
+		urv.setGoods_id(goods_id);
+		urv.setRatingAvg(ratingAvg);
+
+		replyMapper.updateRating(urv);
+
 	}
 
 }

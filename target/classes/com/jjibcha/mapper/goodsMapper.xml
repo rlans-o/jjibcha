@@ -182,5 +182,14 @@
 	
 	
 	</select>
+	
+<!-- 	<select id="likeSelect" resultType="com.jjibcha.vo.SelectVO"> -->
+	
+<!-- 	select goods_id, goods_name, ratingAvg,  -->
+<!-- 	(select cateName from vam_bcate where goods.cateCode = vam_bcate.cateCode) as cateName -->
+<!-- 	from goods -->
+<!-- 	order by ratingAvg desc limit 8		 -->
+	
+<!-- 	</select> -->
   	
   </mapper>
