@@ -31,7 +31,7 @@
 				$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
 				
 			} else {
-				alert("안돼")
+				alelt("안돼");
 			}
 			
 		});

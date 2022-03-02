@@ -21,7 +21,8 @@ public interface GoodsMapper {
 	public Integer getRow(PageObject pageObject);
 	
 	/* 상품 정보 */
-	public GoodsVO getGoodsInfo(int goods_id);	
+	public GoodsVO getGoodsInfo(int goods_id);
+	public List<GoodsVO> getGoodsName(int goods_id);
 	
 	// view - 조회수 1증가
 	public GoodsVO view(int qna_no);

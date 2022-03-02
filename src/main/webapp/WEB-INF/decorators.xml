@@ -15,6 +15,7 @@
 		<pattern>/QnA/*</pattern>
 		<pattern>/Cart/*</pattern>
 		<pattern>/Order/*</pattern>
+		<pattern>/Review/*</pattern>
 
 	</decorator>
 	

@@ -4,6 +4,15 @@
 
 <style>
 
+a {
+	color: black;
+	text-decoration: none;
+}
+
+.add_reg {
+	font-size: 12px;
+}
+
 .slick-prev{
 	left: 160px;
     z-index: 1;
@@ -66,6 +75,33 @@
 	font-size: 26px;
 	padding-bottom: 10px;
 }
+
+.ls_div_content_prev{
+    position: absolute;
+    top: 40%;
+    width: 40px;
+    height: 30px;
+    left: 27px;
+    font-weight: bold;
+    z-index: 1;
+    opacity: 35%;
+}
+.ls_div_content_prev:hover{
+   opacity: 80%;
+}
+.ls_div_content_next{
+    position: absolute;
+    top: 40%;
+    width: 40px;
+    height: 30px;
+    right: 27px;
+    font-weight: bold;
+    z-index: 1;
+    opacity: 35%;
+}
+.ls_div_content_next:hover{
+   opacity: 80%;
+}
 </style>
 
 <div class="content_area">
@@ -93,15 +129,14 @@
 	<div class="ls_div_subject">상품</div>
 	<div class="ls_div">
 		<c:forEach items="${goodsList}" var="ls">
-			<a href="/goods/Goodsview/${ls.goods_id}">
+			<a href="/Goods/view.do?goods_id=${ls.goods_id }">
 				<div class="ls_div_content_wrap">
 					<div class="ls_div_content">
 						<div class="image_wrap" data-goods_id="${ls.imageList[0].goods_id}"
 							data-path="${ls.imageList[0].uploadPath}" data-uuid="${ls.imageList[0].uuid}"
 							data-filename="${ls.imageList[0].fileName}">
-							<img>
+							<img />
 						</div>
-						<div class="ls_category">카테이름</div>
 						<div class="ls_rating">${ls.ratingAvg}</div>
 						<div class="ls_goods_name">${ls.goods_name}</div>
 					</div>
@@ -114,53 +149,36 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>Welcome jjibcha</h1>      
-    <p>Some text that represents "Me"...</p>
+    <p>jjibcha를 방문해 주셔서 너무 감사드립니다.</p>
   </div>
 </div>
   
 <div class="container-fluid bg-3 text-center">    
-  <h3>Some of my Work</h3><br>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-   
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
+<div class="ls_wrap">
+	<div class="ls_div_subject">리뷰 상품</div>
+	<div class="ls_div">
+		<c:forEach items="${replyList}" var="rl">
+			<a href="/Goods/view.do?goods_id=${rl.goods_id }">
+				<div class="ls_div_content_wrap">
+					<div class="ls_div_content">
+						<div class="image_wrap" data-goods_id="${rl.imageList[0].goods_id}"
+							data-path="${rl.imageList[0].uploadPath}" data-uuid="${rl.imageList[0].uuid}"
+							data-filename="${rl.imageList[0].fileName}">
+							<img />
+						</div>
+						<div class="goods_name_div">${rl.goodsList[0].goods_name}</div>
+						<div class="ls_rating">${rl.rating}</div>
+						<p class="content_p">${rl.content }</p>
+						<div class="add_reg">${rl.mem_id}  l <fmt:formatDate value="${rl.regDate}" pattern="yyyy-MM-dd" /></div>
+						
+					</div>
+				</div>
+			</a>
+		</c:forEach>
+	</div>
+</div>
 </div><br>
 
-<div class="container-fluid bg-3 text-center">    
-  <div class="row">
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3"> 
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-3">
-      <p>Some text..</p>
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-    </div>
-  </div>
-</div><br><br>
 
 <!-- QnA 게시판 리스트 -->
 	<div class="panel panel-danger">
@@ -172,10 +190,8 @@
 				<li class="list-group-item dataRow">
 					<a href="/QnA/view.do?qna_no=${vo.qna_no }&inc=1"
 					style="text-decoration: none;">
-					${vo.qna_no }. ${vo.qna_title } - ${vo.qna_writer }
-					${vo.qna_writer } (
-									<fmt:formatDate value="${vo.qna_writerDate }" pattern="yyyy.MM.dd" />
-									)
+					${vo.qna_title } - 작성자 : ${vo.qna_writer }
+					 (<fmt:formatDate value="${vo.qna_writerDate }" pattern="yyyy.MM.dd" />)
 						<span class="badge">${vo.qna_count }</span>
 					</a>
 				</li>
@@ -190,24 +206,6 @@
 
 
 <script type="text/javascript">
-	$(function() {
-
-		<c:if test="${processResult == 'write success'}">
-		// 쓰기 메시지 처리
-		alert("작성하신 글이 등록되었습니다.");
-		</c:if>
-
-		<c:if test="${processResult == 'delete success'}">
-		// 삭제 메시지 처리
-		alert("글 삭제가 정상적으로 삭제되었습니다.");
-		</c:if>
-
-		// 		$(".dataRow").click(function() {
-		// 			// 글번호 찾기
-		// 			var goods_no = $(this).find(".goods_no").text();
-		// 			location = "/Image/view.do?goods_no=" + goods_no + "&inc=1";
-		// 		});
-	});
 	
 $(document).ready(function(){
 	
@@ -217,31 +215,34 @@ $(document).ready(function(){
 				autoplaySpeed: 5000
 	});
 	
+	$(".ls_div").slick({
+		slidesToShow: 4,
+		slidesToScroll: 4,
+		prevArrow : "<button type='button' class='ls_div_content_prev'>이전</button>",		// 이전 화살표 모양 설정
+		nextArrow : "<button type='button' class='ls_div_content_next'>다음</button>"		// 다음 화살표 모양 설정
+	});
+	
+	/* 이미지 삽입 */
+	$(".image_wrap").each(function(i, obj){
+		
+		const bobj = $(obj);
+		
+		if(bobj.data("goods_id")){
+			const uploadPath = bobj.data("path");
+			const uuid = bobj.data("uuid");
+			const fileName = bobj.data("filename");
+			
+			const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+			
+			$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+		} else {
+			$(this).find("img").attr('src', '/resources/img/noimg.png');
+		}
+		
+	});
+	
 });
 
-$(".ls_div").slick({
-	slidesToShow: 4,
-	slidesToScroll: 4
-});
-
-/* 이미지 삽입 */
-$(".image_wrap").each(function(i, obj){
-	
-	const bobj = $(obj);
-	
-	if(bobj.data("goods_id")){
-		const uploadPath = bobj.data("path");
-		const uuid = bobj.data("uuid");
-		const fileName = bobj.data("filename");
-		
-		const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
-		
-		$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
-	} else {
-		$(this).find("img").attr('src', '/resources/img/noimg.png');
-	}
-	
-});
 </script>
 
 

@@ -183,6 +183,15 @@
 	
 	</select>
 	
+	<select id="getGoodsName" resultType="com.jjibcha.vo.GoodsVO">
+	
+		select goods_id, goods_name 
+		from goods 
+		where goods_id = #{goods_id}
+	
+	
+	</select>
+	
 <!-- 	<select id="likeSelect" resultType="com.jjibcha.vo.SelectVO"> -->
 	
 <!-- 	select goods_id, goods_name, ratingAvg,  -->

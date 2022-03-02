@@ -1,10 +1,19 @@
 package com.jjibcha.service;
 
+import java.util.List;
+
 import com.jjibcha.vo.Criteria;
+import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.ReplyPageVO;
 import com.jjibcha.vo.ReplyVO;
 
+import net.webjjang.util.PageObject;
+
 public interface ReplyService {
+	
+	// list
+		public List<ReplyVO> list(PageObject pageObject);
+		public int getReplyRow(PageObject pageObject);
 	
 	/* 댓글 등록 */
 	public int enrollReply(ReplyVO vo);

@@ -17,6 +17,11 @@ import net.webjjang.util.PageObject;
 @Mapper
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public interface ReplyMapper {
+	
+	// reply list - 전체 데이터 구하기
+		public List<ReplyVO> list(PageObject pageObject);
+		public Integer getReplyRow(PageObject pageObject);
+		
 
 	/* 댓글 등록 */
 	public int enrollReply(ReplyVO vo);

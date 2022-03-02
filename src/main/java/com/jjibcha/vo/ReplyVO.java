@@ -1,6 +1,7 @@
 package com.jjibcha.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +16,8 @@ public class ReplyVO {
 	
 	private int goods_id;
 	
+	private List<GoodsVO> goodsList;
+	
 	private String mem_id;
 
 	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
@@ -23,5 +26,8 @@ public class ReplyVO {
 	private String content;
 	
 	private double rating;
+	
+	/* 이미지 정보 */
+	private List<AttachImageVO> imageList;
 	
 }

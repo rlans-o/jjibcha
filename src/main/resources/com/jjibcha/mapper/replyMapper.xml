@@ -11,6 +11,20 @@
   
   <mapper namespace="com.jjibcha.mapper.ReplyMapper">
   
+  <!-- 페이징 처리 후 상품 조회 -->
+	<select id="list" resultType="com.jjibcha.vo.ReplyVO">
+   		select *
+		from reply
+		order by replyId desc
+		limit #{startRow}, #{endRow}
+	</select>
+  	
+  	<!-- 전체 데이터 가져오기 : 검색 적용 -->
+  	<select id="getReplyRow" resultType="int">
+   		select count(*)
+   		from reply
+  	</select>
+  
 	<!-- 댓글등록 -->
   	<insert id="enrollReply">
   	

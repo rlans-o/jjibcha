@@ -7,7 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jjibcha.mapper.AttachMapper;
+import com.jjibcha.mapper.GoodsMapper;
 import com.jjibcha.mapper.ReplyMapper;
+import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.PageVO;
@@ -15,14 +18,22 @@ import com.jjibcha.vo.ReplyPageVO;
 import com.jjibcha.vo.ReplyVO;
 import com.jjibcha.vo.UpdateReplyVO;
 
+import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
 
 @Service
+@Log4j
 public class ReplyServiceImpl implements ReplyService {
 
 	@Autowired
 	private ReplyMapper replyMapper;
 
+	@Autowired
+	private AttachMapper attachMapper;
+	
+	@Autowired
+	private GoodsMapper goodsMapper;
+	
 	@Override
 	public int enrollReply(ReplyVO vo) {
 
@@ -99,6 +110,35 @@ public class ReplyServiceImpl implements ReplyService {
 
 		replyMapper.updateRating(urv);
 
+	}
+
+	@Override
+	public List<ReplyVO> list(PageObject pageObject) {
+		// getRow() 메서드를 이용해서 전체데이터를 셋팅하면 계산이 되어진다.
+				pageObject.setTotalRow(replyMapper.getReplyRow(pageObject));
+				log.info(pageObject);
+
+				List<ReplyVO> list = replyMapper.list(pageObject);
+
+				list.forEach(goods -> {
+
+					int goods_id = goods.getGoods_id();
+					log.info(goods_id);
+					List<AttachImageVO> imageList = attachMapper.getAttachList(goods_id);
+					List<GoodsVO> goodsList = goodsMapper.getGoodsName(goods_id);
+					
+					goods.setImageList(imageList);
+					goods.setGoodsList(goodsList);
+					log.info(imageList);
+				});
+
+				return list;
+	}
+
+	@Override
+	public int getReplyRow(PageObject pageObject) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
