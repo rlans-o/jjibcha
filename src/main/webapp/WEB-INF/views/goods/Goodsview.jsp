@@ -79,8 +79,9 @@
 </div>
 
 
-<a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
-<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
+<c:if test="${member.adminCk == 1 }">
+	<a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
+</c:if>
 
 <!-- 주문 form -->
 			<form action="/Order/${member.mem_id}" method="get" class="order_form">
@@ -96,23 +97,7 @@
 </form>
 
 <script type="text/javascript">
-	$(function() {
-		$("#deleteBtn").click(function() {
-			var goods_pw = prompt("비밀번호 입력 : ");
 
-			if (goods_pw.length >= 4) {
-				$("#deletePw").val(goods_pw); // pw value값을 등록시킴
-				$("#deleteForm").submit();
-				return;
-			}
-
-			alert("비밀번호는 4자 이상 50자 이내로 입력하셔야 합니다.");
-			// 화면 이동을 막는다.
-			return false;
-		});
-	});
-
-	
 	$(document).ready(function() {
 
 	/* 이미지 정보 호출 */

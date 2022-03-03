@@ -193,11 +193,6 @@ public class AdminController {
 
 		ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(list, HttpStatus.OK);
 
-		// DB에 정보 저장하기
-		// service.write(vo);
-
-		// 글쓰기 정상처리 표시 데이터 셋팅
-		rttr.addFlashAttribute("processResult", "write success");
 
 		return result;
 	}
@@ -237,11 +232,11 @@ public class AdminController {
 	}
 
 	/* 상품 관리 페이지 접속 */
-	@RequestMapping(value = "/Admin/goodsManage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/Admin/Goods/manage.do", method = RequestMethod.GET)
 	public String goodsManageGET() throws Exception {
 		log.info("상품 등록 페이지 접속");
 
-		return "admin/goodsManage";
+		return "admin/Goodsmanage";
 	}
 	
 	/* 주문 현황 페이지 */

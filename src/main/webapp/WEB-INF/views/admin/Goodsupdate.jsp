@@ -89,9 +89,14 @@
 		
 		
 		<button class="btn btn-primary">수정</button>
+		<button id="deleteBtn" class="btn delete_btn">삭제</button>
 		<button type="reset" class="btn btn-primary">새로입력</button>
 		<button type="button" class="cancelBtn" class="btn btn-primary">취소</button>
 	</form>
+	
+	<form id="moveForm" action="/Admin/Goods/manage.do" method="get" >
+		<input type="hidden" name='goods_id' value="${vo.goods_id}">
+    </form> 
 	
 </div>
 
@@ -141,8 +146,21 @@ $(document).ready(function() {
 		uploadResult.html(str);			
 		
 	});// GetJSON
+
 	
 }); // ready
+
+/* 삭제 버튼 */
+$("#deleteBtn").on("click", function(e){
+	e.preventDefault();
+	let moveForm = $("#moveForm");
+	moveForm.find("input").remove();
+	moveForm.append('<input type="hidden" name="goods_id" value="${vo.goods_id}">');
+	moveForm.attr("action", "/Admin/Goods/delete.do");
+	moveForm.attr("method", "post");
+	moveForm.submit();
+});
+
 
 /* 이미지 삭제 버튼 동작 */
 $("#uploadResult").on("click", ".imgDeleteBtn", function(e){
