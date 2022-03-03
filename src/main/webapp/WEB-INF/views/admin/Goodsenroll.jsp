@@ -36,11 +36,15 @@
 	    cursor: pointer;	
 	}
 	
+	.ck-content {						/* ckeditor 높이 */
+    height: 170px;
+}
+	
 </style>
 
 <div class="allblock">
 	<h1 align="center">상품 등록</h1>
-	<form method="post"  enctype="multipart/form-data">
+	<form id="enrollForm" action="/Admin/Goods/enroll.do" method="post"  enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="goods_name">상품 이름 : </label>
 			<input type="text" class="form-control" id="goods_name" name="goods_name" 
@@ -72,13 +76,41 @@
 			<textarea class="form-control" id="goods_des" name="goods_des"></textarea>
 		</div>
 		
-		<button class="btn btn-primary">등록</button>
-	
+		<button id="enrollBtn" class="btn btn-primary">등록</button>
+		<button id="cancelBtn" class="btn btn-primary">취소</button>
 	</form>
 	
 </div>
 
 <script type="text/javascript">
+
+/* 위지윅 적용 */
+/* 상품 설명 */	
+ClassicEditor
+.create(document.querySelector('#goods_des'))
+.catch(error=>{
+	console.error(error);
+});
+
+
+let enrollForm = $("#enrollForm")
+
+/* 취소 버튼 */
+$("#cancelBtn").click(function(){
+
+location.href="/admin/goodsManage"
+
+});
+
+/* 상품 등록 버튼 */
+$("#enrollBtn").on("click",function(e){
+
+e.preventDefault();
+
+enrollForm.submit();
+
+});
+
 	
 /* 이미지 업로드 */
 $("input[type='file']").on("change", function(e){

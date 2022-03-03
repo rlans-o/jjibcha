@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ImageMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.goodsMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.CartMapper">
+  	
+	<!-- 카테고리 리스트 -->
+  	<select id="cateList" resultType="com.jjibcha.vo.CateVO">
+  	
+  		select * from bcate order by catecode
+  	
+  	</select>
+  	
+  </mapper>

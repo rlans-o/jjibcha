@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jjibcha.service.AdminService;
 import com.jjibcha.service.GoodsService;
 import com.jjibcha.service.OrderService;
 import com.jjibcha.vo.AttachImageVO;
@@ -47,6 +49,10 @@ public class AdminController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private AdminService adminService;
+
 
 	/* 관리자 메인 페이지 이동 */
 	@RequestMapping(value = "/Admin/main.do", method = RequestMethod.GET)
@@ -59,9 +65,9 @@ public class AdminController {
 
 	// Goods 상품등록 get
 	@RequestMapping(value = "/Admin/Goods/enroll.do", method = RequestMethod.GET)
-	public String getGoodsenroll() {
+	public String getGoodsenroll(Model model) throws Exception {
 		log.info("getGoodsenroll");
-
+		
 		return "/admin/Goodsenroll";
 	}
 
@@ -74,7 +80,7 @@ public class AdminController {
 
 		rttr.addFlashAttribute("enroll_result", vo.getGoods_name());
 
-		return "redirect:/Goods/list.do";
+		return "redirect:/Admin/Goods/manage.do";
 	}
 
 	// Goods 상품수정 get
