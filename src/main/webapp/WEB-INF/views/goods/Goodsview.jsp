@@ -83,6 +83,12 @@
 	<a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
 </c:if>
 
+<form id="moveForm" action="/admin/goodsManage" method="get" >
+ 						<input type="hidden" name="pageNum" value="${cri.pageNum}">
+						<input type="hidden" name="amount" value="${cri.amount}">
+						<input type="hidden" name="keyword" value="${cri.keyword}">
+</form>
+
 <!-- 주문 form -->
 			<form action="/Order/${member.mem_id}" method="get" class="order_form">
 				<input type="hidden" name="orders[0].goods_id" value="${vo.goods_id}">

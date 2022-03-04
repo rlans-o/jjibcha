@@ -32,9 +32,11 @@ import com.jjibcha.service.AdminService;
 import com.jjibcha.service.GoodsService;
 import com.jjibcha.service.OrderService;
 import com.jjibcha.vo.AttachImageVO;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.OrderCancelVO;
 import com.jjibcha.vo.OrderVO;
+import com.jjibcha.vo.PageVO;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -239,10 +241,22 @@ public class AdminController {
 
 	/* 상품 관리 페이지 접속 */
 	@RequestMapping(value = "/Admin/Goods/manage.do", method = RequestMethod.GET)
-	public String goodsManageGET() throws Exception {
+	public String goodsManageGET(Criteria cri, Model model) throws Exception {
 		log.info("상품 등록 페이지 접속");
 
-		return "admin/Goodsmanage";
+		/* 상품 리스트 데이터 */
+		List list = adminService.goodsGetList(cri);
+		
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+			
+		}
+		
+		/* 페이지 인터페이스 데이터 */
+		model.addAttribute("pageMaker", new PageVO(cri, adminService.goodsGetTotal(cri)));
+		return "/admin/Goodsmanage";
 	}
 	
 	/* 주문 현황 페이지 */

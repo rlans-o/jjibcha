@@ -3,84 +3,232 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="pageNav" tagdir="/WEB-INF/tags"%>
 
+<style>
+
+.admin_content_wrap{
+    width: 80%;
+    float:left;
+    min-height: 700px;
+}
+.admin_content_subject{	/* 관리자 컨텐츠 제목 영역 */
+    font-size: 40px;
+    font-weight: bolder;
+    padding-left: 15px;
+    background-color: #6AAFE6;
+    height: 80px;
+    line-height: 80px;
+    color: white;	
+}
+
+/* 상품 목록 영역 */
+.goods_table_wrap{
+	padding: 20px 35px
+}
+.goods_table{
+	width: 100%;
+    border: 1px solid #d3d8e1;
+    text-align: center;
+    border-collapse: collapse;
+}
+.goods_table td{
+	padding: 10px 5px;
+	border : 1px solid #e9ebf0;
+}
+.goods_table thead{
+	background-color: #f8f9fd;	
+	font-weight: 600;
+}
+.goods_table a{
+	color:#1088ed;
+	font-weight: 500;
+}
+.th_column_1{
+	width:120px;
+}
+.th_column_3{
+	width:110px;
+}
+.th_column_4{
+	width:140px;
+}
+.th_column_5{
+	width:140px;
+}
+.th_column_6{
+	
+}
+	
+.table_empty{
+	height: 50px;
+    text-align: center;
+    margin: 200px 0 215px 0px;
+    font-size: 25px;
+}
+
+	/* 검색 영역 */
+.search_wrap{
+	margin-top:15px;
+}
+.search_input{
+    position: relative;
+    text-align:center;	
+}
+.search_input input[name='word']{
+	padding: 4px 10px;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+.search_btn{
+	height: 32px;
+    width: 80px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    position: absolute;
+    margin-left: 15px;
+    background-color: #c3daf7;
+}
+
+
+	/* 페이지 버튼 인터페이스 */
+.pageMaker_wrap{
+	text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.pageMaker{
+    list-style: none;
+    display: inline-block;
+}	
+.pageMaker_btn {
+    float: left;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 20px;
+}
+.active{
+	border : 2px solid black;
+	font-weight:400;
+}
+.next, .prev {
+    border: 1px solid #ccc;
+    padding: 0 10px;
+}
+.pageMaker_btn a:link {color: black;}
+.pageMaker_btn a:visited {color: black;}
+.pageMaker_btn a:active {color: black;}
+.pageMaker_btn a:hover {color: black;}
+.next a, .prev a {
+    color: #ccc;
+}
+
+</style>
+
 
 <div class="admin_content_wrap">
 	<div class="admin_content_subject">
 		<span>상품 관리</span>
 	</div>
 	
-	<!-- 검색 기능 -->
-	<div>
-		<form class="navbar-form">
-			<div class="input-group">
-				<div class="form-group navbar-left">
-					<select name="key" class="form-control">
-						<!-- selected="select" or selected -->
-						<option value="t" ${(pageObject.key == "t")? " selected ":"" }>제목</option>
-						<option value="c" ${(pageObject.key == "c")? " selected ":"" }>내용</option>
-						<option value="w" ${(pageObject.key == "w")? " selected ":"" }>작성자</option>
-						<option value="tc" ${(pageObject.key == "tc")? " selected ":"" }>제목/내용</option>
-						<option value="tw" ${(pageObject.key == "tw")? " selected ":"" }>제목/작성자</option>
-						<option value="cw" ${(pageObject.key == "cw")? " selected ":"" }>내용/작성자</option>
-						<option value="tcw" ${(pageObject.key == "tcw")? " selected ":"" }>전체</option>
-					</select> <input type="text" class="form-control" placeholder="Search" name="word"
-						value="${pageObject.word }">
-
-				</div>
-				<div class="input-group-btn">
-					<button class="btn btn-default" type="submit">
-						<i class="glyphicon glyphicon-search"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	
-	
-	
-	<div class="goods_table_wrap">
-		<!-- 상품 리스트 O -->
-		<c:if test="${listcheck != 'empty'}">
-			<table class="goods_table">
-				<thead>
-					<tr>
-						<td class="th_column_1">상품 번호</td>
-						<td class="th_column_2">상품 이름</td>
-						<td class="th_column_3">작가 이름</td>
-						<td class="th_column_4">카테고리</td>
-						<td class="th_column_5">재고</td>
-						<td class="th_column_6">등록날짜</td>
-					</tr>
-				</thead>
-				<c:forEach items="${list}" var="list">
-					<tr>
-						<td><c:out value="${list.goods_id}"></c:out></td>
-						<td><a class="move" href='<c:out value="${list.goods_id}"/>'> <c:out
-									value="${list.goods_name}"></c:out>
-						</a></td>
-						<td><c:out value=""></c:out></td>
-						<td><c:out value=""></c:out></td>
-						<td><c:out value="${list.goods_stock}"></c:out></td>
-						<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd" /></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</c:if>
-		<!-- 상품 리스트 X -->
-		<c:if test="${listCheck == 'empty'}">
-			<div class="table_empty">등록된 작가가 없습니다.</div>
-		</c:if>
-	</div>
-	
-	<c:if test="${pageObject.totalPage > 1 }">
-		<!-- 전체 페이지가 2페이지 이상이면 보여주는 부분 -->
-		<pageNav:pageNav pageObject="${pageObject }" listURI="/Goods/list.do" />
-	</c:if>
+	 <div class="goods_table_wrap">
+                    	<!-- 상품 리스트 O -->
+	                    <c:if test="${listcheck != 'empty'}">
+	                    	<table class="goods_table">
+	                    		<thead>
+	                    			<tr>
+										<td class="th_column_1">상품 번호</td>
+	                    				<td class="th_column_2">상품 이름</td>
+	                    				<td class="th_column_5">재고</td>
+	                    				<td class="th_column_6">등록날짜</td>
+	                    			</tr>
+	                    		</thead>	
+	                    		<c:forEach items="${list}" var="list">
+	                    		<tr>
+	                    			<td><c:out value="${list.goods_id}"></c:out></td>
+	                    			<td>
+	                    				<a class="move" href='<c:out value="${list.goods_id}"/>'>
+											<c:out value="${list.goods_name}"></c:out>
+										</a>
+	                    			</td>
+	                    			<td><c:out value="${list.goods_stock}"></c:out></td>
+	                    			<td><fmt:formatDate value="${list.goods_date}" pattern="yyyy-MM-dd"/></td>
+	                    		</tr>
+	                    		</c:forEach>
+	                    	</table>
+	                    </c:if>
+	                    <!-- 상품 리스트 X -->
+                		<c:if test="${listCheck == 'empty'}">
+                			<div class="table_empty">
+                				등록된 상품이 없습니다.
+                			</div>
+                		</c:if> 
+                	</div>
+                	
+                	<!-- 검색 영역 -->
+                	<div class="search_wrap">
+                		<form id="searchForm" action="/Admin/Goods/manage.do" method="get">
+                			<div class="search_input">
+                    			<input type="text" name="word" value='<c:out value="${pageMaker.cri.word}"></c:out>'>
+                    			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
+                    			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+<!--                     			<input type="hidden" name="type" value="G"> -->
+                    			<button class='btn search_btn'>검 색</button>                				
+                			</div>
+                		</form>
+                	</div>
+                	
+                	<!-- 페이지 이름 인터페이스 영역 -->
+                	<div class="pageMaker_wrap">
+                		<ul class="pageMaker">
+                			
+                			<!-- 이전 버튼 -->
+                			<c:if test="${pageMaker.prev }">
+                				<li class="pageMaker_btn prev">
+                					<a href="${pageMaker.pageStart -1}">이전</a>
+                				</li>
+                			</c:if>
+                			
+                			<!-- 페이지 번호 -->
+                			<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
+                				<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
+                					<a href="${num}">${num}</a>
+                				</li>	
+                			</c:forEach>
+                		
+	                    	<!-- 다음 버튼 -->
+	                    	<c:if test="${pageMaker.next}">
+	                    		<li class="pageMaker_btn next">
+	                    			<a href="${pageMaker.pageEnd + 1 }">다음</a>
+	                    		</li>
+	                    	</c:if>
+	                    </ul>
+                	</div>
+                	
+                	<form id="moveForm" action="/Admin/Goods/manage.do" method="get" >
+ 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" name="word" value="${pageMaker.cri.word}">
+                	</form>
 
 	
 </div>
 
 <script>
+
+/* 상품 조회 페이지 */
+$(".move").on("click", function(e){
+	
+	e.preventDefault();
+	
+	moveForm.append("<input type='hidden' name='goods_id' value='"+$(this).attr("href") + "'>");
+	moveForm.attr("action", "/Goods/view.do");
+	moveForm.submit();
+	
+	
+});
+
 $(document).ready(function(){
 	
 	/* 등록 성공 이벤트 */
@@ -110,8 +258,10 @@ $(document).ready(function(){
 		alert("삭제 완료");
 	}	
 });
+
 let searchForm = $('#searchForm');
 let moveForm = $('#moveForm');
+
 /* 작거 검색 버튼 동작 */
 $("#searchForm button").on("click", function(e){
 	
@@ -138,15 +288,5 @@ $(".pageMaker_btn a").on("click", function(e){
 	moveForm.submit();
 	
 });
-/* 상품 조회 페이지 */
-$(".move").on("click", function(e){
-	
-	e.preventDefault();
-	
-	moveForm.append("<input type='hidden' name='goods_id' value='"+$(this).attr("href") + "'>");
-	moveForm.attr("action", "/Goods/view.do");
-	moveForm.submit();
-	
-	
-});
+
 </script>

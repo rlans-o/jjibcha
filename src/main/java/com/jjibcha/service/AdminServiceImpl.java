@@ -13,6 +13,7 @@ import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.mapper.GoodsMapper;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.CateVO;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 
 import lombok.extern.log4j.Log4j;
@@ -33,6 +34,18 @@ public class AdminServiceImpl implements AdminService {
 		log.info("(service)cateList........");
 		
 		return adminMapper.cateList();
+	}
+
+	@Override
+	public List<GoodsVO> goodsGetList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return adminMapper.goodsGetList(cri);
+	}
+
+	@Override
+	public int goodsGetTotal(Criteria cri) {
+		// TODO Auto-generated method stub
+		return adminMapper.goodsGetTotal(cri);
 	}
 
 	
