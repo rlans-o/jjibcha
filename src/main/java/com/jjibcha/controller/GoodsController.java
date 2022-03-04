@@ -33,6 +33,7 @@ import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.service.GoodsService;
 import com.jjibcha.service.ReplyService;
 import com.jjibcha.vo.AttachImageVO;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.OrderVO;
 import com.jjibcha.vo.ReplyVO;
@@ -71,11 +72,13 @@ public class GoodsController {
 
 	// Goods 상품보기 get
 	@RequestMapping(value = "/Goods/view.do", method = RequestMethod.GET)
-	public String getGoodsview(Model model, int goods_id) {
+	public String getGoodsview(Model model, int goods_id, Criteria cri) {
 		log.info("getGoodsview");
-
+		
 		model.addAttribute("vo", goodsService.view(goods_id));
-
+		model.addAttribute("cri", cri);
+		
+		
 		return "/goods/Goodsview";
 	}
 

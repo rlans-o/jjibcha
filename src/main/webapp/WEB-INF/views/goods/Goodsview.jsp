@@ -83,10 +83,10 @@
 	<a href="/Admin/Goods/update.do?goods_id=${vo.goods_id}" class="btn btn-primary">수정</a>
 </c:if>
 
-<form id="moveForm" action="/admin/goodsManage" method="get" >
+<form id="moveForm" action="/admin/Goods/manage.do" method="get" >
  						<input type="hidden" name="pageNum" value="${cri.pageNum}">
 						<input type="hidden" name="amount" value="${cri.amount}">
-						<input type="hidden" name="keyword" value="${cri.keyword}">
+						<input type="hidden" name="word" value="${cri.word}">
 </form>
 
 <!-- 주문 form -->
@@ -103,6 +103,14 @@
 </form>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+	
+	/* 할인율 값 삽입 */
+	let goods_discount = '<c:out value="${vo.goods_discount}"/>' * 100;
+	$("#discount_interface").attr("value", goods_discount);
+	
+});
 
 	$(document).ready(function() {
 

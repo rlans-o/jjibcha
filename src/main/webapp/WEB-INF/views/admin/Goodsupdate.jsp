@@ -70,6 +70,18 @@
 			required="required" value="${vo.goods_price }">
 		</div>
 		
+		<div class="form_section">
+               <div class="form_section_title">
+                 <label>상품 할인율</label>
+                </div>
+                <div class="form_section_content">
+                 <input id="discount_interface" maxlength="2" value="0">
+                 <input name="goods_discount" type="hidden" value="${vo.goods_discount}">
+                 <span class="step_val">할인 가격 : <span class="span_discount"></span></span>
+                 <span class="ck_warn goods_discount_warn">1~99 숫자를 입력해주세요.</span>
+                </div>
+           </div>          	
+		
 		<div class="form-group">
 			<label for="goods_stock">상품 수량 :</label>
 			<input type="text" class="form-control" id="goods_stock" name="goods_stock"
@@ -95,6 +107,9 @@
 	</form>
 	
 	<form id="moveForm" action="/Admin/Goods/manage.do" method="get" >
+		<input type="hidden" name="pageNum" value="${cri.pageNum}">
+		<input type="hidden" name="amount" value="${cri.amount}">
+		<input type="hidden" name="word" value="${cri.word}">
 		<input type="hidden" name='goods_id' value="${vo.goods_id}">
     </form> 
 	
