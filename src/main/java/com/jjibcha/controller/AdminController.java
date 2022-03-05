@@ -105,7 +105,7 @@ public class AdminController {
 		// 글수정 정상처리 표시 데이터 셋팅
 		rttr.addFlashAttribute("update_result", result);
 
-		return "redirect:/Goods/view.do?goods_id=" + vo.getGoods_id();
+		return "redirect:/Admin/Goods/manage.do";
 	}
 
 	// 첨부 파일 업로드

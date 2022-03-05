@@ -70,16 +70,12 @@
 			required="required" value="${vo.goods_price }">
 		</div>
 		
-		<div class="form_section">
-               <div class="form_section_title">
+		<div class="form-group">
                  <label>상품 할인율</label>
-                </div>
-                <div class="form_section_content">
                  <input id="discount_interface" maxlength="2" value="0">
                  <input name="goods_discount" type="hidden" value="${vo.goods_discount}">
                  <span class="step_val">할인 가격 : <span class="span_discount"></span></span>
                  <span class="ck_warn goods_discount_warn">1~99 숫자를 입력해주세요.</span>
-                </div>
            </div>          	
 		
 		<div class="form-group">
@@ -116,6 +112,65 @@
 </div>
 
 <script type="text/javascript">
+
+/* 위지윅 적용 */	
+ClassicEditor
+.create(document.querySelector('#goods_des'))
+.catch(error=>{
+	console.error(error);
+});
+
+/* 할인율 Input 설정 */
+
+$("#discount_interface").on("propertychange change keyup paste input", function(){
+	
+	let userInput = $("#discount_interface");
+	let discountInput = $("input[name='goods_discount']");
+	
+	let discountRate = userInput.val();					// 사용자가 입력한 할인값
+	let sendDiscountRate = discountRate / 100;			// 서버에 전송할 할인값
+	let goodsPrice = $("input[name='goods_price']").val();			// 원가
+	let discountPrice = goodsPrice * (1 - sendDiscountRate);		// 할인가격
+	
+	if(!isNaN(discountRate)){
+		$(".span_discount").html(discountPrice);		
+		discountInput.val(sendDiscountRate);				
+	}
+
+	
+});	
+
+$("input[name='goods_price']").on("change", function(){
+	
+	let userInput = $("#discount_interface");
+	let discountInput = $("input[name='goods_discount']");
+	
+	let discountRate = userInput.val();					// 사용자가 입력한 할인값
+	let sendDiscountRate = discountRate / 100;			// 서버에 전송할 할인값
+	let goodsPrice = $("input[name='goods_price']").val();			// 원가
+	let discountPrice = goodsPrice * (1 - sendDiscountRate);		// 할인가격
+	
+	if(!isNaN(discountRate)){
+		$(".span_discount").html(discountPrice);	
+	}
+	
+	
+});		
+
+/* 할인율 인터페이스 출력 */
+let goodsPriceInput = $("input[name='goods_price']");
+let discountInput = $("input[name='goods_discount']");
+
+let goods_price = goodsPriceInput.val();
+let rawDiscountRate = discountInput.val();
+let discountRate = rawDiscountRate * 100;
+
+
+let discountPrice = goods_price * (1-rawDiscountRate);
+$(".span_discount").html(discountPrice);
+$("#discount_interface").val(discountRate);
+
+
 $(function () {
 	$(".cancelBtn").click(function () {
 		history.back();

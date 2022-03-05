@@ -64,7 +64,14 @@
 			<input type="text" class="form-control" id="goods_price" name="goods_price"
 			required="required" > 
 		</div>
-		
+
+		<div class="form-group">
+				<label>상품 할인율</label>
+				<input id="discount_interface" maxlength="2" value="0"> <input name="goods_discount"
+					type="hidden" value="0"> <span class="step_val">할인 가격 : <span
+					class="span_discount"></span></span> <span class="ck_warn goods_discount_warn">1~99 숫자를 입력해주세요.</span>
+		</div>
+
 		<div class="form-group">
 			<label for="goods_stock">상품 수량 :</label>
 			<input type="text" class="form-control" id="goods_stock" name="goods_stock"
@@ -83,6 +90,59 @@
 </div>
 
 <script type="text/javascript">
+
+/* 할인율 Input 설정 */
+
+$("#discount_interface").on("propertychange change keyup paste input", function(){
+	
+	let userInput = $("#discount_interface");
+	let discountInput = $("input[name='goods_discount']");
+	
+	let discountRate = userInput.val();					// 사용자가 입력한 할인값
+	let sendDiscountRate = discountRate / 100;			// 서버에 전송할 할인값
+	let goodsPrice = $("input[name='goods_price']").val();			// 원가
+	let discountPrice = goodsPrice * (1 - sendDiscountRate);		// 할인가격
+	
+	if(!isNaN(discountRate)){
+		$(".span_discount").html(discountPrice);		
+		discountInput.val(sendDiscountRate);				
+	}
+	
+});	
+
+$("input[name='goods_price']").on("change", function(){
+	
+	let userInput = $("#discount_interface");
+	let discountInput = $("input[name='goods_discount']");
+	
+	let discountRate = userInput.val();					// 사용자가 입력한 할인값
+	let sendDiscountRate = discountRate / 100;			// 서버에 전송할 할인값
+	let goodsPrice = $("input[name='goods_price']").val();			// 원가
+	let discountPrice = goodsPrice * (1 - sendDiscountRate);		// 할인가격
+	
+	if(!isNaN(discountRate)){
+		$(".span_discount").html(discountPrice);	
+	}
+	
+	
+});
+/* 할인값 처리 */
+$("input[name='goods_price']").on("change", function(){
+	
+	let userInput = $("#discount_interface");
+	let discountInput = $("input[name='goods_discount']");
+	
+	let discountRate = userInput.val();					// 사용자가 입력한 할인값
+	let sendDiscountRate = discountRate / 100;			// 서버에 전송할 할인값
+	let goodsPrice = $("input[name='goods_price']").val();			// 원가
+	let discountPrice = goodsPrice * (1 - sendDiscountRate);		// 할인가격
+	
+	if(!isNaN(discountRate)){
+		$(".span_discount").html(discountPrice);	
+	}
+	
+	
+});
 
 /* 위지윅 적용 */
 /* 상품 설명 */	

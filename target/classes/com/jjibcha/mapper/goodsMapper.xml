@@ -76,8 +76,8 @@
 	  		
 	  	</selectKey>
  
-   		insert into goods(goods_id, goods_name, goods_price, goods_stock, goods_des)
-   		values(#{goods_id}, #{goods_name}, #{goods_price}, #{goods_stock}, #{goods_des})   		
+   		insert into goods(goods_id, goods_name, goods_price, goods_discount, goods_stock, goods_des)
+   		values(#{goods_id}, #{goods_name}, #{goods_price}, #{goods_discount}, #{goods_stock}, #{goods_des})   		
    		 
   	</insert>
   	
@@ -121,7 +121,7 @@
   	<update id="update" >
   		<![CDATA[
   		update goods
-  		set goods_name = #{goods_name}, goods_price = #{goods_price}, goods_stock = #{goods_stock}, goods_des = #{goods_des}
+  		set goods_name = #{goods_name}, goods_price = #{goods_price}, goods_stock = #{goods_stock}, goods_des = #{goods_des}, goods_discount = #{goods_discount}
   		where goods_id = #{goods_id}
   		]]>
   	</update>
