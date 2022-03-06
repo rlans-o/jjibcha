@@ -3,6 +3,7 @@ package com.jjibcha.service;
 import java.util.List;
 
 import com.jjibcha.vo.AttachImageVO;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.OrderVO;
 
@@ -12,8 +13,8 @@ import net.webjjang.util.PageObject;
 public interface GoodsService {
 
 	// list
-	public List<GoodsVO> list(PageObject pageObject);
-	public int getRow(PageObject pageObject);
+	public List<GoodsVO> list(Criteria cri);
+	public int getRow(Criteria cri);
 	
 	/* 상품 정보 */
 	public GoodsVO getGoodsInfo(int goods_id);

@@ -1,17 +1,15 @@
 package com.jjibcha.controller;
 
-import java.awt.Graphics2D;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
-import java.util.UUID;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,11 +33,12 @@ import com.jjibcha.service.ReplyService;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
-import com.jjibcha.vo.OrderVO;
+
+import com.jjibcha.vo.PageVO;
 import com.jjibcha.vo.ReplyVO;
 
 import lombok.extern.log4j.Log4j;
-import net.webjjang.util.PageObject;
+
 
 @Controller
 @Log4j
@@ -57,17 +56,41 @@ public class GoodsController {
 	// Goods 페이지
 	@RequestMapping(value = "/Goods/list.do", method = RequestMethod.GET)
 	// PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
-	public String getGoodsList(Model model, HttpServletRequest request, PageObject pageObject) {
+	public String getGoodsList(Model model, HttpServletRequest request, Criteria cri) {
 		log.info("getGoods");
 
 		// model에 데이터를 담으면 request에 데이터가 담기게 된다.
 		// jsp에서 꺼내 쓸때는 ${list} == ${requestScope.list}
-		model.addAttribute("list", goodsService.list(pageObject));
+		model.addAttribute("list", goodsService.list(cri));
 		// 하단 부분의 페이지네이션 처리를 위해서 pageObject가 필요함
 		// 2페이지 이상이되면 페이지네이션을 표시한다.
-		model.addAttribute("pageObject", pageObject);
+		model.addAttribute("cri", cri);
 
 		return "/goods/Goodslist";
+	}
+	
+	/* 상품 검색 */
+	@GetMapping("/Search")
+	public String searchGoodsGET(Criteria cri, Model model) {
+		
+		log.info("cri : " + cri);
+		
+		List<GoodsVO> list = goodsService.list(cri);
+		log.info("pre list : " + list);
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+			log.info("list : " + list);
+		} else {
+			model.addAttribute("listcheck", "empty");
+			
+			return "search";
+		}
+		
+		model.addAttribute("pageMaker", new PageVO(cri, goodsService.getRow(cri)));
+		
+		
+		return "Search";
+		
 	}
 
 	// Goods 상품보기 get
@@ -148,7 +171,7 @@ public class GoodsController {
 		// 글삭제 정상처리 표시 데이터 셋팅
 		rttr.addFlashAttribute("delete_result", result);
 
-		return "redirect:/Goods/list.do";
+		return "redirect:/Admin/Goods/manage.do";
 	}
 
 	/* 리뷰 쓰기 */

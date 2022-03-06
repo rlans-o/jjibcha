@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.jjibcha.vo.AttachImageVO;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.OrderVO;
 
@@ -17,8 +18,8 @@ import net.webjjang.util.PageObject;
 public interface GoodsMapper {
 
 	// goods list - 전체 데이터 구하기
-	public List<GoodsVO> list(PageObject pageObject);
-	public Integer getRow(PageObject pageObject);
+	public List<GoodsVO> list(Criteria cri);
+	public Integer getRow(Criteria cri);
 	
 	/* 상품 정보 */
 	public GoodsVO getGoodsInfo(int goods_id);

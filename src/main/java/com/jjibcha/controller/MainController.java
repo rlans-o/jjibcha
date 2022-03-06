@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.jjibcha.service.GoodsService;
 import com.jjibcha.service.QnAService;
 import com.jjibcha.service.ReplyService;
+import com.jjibcha.vo.Criteria;
 
 import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
@@ -33,7 +34,7 @@ public class MainController {
 	
 	// 메인 페이지
 	@GetMapping("/index")
-	public String Main(Model model) throws Exception {
+	public String Main(Model model, Criteria cri) throws Exception {
 		log.info("main");
 		
 		PageObject pageObject = new PageObject(1, 4);
@@ -42,7 +43,7 @@ public class MainController {
 		
 		pageObject = new PageObject(1, 4);
 		model.addAttribute("goodsList", 
-				goodsService.list(pageObject));
+				goodsService.list(cri));
 		
 		pageObject = new PageObject(1, 4);
 		model.addAttribute("replyList", 

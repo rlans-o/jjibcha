@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.mapper.GoodsMapper;
 import com.jjibcha.vo.AttachImageVO;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
 import com.jjibcha.vo.OrderVO;
 import com.jjibcha.vo.SelectVO;
@@ -31,13 +32,13 @@ public class GoodsServiceImpl implements GoodsService {
 	private AttachMapper attachMapper;
 
 	@Override
-	public List<GoodsVO> list(PageObject pageObject) {
+	public List<GoodsVO> list(Criteria cri) {
 
 		// getRow() 메서드를 이용해서 전체데이터를 셋팅하면 계산이 되어진다.
-		pageObject.setTotalRow(goodsMapper.getRow(pageObject));
-		log.info(pageObject);
+//		cri.setTotalRow(goodsMapper.getRow(cri));
+		log.info(cri);
 
-		List<GoodsVO> list = goodsMapper.list(pageObject);
+		List<GoodsVO> list = goodsMapper.list(cri);
 
 		list.forEach(goods -> {
 
@@ -53,9 +54,9 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public int getRow(PageObject pageObject) {
+	public int getRow(Criteria cri) {
 
-		return goodsMapper.getRow(pageObject);
+		return goodsMapper.getRow(cri);
 	}
 
 	@Override

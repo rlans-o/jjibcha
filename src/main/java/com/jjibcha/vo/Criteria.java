@@ -17,12 +17,6 @@ public class Criteria {
 	/* 검색 키워드 */
 	private String word;
 	
-	/* 작가 리스트 */
-	private String[] authorArr;
-	
-	/* 카테고리 코드 */
-	private String cateCode;
-	
 	/* 상품 번호(댓글 기능에서 사용) */
 	private int goods_id;
 	
