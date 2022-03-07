@@ -25,8 +25,10 @@
 		<div class="line"></div>
 		<div class="price">
 			<div class="discount_price">
-				판매가 : <span class="discount_price_number">${vo.goods_price }</span>
-			</div>
+					판매가 : <span class="discount_price_number"><fmt:formatNumber value="${vo.goods_price - (vo.goods_price*vo.goods_discount)}" pattern="#,### 원" /></span> 
+					[<fmt:formatNumber value="${vo.goods_discount*100}" pattern="###" />% 
+					<fmt:formatNumber value="${vo.goods_price*vo.goods_discount}" pattern="#,### 원" /> 할인]
+				</div>	
 			<div>
 				적립 포인트 : <span class="point_span"></span>원
 			</div>
@@ -49,7 +51,7 @@
 </div>
 <div class="line"></div>
 <div class="content_middle">
-	<div class="goods__intro">.</div>
+	<div class="goods__intro"><h3>상품 설명</h3></div>
 	<div class="goods__content">${vo.goods_des }</div>
 </div>
 <div class="line"></div>
@@ -149,7 +151,7 @@ $(document).ready(function(){
 	});
 	
 	/* 포인트 삽입 */
-	let salePrice = "${vo.goods_price}"
+	let salePrice = "${vo.goods_price - (vo.goods_price*vo.goods_discount)}"
 	let point = salePrice*0.05;
 	point = Math.floor(point);
 	$(".point_span").text(point);

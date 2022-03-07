@@ -249,7 +249,6 @@ ul{
 
 let searchForm = $('#searchForm');
 
-/* 작거 검색 버튼 동작 */
 $("#searchForm button").on("click", function(e){
 	
 	e.preventDefault();

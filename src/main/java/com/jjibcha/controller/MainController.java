@@ -47,7 +47,7 @@ public class MainController {
 		
 		pageObject = new PageObject(1, 4);
 		model.addAttribute("replyList", 
-				replyService.list(pageObject));
+				replyService.list(cri));
 		
 		
 		return "index";

@@ -57,7 +57,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public ReplyPageVO replyList(Criteria cri) {
+	public ReplyPageVO getReplyList(Criteria cri) {
 
 		ReplyPageVO rpv = new ReplyPageVO();
 
@@ -113,12 +113,12 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> list(PageObject pageObject) {
+	public List<ReplyVO> list(Criteria cri) {
 		// getRow() 메서드를 이용해서 전체데이터를 셋팅하면 계산이 되어진다.
-				pageObject.setTotalRow(replyMapper.getReplyRow(pageObject));
-				log.info(pageObject);
+//				pageObject.setTotalRow(replyMapper.getReplyRow(pageObject));
+//				log.info(pageObject);
 
-				List<ReplyVO> list = replyMapper.list(pageObject);
+				List<ReplyVO> list = replyMapper.list(cri);
 
 				list.forEach(goods -> {
 
@@ -136,7 +136,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public int getReplyRow(PageObject pageObject) {
+	public int getReplyRow(Criteria cri) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

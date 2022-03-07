@@ -45,7 +45,7 @@ public class ReplyController {
 	/* 댓글 페이징 */
 	@GetMapping(value="/Reply/list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ReplyPageVO replyListPOST(Criteria cri) {
-		return replyService.replyList(cri);
+		return replyService.getReplyList(cri);
 	}
 	
 	/* 댓글 수정 */

@@ -125,6 +125,15 @@ a {
 	
 </div> <!-- content_div end -->
 
+<div class="search_wrap">
+		<form id="searchForm" action="/Search" method="get">
+			<div class="search_input">
+				<input type="text" name="word">
+				<button class='btn search_btn'>검 색</button>
+			</div>
+		</form>
+	</div>
+
 <div class="ls_wrap">
 	<div class="ls_div_subject">상품</div>
 	<div class="ls_div">
@@ -152,6 +161,8 @@ a {
     <p>jjibcha를 방문해 주셔서 너무 감사드립니다.</p>
   </div>
 </div>
+  
+  
   
 <div class="container-fluid bg-3 text-center">    
 <div class="ls_wrap">
@@ -218,8 +229,8 @@ $(document).ready(function(){
 	$(".ls_div").slick({
 		slidesToShow: 4,
 		slidesToScroll: 4,
-		prevArrow : "<button type='button' class='ls_div_content_prev'>이전</button>",		// 이전 화살표 모양 설정
-		nextArrow : "<button type='button' class='ls_div_content_next'>다음</button>"		// 다음 화살표 모양 설정
+		prevArrow : "<button type='button' class='ls_div_content_prev'>&lt;</button>",		// 이전 화살표 모양 설정
+		nextArrow : "<button type='button' class='ls_div_content_next'>&gt;</button>"		// 다음 화살표 모양 설정
 	});
 	
 	/* 이미지 삽입 */

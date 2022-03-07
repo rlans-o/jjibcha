@@ -26,7 +26,7 @@ public interface CartMapper {
 	public int modifyCount(CartVO cart);
 	
 	/* 카트 목록 */
-	public List<CartVO> getCart(String mem_id);	
+	public List<CartVO> getCartList(String mem_id);	
 	
 	/* 카트 확인 */
 	public CartVO checkCart(CartVO cart);

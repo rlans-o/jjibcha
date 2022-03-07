@@ -98,7 +98,7 @@ public class GoodsController {
 	public String getGoodsview(Model model, int goods_id, Criteria cri) {
 		log.info("getGoodsview");
 		
-		model.addAttribute("vo", goodsService.view(goods_id));
+		model.addAttribute("vo", goodsService.getGoodsInfo(goods_id));
 		model.addAttribute("cri", cri);
 		
 		

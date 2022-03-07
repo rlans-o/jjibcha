@@ -17,7 +17,8 @@ public class OrderPageItemVO {
     
     private int goods_price;
     
-   // private double goods_discount;
+    private double goods_discount;
+   
     
 	/* 만들어 낼 값 */
     private int salePrice;
@@ -32,7 +33,7 @@ public class OrderPageItemVO {
 	private List<AttachImageVO> imageList;
     
     public void initSaleTotal() {
-		this.salePrice = (int) (this.goods_price);
+		this.salePrice = (int) (this.goods_price * (1-this.goods_discount));
 		this.totalPrice = this.salePrice*this.goods_count;
 		this.point = (int)(Math.floor(this.salePrice*0.05));
 		this.totalPoint =this.point * this.goods_count;

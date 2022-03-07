@@ -12,8 +12,8 @@ import net.webjjang.util.PageObject;
 public interface ReplyService {
 	
 	// list
-		public List<ReplyVO> list(PageObject pageObject);
-		public int getReplyRow(PageObject pageObject);
+		public List<ReplyVO> list(Criteria cri);
+		public int getReplyRow(Criteria cri);
 	
 	/* 댓글 등록 */
 	public int enrollReply(ReplyVO vo);
@@ -22,7 +22,7 @@ public interface ReplyService {
 	public String checkReply(ReplyVO vo);
 	
 	/* 댓글 페이징 */
-	public ReplyPageVO replyList(Criteria cri);
+	public ReplyPageVO getReplyList(Criteria cri);
 	
 	/* 댓글 수정 */
 	public int updateReply(ReplyVO vo);

@@ -20,6 +20,9 @@ public class OrderItemVO {
 	/* 상품 한 개 가격 */
     private int goods_price;
     
+	/* 상품 할인 율 */
+    private double goods_discount;
+    
 	/* 상품 한개 구매 시 획득 포인트 */
     private int savePoint;
     
@@ -35,7 +38,7 @@ public class OrderItemVO {
     private int totalSavePoint;
 	
     public void initSaleTotal() {
-		this.salePrice = (int) (this.goods_price);
+		this.salePrice = (int) (this.goods_price * (1-this.goods_discount));
 		this.totalPrice = this.salePrice*this.goods_count;
 		this.savePoint = (int)(Math.floor(this.salePrice*0.05));
 		this.totalSavePoint =this.savePoint * this.goods_count;

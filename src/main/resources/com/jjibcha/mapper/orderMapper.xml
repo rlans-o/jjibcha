@@ -14,14 +14,14 @@
   	<!-- 주문 상품 정보 -->
 	<select id="getGoodsInfo" resultType="com.jjibcha.vo.OrderPageItemVO">
 	
-		select goods_id, goods_name, goods_price
+		select goods_id, goods_name, goods_price, goods_discount
 		from goods where goods_id = #{goods_id}	
 	
 	</select>
 	
 	<select id="getOrderInfo" resultType="com.jjibcha.vo.OrderItemVO">
 	
-		select goods_id, goods_price
+		select goods_id, goods_price, goods_discount
 		from goods where goods_id = #{goods_id}
 	
 	</select>
@@ -37,8 +37,8 @@
 	<!-- 주문 아이템 테이블 등록 -->
 	<insert id="enrollOrderItem">
 	
-		insert into jjibcha_orderItem(orderId, goods_id, goods_count, goods_price, savePoint)
-		values(#{orderId}, #{goods_id}, #{goods_count}, #{goods_price}, #{savePoint})
+		insert into jjibcha_orderitem(orderId, goods_id, goods_count, goods_price, goods_discount, savePoint)
+		values(#{orderId}, #{goods_id}, #{goods_count}, #{goods_price}, #{goods_discount}, #{savePoint})
 	
 	</insert>
 	
@@ -75,7 +75,7 @@
 	<!-- 주문 상품 정보(주문취소) -->
 	<select id="getOrderItemInfo" resultType="com.jjibcha.vo.OrderItemVO">
 	
-		select * from jjibcha_orderItem
+		select * from jjibcha_orderitem
 		where orderId = #{orderId}
 	
 	</select>

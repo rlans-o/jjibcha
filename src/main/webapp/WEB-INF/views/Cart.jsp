@@ -273,7 +273,7 @@
 								</td>
 								<td class="td_width_3">${ci.goods_name}</td>
 								<td class="td_width_4 price_td">
-<%-- 									<del>정가 : <fmt:formatNumber value="${ci.goods_price}" pattern="#,### 원" /></del><br> --%>
+									<del>정가 : <fmt:formatNumber value="${ci.goods_price}" pattern="#,### 원" /></del><br>
 									판매가 : <span class="red_color"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원" /></span><br>
 									마일리지 : <span class="green_color"><fmt:formatNumber value="${ci.point}" pattern="#,###" /></span>
 								</td>

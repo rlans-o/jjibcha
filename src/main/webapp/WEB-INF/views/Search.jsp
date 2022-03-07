@@ -79,8 +79,29 @@
 	.next a, .prev a {
 	    color: #ccc;
 	}
+	
+	/* 상품 이미지 관련 */
+		.image_wrap {
+		    width: 100%;
+		    height: 100%;
+		}	
+		.image_wrap img {
+		    max-width: 85%;
+		    height: auto;
+		    display: block;
+		}
+ 
 
 </style>
+
+<div class="search_wrap">
+		<form id="searchForm" action="/Search" method="get">
+			<div class="search_input">
+				<input type="text" name="word">
+				<button class='btn search_btn'>검 색</button>
+			</div>
+		</form>
+	</div>
 
 <div class="list_search_result">
 					<table class="type_list">
@@ -94,10 +115,18 @@
 						<tbody id="searchList>">
 							<c:forEach items="${list}" var="list">
 								<tr>
-									<td class="image"></td>
+									<td class="image">
+										<div class="image_wrap" data-goods_id="${list.imageList[0].goods_id}"
+											data-path="${list.imageList[0].uploadPath}" data-uuid="${list.imageList[0].uuid}"
+											data-filename="${list.imageList[0].fileName}">
+											<img>
+										</div>
+									</td>
 									<td class="detail">
 										<div class="title">
-											${list.goods_name}
+											<a href="/Goods/view.do?goods_id=${list.goods_id}">
+												${list.goods_name}
+											</a>		
 										</div>
 <!-- 										<div class="author"> -->
 <%-- 											${list.authorName} 지음 | ${list.publisher} | ${list.publeYear} --%>
@@ -111,12 +140,12 @@
 									<td class="price">
 										<div class="org_price">
 											<del>
-												${list.goods_price}
+												<fmt:formatNumber value="${list.goods_price}" pattern="#,### 원" />
 											</del>
 										</div>
 										<div class="sell_price">
 											<strong>
-												<c:out value="${list.goods_price * (1-list.goods_discount)}"/>
+												<fmt:formatNumber value="${list.goods_price * (1-list.goods_discount)}" pattern="#,### 원" />
 											</strong>
 										</div>
 									</td>
@@ -184,6 +213,26 @@ $(document).ready(function(){
 	if(selectedType != ""){
 		$("select[name='type']").val(selectedType).attr("selected", "selected");	
 	}
+	
+	/* 이미지 삽입 */
+	$(".image_wrap").each(function(i, obj){
+		
+		const bobj = $(obj);
+		
+		if(bobj.data("goods_id")){
+		const uploadPath = bobj.data("path");
+		const uuid = bobj.data("uuid");
+		const fileName = bobj.data("filename");
+		
+		const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+		
+		$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+		
+		} else {
+			$(this).find("img").attr('src', '/resources/img/noimg.png');
+		}
+		
+	});
 	
 });
 	

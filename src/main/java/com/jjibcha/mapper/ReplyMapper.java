@@ -19,8 +19,8 @@ import net.webjjang.util.PageObject;
 public interface ReplyMapper {
 	
 	// reply list - 전체 데이터 구하기
-		public List<ReplyVO> list(PageObject pageObject);
-		public Integer getReplyRow(PageObject pageObject);
+		public List<ReplyVO> list(Criteria cri);
+		public Integer getReplyRow(Criteria cri);
 		
 
 	/* 댓글 등록 */

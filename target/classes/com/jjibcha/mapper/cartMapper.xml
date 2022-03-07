@@ -23,22 +23,25 @@
 	<!-- 카트 삭제 -->
 	<delete id="deleteCart">
 	
-		delete from cart where cart_id = #{cart_id}
+		delete from cart 
+		where cart_id = #{cart_id}
 	
 	</delete>
 	
 	<!-- 카트 수량 수정 -->
 	<update id="modifyCount">
 	
-		update cart set goods_count=#{goods_count} where cart_id = #{cart_id}
+		update cart 
+		set goods_count=#{goods_count} 
+		where cart_id = #{cart_id}
 	
 	</update>
 	
 	
 	<!-- 카트 목록 -->
-	<select id="getCart" resultType="com.jjibcha.vo.CartVO">
+	<select id="getCartList" resultType="com.jjibcha.vo.CartVO">
 	
-		select a.cart_id, a.mem_id, a.goods_id, a.goods_count, b.goods_name, b.goods_price
+		select a.cart_id, a.mem_id, a.goods_id, a.goods_count, b.goods_name, b.goods_price, b.goods_discount
 		from cart a left outer join goods b on a.goods_id = b.goods_id
 		where mem_id = #{mem_id}	
 	
