@@ -4,6 +4,48 @@
 
 <style>
 
+/* 검색 박스 영역 */
+.search_area{
+	width: 50%;
+	height: 100%;
+	float:left;	
+}
+.search_wrap{
+	width: 100%;
+    height: 100%;
+    margin-top: 30px;
+}
+#searchForm{
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search_input{
+    display: flex;
+    height: 30%;
+    width: 80%;	
+}
+.search_input select{
+	width: 20%;
+    text-align: center;
+    font-size: 15px;	
+}
+.search_input input{
+    margin-left: 10px;
+    width: 57%;	
+    font-size: 18px;
+    padding-left: 2%;
+}
+.search_btn{
+	margin-left: 10px;
+    width: 17%;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;	
+}	
+
 /* 상품 표 */
 	.list_search_result{
 		width: 90%;
@@ -112,7 +154,7 @@
 							<col width="120">
 							<col width="120">
 						</colgroup>
-						<tbody id="searchList>">
+						<tbody id="searchList">
 							<c:forEach items="${list}" var="list">
 								<tr>
 									<td class="image">
@@ -134,7 +176,7 @@
 									</td>
 									<td class="info">
 										<div class="rating">
-											평점(추후 추가)
+											${list.ratingAvg }
 										</div>
 									</td>
 									<td class="price">
@@ -156,35 +198,36 @@
 					
 					</table>
 				</div>
-				
-				<!-- 페이지 이동 인터페이스 -->
-				<div class="pageMaker_wrap">
-					<ul class="pageMaker">
-	                			
-						<!-- 이전 버튼 -->
-						<c:if test="${pageMaker.prev }">
-	               			<li class="pageMaker_btn prev">
-	               				<a href="${pageMaker.pageStart -1}">이전</a>
-	               			</li>
-						</c:if>
-	               			
-	               		<!-- 페이지 번호 -->
-	               		<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
-	               			<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
-	               				<a href="${num}">${num}</a>
-	               			</li>	
-	               		</c:forEach>
-	               		
-	                   	<!-- 다음 버튼 -->
-	                   	<c:if test="${pageMaker.next}">
-	                   		<li class="pageMaker_btn next">
-	                   			<a href="${pageMaker.pageEnd + 1 }">다음</a>
-	                   		</li>
-	                   	</c:if>
-					</ul>
-				</div>
-				
-				<form id="moveForm" action="/Search" method="get" >
+
+<!-- 페이지 이동 인터페이스 -->
+<div class="pageMaker_wrap">
+	<ul class="pageMaker">
+
+		<!-- 이전 버튼 -->
+		<c:if test="${pageMaker.prev }">
+			<li class="pageMaker_btn prev"><a href="${pageMaker.pageStart -1}">이전</a></li>
+		</c:if>
+
+		<!-- 페이지 번호 -->
+		<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
+			<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a>
+			</li>
+		</c:forEach>
+
+		<!-- 다음 버튼 -->
+		<c:if test="${pageMaker.next}">
+			<li class="pageMaker_btn next"><a href="${pageMaker.pageEnd + 1 }">다음</a></li>
+		</c:if>
+	</ul>
+
+	<!-- 게시물 x -->
+	<c:if test="${listcheck == 'empty'}">
+		<div class="table_empty">검색결과가 없습니다.</div>
+	</c:if>
+
+</div>
+
+<form id="moveForm" action="/Search" method="get" >
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 					<input type="hidden" name="word" value="${pageMaker.cri.word}">

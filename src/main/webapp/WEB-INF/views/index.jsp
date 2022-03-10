@@ -102,6 +102,49 @@ a {
 .ls_div_content_next:hover{
    opacity: 80%;
 }
+
+/* 검색 박스 영역 */
+.search_area{
+	width: 50%;
+	height: 100%;
+	float:left;	
+}
+.search_wrap{
+	width: 100%;
+    height: 100%;
+    margin-top: 30px;
+}
+#searchForm{
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search_input{
+    display: flex;
+    height: 30%;
+    width: 80%;	
+}
+.search_input select{
+	width: 20%;
+    text-align: center;
+    font-size: 15px;	
+}
+.search_input input{
+    margin-left: 10px;
+    width: 57%;	
+    font-size: 18px;
+    padding-left: 2%;
+}
+.search_btn{
+	margin-left: 10px;
+    width: 17%;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;	
+}	
+
 </style>
 
 <div class="content_area">
@@ -123,9 +166,8 @@ a {
 		</div>
 	</div>
 	
-</div> <!-- content_div end -->
-
-<div class="search_wrap">
+	
+	<div class="search_wrap">
 		<form id="searchForm" action="/Search" method="get">
 			<div class="search_input">
 				<input type="text" name="word">
@@ -211,6 +253,10 @@ a {
 			</ul>
 		</div>
 	</div>
+	
+	
+</div> <!-- content_div end -->
+
 
 
 

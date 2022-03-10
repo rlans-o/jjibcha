@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="pageNav" tagdir="/WEB-INF/tags"%>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <style>
@@ -246,6 +245,22 @@ ul{
 </form>
 
 <script type="text/javascript">
+let moveForm = $('#moveForm');
+/* 작거 검색 버튼 동작 */
+
+/* 페이지 이동 버튼 */
+$(".pageMaker_btn a").on("click", function(e){
+	
+	e.preventDefault();
+	
+	console.log($(this).attr("href"));
+	
+	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	moveForm.submit();
+	
+});
+
 
 let searchForm = $('#searchForm');
 

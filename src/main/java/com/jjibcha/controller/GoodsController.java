@@ -83,7 +83,7 @@ public class GoodsController {
 		} else {
 			model.addAttribute("listcheck", "empty");
 			
-			return "search";
+			return "Search";
 		}
 		
 		model.addAttribute("pageMaker", new PageVO(cri, goodsService.getRow(cri)));

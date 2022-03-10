@@ -86,7 +86,7 @@
     font-size: 18px;
     line-height: 20px;
     position: absolute;
-    margin-left: 15px;
+    margin-left: 400px;
     background-color: #c3daf7;
 }
 
