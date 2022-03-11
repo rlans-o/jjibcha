@@ -27,7 +27,7 @@
 			where (goods_name like concat ('%', #{word}, '%'))
 		</if>
 		order by goods_id desc 
-		limit #{pageNum}, #{amount}		
+		limit #{skip}, #{amount}		
 	
 	</select>
   	

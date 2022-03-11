@@ -19,7 +19,7 @@
 		from goods
 		<include refid="search" />
 		order by goods_id desc
-		limit #{pageNum}, #{amount}
+		limit #{skip}, #{amount}
 	</select>
   	
   	<!-- 전체 데이터 가져오기 : 검색 적용 -->
@@ -153,7 +153,7 @@
 		    	where mem_id like concat('%',#{word}, '%')
 		    </if>
 		    order by orderdate desc
-		    limit #{startRow}, #{endRow}
+		    limit #{skip}, #{endRow}
 		    
 	</select>	
 	

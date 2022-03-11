@@ -21,6 +21,9 @@ public interface GoodsMapper {
 	public List<GoodsVO> list(Criteria cri);
 	public Integer getRow(Criteria cri);
 	
+	 /* 게시물 목록(페이징 적용) */
+    public List<GoodsVO> getListPaging(Criteria cri);
+	
 	/* 상품 정보 */
 	public GoodsVO getGoodsInfo(int goods_id);
 	public List<GoodsVO> getGoodsName(int goods_id);

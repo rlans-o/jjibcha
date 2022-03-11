@@ -19,7 +19,7 @@
 		from review
 		<include refid="search" />
 		order by review_no desc
-		limit #{startRow}, #{endRow}
+		limit #{skip}, #{amount}
 	</select>
   	
   	<!-- 전체 데이터 가져오기 : 검색 적용 -->

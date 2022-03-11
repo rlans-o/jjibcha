@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jjibcha.service.QnAService;
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.QnAVO;
 
 import lombok.extern.log4j.Log4j;
@@ -28,15 +29,15 @@ public class QnAController {
 	// QnA 게시판 페이지
 	   @RequestMapping(value = "/QnA/list.do", method = RequestMethod.GET)
 	   // PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
-		public String getQnA(Model model, HttpServletRequest request, PageObject pageObject) throws Exception {
+		public String getQnA(Model model, HttpServletRequest request, Criteria cri) throws Exception {
 		   log.info("getQnA");
 		
 		   // model에 데이터를 담으면 request에 데이터가 담기게 된다.
 		   // jsp에서 꺼내 쓸때는 ${list} == ${requestScope.list}		   
-		   model.addAttribute("list", service.list(pageObject));
+		   model.addAttribute("list", service.list(cri));
 		   // 하단 부분의 페이지네이션 처리를 위해서 pageObject가 필요함
 		   // 2페이지 이상이되면 페이지네이션을 표시한다.
-		   model.addAttribute("pageObject", pageObject);
+		   model.addAttribute("cri", cri);
 		   
 		   return "/qna/QnA";
 		}

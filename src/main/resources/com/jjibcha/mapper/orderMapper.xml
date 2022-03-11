@@ -69,7 +69,9 @@
 	
 	<!-- 주문취소 -->
 	<update id="orderCancle">
-		update jjibcha_order set orderState = '주문취소' where orderId = #{orderId}
+		update jjibcha_order 
+		set orderState = '주문취소' 
+		where orderId = #{orderId}
 	</update>	
 
 	<!-- 주문 상품 정보(주문취소) -->

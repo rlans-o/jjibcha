@@ -65,6 +65,12 @@ public class GoodsController {
 		// 하단 부분의 페이지네이션 처리를 위해서 pageObject가 필요함
 		// 2페이지 이상이되면 페이지네이션을 표시한다.
 		model.addAttribute("cri", cri);
+		
+		int total = goodsService.getRow(cri);
+		
+		PageVO pageMake = new PageVO(cri, total);
+		
+		model.addAttribute("pageMaker", pageMake);
 
 		return "/goods/Goodslist";
 	}

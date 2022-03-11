@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jjibcha.mapper.QnAMapper;
-
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.QnAVO;
 
 import net.webjjang.util.PageObject;
@@ -26,18 +26,16 @@ public class QnAServiceImpl implements QnAService {
 	private QnAMapper mapper;
 	
 	@Override
-	public List<QnAVO> list(PageObject pageObject) throws Exception {
+	public List<QnAVO> list(Criteria cri) throws Exception {
 		
-		// getRow() 메서드를 이용해서 전체데이터를 셋팅하면 계산이 되어진다.
-		pageObject.setTotalRow(mapper.getRow(pageObject));
-		log.info("pageobject", pageObject);
-		return mapper.list(pageObject);
+
+		return mapper.list(cri);
 	}
 	
 	@Override
-	public int getRow(PageObject pageObject) {
+	public int getRow(Criteria cri) {
 		
-		return mapper.getRow(pageObject);
+		return mapper.getRow(cri);
 	}
 
 	@Override

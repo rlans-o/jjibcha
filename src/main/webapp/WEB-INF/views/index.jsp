@@ -188,7 +188,7 @@ a {
 							data-filename="${ls.imageList[0].fileName}">
 							<img />
 						</div>
-						<div class="ls_rating">${ls.ratingAvg}</div>
+						<div class="ls_rating">평점 : ${ls.ratingAvg}</div>
 						<div class="ls_goods_name">${ls.goods_name}</div>
 					</div>
 				</div>
@@ -220,7 +220,7 @@ a {
 							<img />
 						</div>
 						<div class="goods_name_div">${rl.goodsList[0].goods_name}</div>
-						<div class="ls_rating">${rl.rating}</div>
+						<div class="ls_rating">평점 : ${rl.rating}</div>
 						<p class="content_p">${rl.content }</p>
 						<div class="add_reg">${rl.mem_id}  l <fmt:formatDate value="${rl.regDate}" pattern="yyyy-MM-dd" /></div>
 						

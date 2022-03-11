@@ -17,7 +17,7 @@
 		from reply
 		<include refid="search" />
 		order by replyId desc
-		limit #{pageNum}, #{amount}
+		limit #{skip}, #{amount}
 	</select>
   	
   	<!-- 전체 데이터 가져오기 : 검색 적용 -->
@@ -80,7 +80,7 @@
 		from reply
 		where goods_id = #{goods_id}
 		order by regDate desc  		
-  		limit #{pageNum}, #{amount}
+  		limit #{skip}, #{amount}
   		
   	</select>
   	

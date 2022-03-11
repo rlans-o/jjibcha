@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.QnAVO;
 
 import net.webjjang.util.PageObject;
@@ -15,8 +16,9 @@ import net.webjjang.util.PageObject;
 public interface QnAMapper {
 
 	// qna list - 전체 데이터 구하기
-	public List<QnAVO> list(PageObject pageObject);
-	public Integer getRow(PageObject pageObject);
+	public List<QnAVO> list(Criteria cri);
+	public Integer getRow(Criteria cri);
+	
 	
 	// view - 조회수 1증가
 	public QnAVO view(int qna_no);
