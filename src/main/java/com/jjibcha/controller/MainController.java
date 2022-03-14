@@ -37,15 +37,13 @@ public class MainController {
 	public String Main(Model model, Criteria cri) throws Exception {
 		log.info("main");
 		
-		cri = new Criteria(1, 4);
+		
 		model.addAttribute("qnaList", 
 				qnaService.list(cri));
 		
-		cri = new Criteria(1, 4);
 		model.addAttribute("goodsList", 
 				goodsService.list(cri));
 		
-		cri = new Criteria(1, 4);
 		model.addAttribute("replyList", 
 				replyService.list(cri));
 		

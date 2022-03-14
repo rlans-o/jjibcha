@@ -55,7 +55,6 @@ public class GoodsController {
 
 	// Goods 페이지
 	@RequestMapping(value = "/Goods/list.do", method = RequestMethod.GET)
-	// PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
 	public String getGoodsList(Model model, HttpServletRequest request, Criteria cri) {
 		log.info("getGoods");
 

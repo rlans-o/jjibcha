@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jjibcha.service.ReplyService;
 import com.jjibcha.vo.Criteria;
+import com.jjibcha.vo.PageVO;
 import com.jjibcha.vo.ReplyPageVO;
 import com.jjibcha.vo.ReplyVO;
 
@@ -41,6 +43,7 @@ public class ReplyController {
 	public String replyCheckPOST(ReplyVO vo) {
 		return replyService.checkReply(vo);
 	}
+
 	
 	/* 댓글 페이징 */
 	@GetMapping(value="/Reply/list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

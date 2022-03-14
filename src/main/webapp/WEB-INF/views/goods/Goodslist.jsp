@@ -174,7 +174,9 @@
 
 			<!-- 이전 버튼 -->
 			<c:if test="${pageMaker.prev }">
-				<li class="pageMaker_btn prev"><a href="${pageMaker.pageStart -1}">이전</a></li>
+				<li class="pageMaker_btn prev">
+				<a href="${pageMaker.pageStart -1}">이전</a>
+				</li>
 			</c:if>
 
 			<!-- 페이지 번호 -->
@@ -193,10 +195,10 @@
 	</div>
 
 	<form id="moveForm" action="/Goods/list.do" method="get" >
-					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-					<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-					<input type="hidden" name="word" value="${pageMaker.cri.word}">
-				</form>
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<input type="hidden" name="word" value="${pageMaker.cri.word}">
+	</form>
 	
 </div>
 

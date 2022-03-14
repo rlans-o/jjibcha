@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <style>
-
 .allblock {
 	margin-top: 200px;
 }
@@ -13,103 +11,271 @@
 	background: #ccc;
 	cursor: pointer;
 }
-
+		
+		/* 상품 표 */
+	.list_search_result{
+		width: 90%;
+	    margin: auto;	
+	}
+	.type_list{
+	    width: 100%;
+	    border-bottom: 1px solid #e7e7e7;
+	    border-collapse: collapse;	
+	}
+	.type_list tr{
+		height:200px;
+		border-bottom: 1px solid #e7e7e7;
+	}
+	.detail div{
+		margin-bottom: 5px;
+	}
+	.category{
+		font-size: 12px;
+    	font-weight: 600;
+	}
+	.title{
+	    font-size: 20px;
+	    color: #3a60df;
+	    font-weight: 700;
+	}
+	.author{
+		font-size: 14px;
+	}
+	.info{
+		text-align: center;
+	}
+	.price{
+		text-align: center;
+	}
+	.org_price del{
+		font-size: 13px;
+	}
+	.sell_price strong{
+		color: #da6262;
+    	font-size: 18px;
+	}
+	
+	/* 페이지 버튼 인터페이스 */
+	.pageMaker_wrap{
+		text-align: center;
+	    margin-top: 30px;
+	    margin-bottom: 40px;
+	}
+	.pageMaker{
+	    list-style: none;
+	    display: inline-block;
+	}	
+	.pageMaker_btn {
+	    float: left;
+	    width: 40px;
+	    height: 40px;
+	    line-height: 40px;
+	    margin-left: 20px;
+	}
+	.active{
+		border : 2px solid black;
+		font-weight:400;
+	}
+	.next, .prev {
+	    border: 1px solid #ccc;
+	    padding: 0 10px;
+	}
+	.pageMaker_btn a:link {color: black;}
+	.pageMaker_btn a:visited {color: black;}
+	.pageMaker_btn a:active {color: black;}
+	.pageMaker_btn a:hover {color: black;}
+	.next a, .prev a {
+	    color: #ccc;
+	}
+	
+	/* 상품 이미지 관련 */
+		.image_wrap {
+		    width: 100%;
+		    height: 100%;
+		}	
+		.image_wrap img {
+		    max-width: 85%;
+		    height: auto;
+		    display: block;
+		}
+ 
 </style>
 
 
-	<div class="allblock">
-	<h1 align="center">Review 게시판</h1>
+<div class="allblock">
+	<h1 align="center">리뷰 리스트</h1>
 
-<!-- 검색 기능 -->	
-<div>
-  <form class="navbar-form">
-    <div class="input-group">
-     <div class="form-group navbar-left">
-      <select name="key" class="form-control">
-       <!-- selected="select" or selected -->
-       <option value="t" ${(paging.key == "t")? " selected ":"" }>제목</option>
-       <option value="c" ${(paging.key == "c")? " selected ":"" }>내용</option>
-       <option value="w" ${(paging.key == "w")? " selected ":"" }>작성자</option>
-       <option value="tc" ${(paging.key == "tc")? " selected ":"" }>제목/내용</option>
-       <option value="tw" ${(paging.key == "tw")? " selected ":"" }>제목/작성자</option>
-       <option value="cw" ${(paging.key == "cw")? " selected ":"" }>내용/작성자</option>
-       <option value="tcw" ${(paging.key == "tcw")? " selected ":"" }>전체</option>
-      </select>
+<!-- <div class="search_wrap"> -->
+<!-- 		<form id="searchForm" action="/Review/list.do" method="get"> -->
+<!-- 			<div class="search_input"> -->
+<!-- 				<input type="text" name="word"> -->
+<!-- 				<button class='btn search_btn'>검 색</button> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 	</div> -->
 
-       <input type="text" class="form-control" placeholder="Search" name="word" value="${paging.word }">
+<div class="list_search_result">
+					<table class="type_list">
+						<colgroup>
+							<col width="110">
+							<col width="*">
+							<col width="120">
+							<col width="120">
+							<col width="120">
+						</colgroup>
+						<tbody id="searchList">
+							<c:forEach items="${replyList}" var="list">
+								<tr>
+									<td class="image">
+										<div class="image_wrap" data-goods_id="${list.imageList[0].goods_id}"
+											data-path="${list.imageList[0].uploadPath}" data-uuid="${list.imageList[0].uuid}"
+											data-filename="${list.imageList[0].fileName}">
+											<img>
+										</div>
+									</td>
+									<td class="detail">
+										<div class="title">
+											<a href="/Goods/view.do?goods_id=${list.goods_id}">
+												${list.goodsList[0].goods_name}
+											</a>		
+										</div>
+										<div class="author">
+											 ${list.content }
+										</div>
+									</td>
+									<td class="info">
+										<div class="rating">
+											평점 : ${list.rating }
+										</div>
+									</td>
+<!-- 									<td class="price"> -->
+<!-- 										<div class="org_price"> -->
+<!-- 											<del> -->
+<%-- 												<fmt:formatNumber value="${list.goodsList[0].goods_price}" pattern="#,### 원" /> --%>
+<!-- 											</del> -->
+<!-- 										</div> -->
+<!-- 										<div class="sell_price"> -->
+<!-- 											<strong> -->
+<%-- 												<fmt:formatNumber value="${list.goodsList[0].goods_price * (1-list.goodsList[0].goods_discount)}" pattern="#,### 원" /> --%>
+<!-- 											</strong> -->
+<!-- 										</div> -->
+<!-- 									</td> -->
+									<td class="option"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					
+					</table>
+				</div>
 
-</div>
+	<!-- 페이지 이동 인터페이스 -->
+	<div class="pageMaker_wrap">
+		<ul class="pageMaker">
 
-      <div class="input-group-btn">
+			<!-- 이전 버튼 -->
+			<c:if test="${pageMaker.prev }">
+				<li class="pageMaker_btn prev">
+				<a href="${pageMaker.pageStart -1}">이전</a>
+				</li>
+			</c:if>
 
-        <button class="btn btn-default" type="submit">
+			<!-- 페이지 번호 -->
+			<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
+				<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
+				<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
 
-          <i class="glyphicon glyphicon-search"></i>
-
-        </button>
-
-      </div>
-
-    </div>
-
-  </form>
-
- </div>
+			<!-- 다음 버튼 -->
+			<c:if test="${pageMaker.next}">
+				<li class="pageMaker_btn next"><a href="${pageMaker.pageEnd + 1 }">다음</a></li>
+			</c:if>
+		</ul>
 
 
-	<div class="panel-body">
-		<div id="tabledata">
-			<table class="table table-striped table-bordered table-hovor">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-
-				<c:choose>
-					<c:when test="${list.size()>0 }">
-						<c:forEach items="${list }" var="list">
-							<tr class="dataRow">
-								<td class="qna_no">${list.qna_no}</td>
-								<td>${list.qna_title }</td>
-								<td>${list.qna_writer }</td>
-								<td>
-									<fmt:formatDate value="${list.qna_writerDate }"
-									pattern="yyyy.MM.dd"/>
-								</td>
-								<td>${list.qna_count }</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-
-					<c:otherwise>
-						<tr>
-							<td colspan="5">검색된 목록이 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-
-			</table>
-		</div>
-
-		<a href="/Review/write.do" class="btn btn-primary">등록</a>
 	</div>
+
+	<form id="moveForm" action="/Review/list.do" method="get" >
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<input type="hidden" name="word" value="${pageMaker.cri.word}">
+	</form>
+	
 </div>
 
-	<script type="text/javascript">
+
+<script type="text/javascript">
+
+let searchForm = $('#searchForm');
+
+$("#searchForm button").on("click", function(e){
 	
-	$(function () {
-		$(".dataRow").click(function () {
+	e.preventDefault();
+	
+	/* 검색 키워드 유효성 검사 */
+	if(!searchForm.find("input[name='word']").val()){
+		alert("키워드를 입력하십시오");
+		return false;
+	}
+	
+	searchForm.find("input[name='pageNum']").val("1");
+	
+	searchForm.submit();
+	
+});
+
+/* 페이지 이동 버튼 */
+const moveForm = $('#moveForm');
+
+$(".pageMaker_btn a").on("click", function(e){
+	
+	e.preventDefault();
+	
+	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
+	moveForm.submit();
+	
+});
+
+
+	$(function() {
+
+		$(".dataRow").click(function() {
 			// 글번호 찾기
-			var qna_no = $(this).find(".qna_no").text();
-			location = "Review/view.do?qna_no="+ qna_no + "&inc=1";
+			var goods_id = $(this).find(".goods_id").text();
+			location = "/Goods/view.do?goods_id=" + goods_id;
 		});
 	});
 	
-		}
-	</script>
+	$(document).ready(function() {
+		
+		/* 이미지 삽입 */
+		$(".image_wrap").each(function(i, obj){
+			
+			const bobj = $(obj);
+			
+			if (bobj.data("goods_id")) {
+				
+				const uploadPath = bobj.data("path");
+				const uuid = bobj.data("uuid");
+				const fileName = bobj.data("filename");
+				
+				const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+				
+				$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
+				
+			} else {
+				
+			}
+			
+		});
+		
+	});
+</script>
+
+
+
+
+
+
 

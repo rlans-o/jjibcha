@@ -27,6 +27,8 @@
    		<include refid="search" />
   	</select>
   	
+  	
+  	
   	<sql id="search">
 	   <if test="word != null">
 					where (goods_name like concat ('%', #{word}, '%'))

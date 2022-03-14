@@ -194,11 +194,9 @@ ul{
 						<td><c:out value="${list.mem_id}"></c:out></td>
 						<td><fmt:formatDate value="${list.orderDate}" pattern="yyyy-MM-dd" /></td>
 						<td><c:out value="${list.orderState}" /></td>
-						<td>
-							<c:if test="${list.orderState == '배송준비' }">
+						<td><c:if test="${list.orderState == '배송준비' }">
 								<button class="delete_btn" data-orderid="${list.orderId}">취소</button>
-							</c:if>
-						</td>
+							</c:if></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -210,83 +208,101 @@ ul{
 		</c:if>
 
 	</div>
-	
-	<!-- 검색 기능 -->
-	<div>
-		<form id="searchForm" class="navbar-form" action="/Admin/orderList" method="get">
-			<div class="input-group search_input">
-				<div class="form-group navbar-left">
-				<input type="text" class="form-control" placeholder="Search" name="word"
-						value="${pageObject.word }">
 
-				</div>
-				<div class="input-group-btn">
-					<button class="btn btn-default" type="submit">
-						<i class="glyphicon glyphicon-search"></i>
-					</button>
-				</div>
+	<!-- 검색 영역 -->
+	<div class="search_wrap">
+		<form id="searchForm" action="/Admin/orderList" method="get">
+			<div class="search_input">
+				<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
+				<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
+				<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+				<button class='btn search_btn'>검 색</button>
 			</div>
 		</form>
 	</div>
 
 </div>
 
-<c:if test="${pageObject.totalPage > 1 }">
-	<!-- 전체 페이지가 2페이지 이상이면 보여주는 부분 -->
-	<pageNav:pageNav pageObject="${pageObject }" listURI="/Admin/orderList" />
-</c:if>
+<!-- 페이지 이동 인터페이스 영역 -->
+<div class="pageMaker_wrap">
+
+	<ul class="pageMaker">
+
+		<!-- 이전 버튼 -->
+		<c:if test="${pageMaker.prev}">
+			<li class="pageMaker_btn prev"><a href="${pageMaker.pageStart - 1}">이전</a></li>
+		</c:if>
+
+		<!-- 페이지 번호 -->
+		<c:forEach begin="${pageMaker.pageStart}" end="${pageMaker.pageEnd}" var="num">
+			<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? "active":""}"><a href="${num}">${num}</a>
+			</li>
+		</c:forEach>
+
+		<!-- 다음 버튼 -->
+		<c:if test="${pageMaker.next}">
+			<li class="pageMaker_btn next"><a href="${pageMaker.pageEnd + 1 }">다음</a></li>
+		</c:if>
+
+	</ul>
+
+</div>
+
+<form id="moveForm" action="/Admin/orderList" method="get">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"> 
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount}"> 
+	<input type="hidden" name="word" value="${pageMaker.cri.word}">
+</form>
 
 <form id="deleteForm" action="/Admin/orderCancle" method="post">
 	<input type="hidden" name="orderId">
-	<input type="hidden" name="perPageNum" value="${pageObject.perPageNum}">
-	<input type="hidden" name="page" value="${pageObject.page}">
-	<input type="hidden" name="word" value="${pageObject.word}">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+	<input type="hidden" name="word" value="${pageMaker.cri.word}">
 	<input type="hidden" name="mem_id" value="${member.mem_id}">
 </form>
 
 <script type="text/javascript">
-let moveForm = $('#moveForm');
-/* 작거 검색 버튼 동작 */
+	let moveForm = $('#moveForm');
+	/* 작거 검색 버튼 동작 */
 
-/* 페이지 이동 버튼 */
-$(".pageMaker_btn a").on("click", function(e){
-	
-	e.preventDefault();
-	
-	console.log($(this).attr("href"));
-	
-	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-	
-	moveForm.submit();
-	
-});
+	/* 페이지 이동 버튼 */
+	$(".pageMaker_btn a").on("click", function(e) {
 
+		e.preventDefault();
 
-let searchForm = $('#searchForm');
+		console.log($(this).attr("href"));
 
-$("#searchForm button").on("click", function(e){
-	
-	e.preventDefault();
-	
-	/* 검색 키워드 유효성 검사 */
-	if(!searchForm.find("input[name='word']").val()){
-		alert("키워드를 입력하십시오");
-		return false;
-	}
-	
-	searchForm.submit();
-	
-});
+		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
 
-$(".delete_btn").on("click", function(e){
-	
-	e.preventDefault();
-	
-	let id = $(this).data("orderid");
-	
-	$("#deleteForm").find("input[name='orderId']").val(id);
-	$("#deleteForm").submit();
-});
+		moveForm.submit();
 
+	});
+
+	let searchForm = $('#searchForm');
+
+	$("#searchForm button").on("click", function(e) {
+
+		e.preventDefault();
+
+		/* 검색 키워드 유효성 검사 */
+		if (!searchForm.find("input[name='word']").val()) {
+			alert("키워드를 입력하십시오");
+			return false;
+		}
+
+		searchForm.submit();
+
+	});
+
+	$(".delete_btn").on("click", function(e) {
+
+		e.preventDefault();
+
+		let id = $(this).data("orderid");
+
+		$("#deleteForm").find("input[name='orderId']").val(id);
+		$("#deleteForm").submit();
+	});
 </script>
 
