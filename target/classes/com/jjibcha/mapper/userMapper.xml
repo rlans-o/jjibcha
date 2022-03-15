@@ -42,6 +42,12 @@
 <!-- 		and mem_pw = #{mem_pw} -->
 	</select>
 	
+	<select id="getUserInfo" resultType="com.jjibcha.vo.UserVO">
+	
+		select * from user where mem_id = #{mem_id}
+	
+	</select>
+	
 	<!-- 주문자 정보 -->
   	<select id="getMemberInfo" resultType="com.jjibcha.vo.UserVO">
   	
