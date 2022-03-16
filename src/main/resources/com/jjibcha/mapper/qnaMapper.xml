@@ -18,7 +18,7 @@
    		select *
 		from qna
 		<include refid="search" />
-		order by qna_no desc
+		order by qna_id desc
 		limit #{skip}, #{amount}
 	</select>
   	
@@ -31,55 +31,22 @@
   	
   	<!-- 검색에 사용되는 조건 처리문 -->
   	<sql id="search">
-  	<!-- 검색처리를 하는 부분 -->
-	  <if test="word !=null and word != ''.toString">
-	   where ( 2 = 1
-	   <!-- 2글자 이상인 경우 : String 취급,
-	     한 글자인 경우:char 취급 => toString()를 이용해서 문자열로 만듬-->
-	   <if test="key == 't'.toString()">
-	 
-	       or qna_title like concat('%', #{word}, '%')
-	   </if>
-	   <if test="key == 'c'.toString()">
-	          or qna_content like concat('%', #{word}, '%')
-	   </if>
-	   <if test="key == 'w'.toString()">
-	          or qna_writer like concat('%', #{word}, '%')
-	   </if>
-	   <if test="key == 'tc'.toString()">
-	          or qna_title like concat('%', #{word}, '%')
-	          or qna_content like concat('%', #{word}, '%')
-	   </if>
-	   <if test="key == 'tw'.toString()">
-	          or qna_title like concat('%', #{word}, '%')
-	          or qna_writer like concat('%', #{word}, '%')
-	   </if>
-	   <if test="key == 'cw'.toString()">
-	          or qna_content like concat('%', #{word}, '%')
-	          or qna_writer like concat('%', #{word}, '%')
-	   </if>
-	   <if test="key == 'all'">
-	          or qna_title like concat('%', #{word}, '%')
-	          or qna_content like concat('%', #{word}, '%')
-	          or qna_writer like concat('%', #{word}, '%')
-	   </if>
-	   )
-	  </if>
+  
   	</sql>
  
   	
   	<insert id="write" >
    		<![CDATA[  
-   		insert into qna(qna_no, qna_title, qna_content, qna_writer, qna_pw)
-   		values(#{qna_no}, #{qna_title}, #{qna_content}, #{qna_writer}, #{qna_pw})   		
+   		insert into qna(qna_id, qna_title, qna_content, qna_pw)
+   		values(#{qna_id}, #{qna_title}, #{qna_content}, #{qna_pw})   		
    		]]> 
   	</insert>
   	
   	<select id="view" resultType="com.jjibcha.vo.QnAVO">
    		<![CDATA[  
-   		select qna_no, qna_title, qna_content, qna_writer, qna_writerDate, qna_count
+   		select qna_id, qna_title, qna_content, qna_writerDate, qna_count
    		from qna 
-   		where qna_no = #{qna_no}
+   		where qna_id = #{qna_id}
    		]]> 
   	</select>
   	
@@ -88,7 +55,7 @@
   		<![CDATA[
   		update qna
   		set qna_count = qna_count + 1
-  		where qna_no = #{qna_no}
+  		where qna_id = #{qna_id}
   		]]>
   	</update>
   	
@@ -96,8 +63,8 @@
   	<update id="update" >
   		<![CDATA[
   		update qna
-  		set qna_title = #{qna_title}, qna_content = #{qna_content}, qna_writer = #{qna_writer}
-  		where qna_no = #{qna_no} and qna_pw = #{qna_pw}
+  		set qna_title = #{qna_title}, qna_content = #{qna_content}
+  		where qna_id = #{qna_id} and qna_pw = #{qna_pw}
   		]]>
   	</update>
   	
@@ -105,7 +72,7 @@
   	<delete id="delete" >
   		<![CDATA[
   		delete from qna
-  		where qna_no = #{qna_no} and qna_pw = #{qna_pw}
+  		where qna_id = #{qna_id} and qna_pw = #{qna_pw}
   		]]>
   	</delete>
   	

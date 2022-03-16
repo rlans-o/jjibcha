@@ -173,7 +173,6 @@
                     			<input type="text" name="word" value='<c:out value="${pageMaker.cri.word}"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
                     			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
-<!--                     			<input type="hidden" name="type" value="G"> -->
                     			<button class='btn search_btn'>검 색</button>                				
                 			</div>
                 		</form>

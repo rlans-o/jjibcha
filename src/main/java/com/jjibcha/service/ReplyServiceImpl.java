@@ -137,8 +137,8 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override
 	public int getReplyRow(Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return replyMapper.getReplyRow(cri);
 	}
 
 }

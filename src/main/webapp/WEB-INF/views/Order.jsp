@@ -419,7 +419,7 @@ table {
 				<tbody>
 					<tr>
 						<th style="width: 25%;">주문자</th>
-						<td style="width: *">${memberInfo.mem_name}|${memberInfo.mem_email}</td>
+						<td style="width: *">${memberInfo.mem_name}</td>
 					</tr>
 				</tbody>
 			</table>

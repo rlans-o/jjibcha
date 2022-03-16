@@ -41,7 +41,7 @@
 
 <body>
 <div class="allblock">
-	<h1 align="center">Image 글 수정</h1>
+	<h1 align="center">GOODS 수정</h1>
 	<form method="post" >
 	
 		<div class="form-group">
@@ -97,9 +97,7 @@
 		
 		
 		<button class="btn btn-primary">수정</button>
-		<button id="deleteBtn" class="btn delete_btn">삭제</button>
-		<button type="reset" class="btn btn-primary">새로입력</button>
-		<button type="button" class="cancelBtn" class="btn btn-primary">취소</button>
+		<button id="deleteBtn" class="btn btn-primary delete_btn">삭제</button>
 	</form>
 	
 	<form id="moveForm" action="/Admin/Goods/manage.do" method="get" >

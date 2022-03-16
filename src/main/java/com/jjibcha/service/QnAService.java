@@ -15,7 +15,7 @@ public interface QnAService {
 	public int getRow(Criteria cri);
 	
 	// view
-	public QnAVO view(int qna_no, int inc);
+	public QnAVO view(int qna_id, int inc);
 	
 	// write
 	public void write(QnAVO vo);

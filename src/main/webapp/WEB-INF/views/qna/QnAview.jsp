@@ -21,10 +21,6 @@
 	<h1 align="center">게시판 글보기</h1>
 	<table class="table">
 		<tr>
-			<th>번호</th>
-			<td id="no">${vo.qna_no }</td>
-		</tr>
-		<tr>
 			<th>제목</th>
 			<td>${vo.qna_title }</td>
 		</tr>
@@ -34,7 +30,7 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${vo.qna_writer }</td>
+			<td>${memberInfo.mem_id }</td>
 		</tr>
 		<tr>
 			<th>작성일</th>
@@ -45,7 +41,7 @@
 			<td>${vo.qna_count }</td>
 		</tr>
 		<tr>
-			<td colspan="2"><a href="/QnA/update.do?qna_no=${vo.qna_no}" class="btn btn-primary">수정</a>
+			<td colspan="2"><a href="/QnA/update.do?qna_id=${vo.qna_id}" class="btn btn-primary">수정</a>
 				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a> 
 				<a href="/QnA/list.do" class="btn btn-primary">리스트</a></td>
 		</tr>
@@ -72,7 +68,7 @@
 
 <!-- 삭제를 위한 form tag -->
 <form action="/QnA/delete.do" method="post" id="deleteForm">
-	<input type="hidden" name="qna_no" value="${vo.qna_no }" /> 
+	<input type="hidden" name="qna_id" value="${vo.qna_id }" /> 
 	<input type="hidden" name="qna_pw" id="deletePw" />
 </form>
 

@@ -21,8 +21,8 @@ public interface QnAMapper {
 	
 	
 	// view - 조회수 1증가
-	public QnAVO view(int qna_no);
-	public void increase(int qna_no);
+	public QnAVO view(int qna_id);
+	public void increase(int qna_id);
 	
 	// write
 	public void write(QnAVO vo);
@@ -30,6 +30,6 @@ public interface QnAMapper {
 	// update
 	public void update(QnAVO vo);
 		
-	// delete - qna_no, qna_pw
+	// delete - qna_id, qna_pw
 	public void delete(QnAVO vo);	
 }

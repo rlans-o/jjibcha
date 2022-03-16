@@ -27,9 +27,9 @@ $(function () {
 	<form method="post" >
 	
 		<div class="form-group">
-			<label for="qna_no">번호 : </label>
-			<input type="text" class="form-control" id="qna_no" name="qna_no" 
-			readonly="readonly" value="${vo.qna_no} "> 
+			<label for="qna_id">번호 : </label>
+			<input type="text" class="form-control" id="qna_id" name="qna_id" 
+			readonly="readonly" value="${vo.qna_id} "> 
 		</div>
 		
 		<div class="form-group">

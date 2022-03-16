@@ -1,18 +1,37 @@
 package com.jjibcha.vo;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
 @Data
 public class QnAVO {
 
-	private int qna_no;
+	private int qna_id;
+	
+	private List<UserVO> userList;
+	
+	private int goods_id;
+	
 	private String qna_title;
+	
 	private String qna_content;
-	private String qna_writer;
+	
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date qna_writerDate;
+	
 	private int qna_count;
+	
 	private String qna_pw;
+	
+	private List<GoodsVO> goodsList;
+
+	/* 이미지 정보 */
+	private List<AttachImageVO> imageList;
+	
+	
 	
 }

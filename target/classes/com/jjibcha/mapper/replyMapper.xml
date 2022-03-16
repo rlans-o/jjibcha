@@ -19,6 +19,8 @@
 		order by replyId desc
 		limit #{skip}, #{amount}
 	</select>
+	
+	
   	
   	<!-- 전체 데이터 가져오기 : 검색 적용 -->
   	<select id="getReplyRow" resultType="int">
@@ -30,9 +32,10 @@
   	
   	
   	<sql id="search">
-	   <if test="word != null">
-					where (goods_name like concat ('%', #{word}, '%'))
-		</if>
+<!--   	검색 추후에 적용 -->
+<!-- 	   <if test="word != null"> -->
+<!-- 					where (goods_name like concat ('%', #{word}, '%')) -->
+<!-- 		</if> -->
 		<!-- 조건 붙이기 아직x -->
 <!-- 		<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
 <!-- 	  		<foreach item="type" collection="typeArr"> -->

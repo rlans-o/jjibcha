@@ -11,51 +11,61 @@
 	background: #ccc;
 	cursor: pointer;
 }
-		
-		/* 상품 표 */
-	.list_search_result{
-		width: 90%;
-	    margin: auto;	
-	}
-	.type_list{
-	    width: 100%;
-	    border-bottom: 1px solid #e7e7e7;
-	    border-collapse: collapse;	
-	}
-	.type_list tr{
-		height:200px;
-		border-bottom: 1px solid #e7e7e7;
-	}
-	.detail div{
-		margin-bottom: 5px;
-	}
-	.category{
-		font-size: 12px;
-    	font-weight: 600;
-	}
-	.title{
-	    font-size: 20px;
-	    color: #3a60df;
-	    font-weight: 700;
-	}
-	.author{
-		font-size: 14px;
-	}
-	.info{
-		text-align: center;
-	}
-	.price{
-		text-align: center;
-	}
-	.org_price del{
-		font-size: 13px;
-	}
-	.sell_price strong{
-		color: #da6262;
-    	font-size: 18px;
-	}
-	
-	/* 페이지 버튼 인터페이스 */
+
+/* 상품 표 */
+.list_search_result {
+	width: 90%;
+	margin: auto;
+}
+
+.type_list {
+	width: 100%;
+	border-bottom: 1px solid #e7e7e7;
+	border-collapse: collapse;
+}
+
+.type_list tr {
+	height: 200px;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.detail div {
+	margin-bottom: 5px;
+}
+
+.category {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.title {
+	font-size: 20px;
+	color: #3a60df;
+	font-weight: 700;
+}
+
+.author {
+	font-size: 14px;
+}
+
+.info {
+	text-align: center;
+}
+
+.price {
+	text-align: center;
+}
+
+.org_price del {
+	font-size: 13px;
+}
+
+.sell_price strong {
+	color: #da6262;
+	font-size: 18px;
+}
+
+/* 페이지 버튼 인터페이스 */
 	.pageMaker_wrap{
 		text-align: center;
 	    margin-top: 30px;
@@ -87,23 +97,31 @@
 	.next a, .prev a {
 	    color: #ccc;
 	}
-	
-	/* 상품 이미지 관련 */
-		.image_wrap {
-		    width: 100%;
-		    height: 100%;
-		}	
-		.image_wrap img {
-		    max-width: 85%;
-		    height: auto;
-		    display: block;
-		}
- 
+
+/* 상품 이미지 관련 */
+.image_wrap {
+	width: 100%;
+	height: 100%;
+}
+
+.image_wrap img {
+	max-width: 85%;
+	height: auto;
+	display: block;
+}
+
+.content_p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100px;
+	height: 20px;
+}
 </style>
 
 
 <div class="allblock">
-	<h1 align="center">리뷰 리스트</h1>
+	<h1 align="center">REVIEW</h1>
 
 <!-- <div class="search_wrap"> -->
 <!-- 		<form id="searchForm" action="/Review/list.do" method="get"> -->
@@ -139,8 +157,8 @@
 												${list.goodsList[0].goods_name}
 											</a>		
 										</div>
-										<div class="author">
-											 ${list.content }
+										<div>
+											 <p class="content_p">${list.content }</p>
 										</div>
 									</td>
 									<td class="info">
@@ -168,32 +186,32 @@
 					</table>
 				</div>
 
-	<!-- 페이지 이동 인터페이스 -->
-	<div class="pageMaker_wrap">
-		<ul class="pageMaker">
-
-			<!-- 이전 버튼 -->
-			<c:if test="${pageMaker.prev }">
-				<li class="pageMaker_btn prev">
-				<a href="${pageMaker.pageStart -1}">이전</a>
-				</li>
-			</c:if>
-
-			<!-- 페이지 번호 -->
-			<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
-				<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
-				<a href="${num}">${num}</a>
-				</li>
-			</c:forEach>
-
-			<!-- 다음 버튼 -->
-			<c:if test="${pageMaker.next}">
-				<li class="pageMaker_btn next"><a href="${pageMaker.pageEnd + 1 }">다음</a></li>
-			</c:if>
-		</ul>
-
-
-	</div>
+	<!-- 페이지 이름 인터페이스 영역 -->
+                	<div class="pageMaker_wrap">
+                		<ul class="pageMaker">
+                			
+                			<!-- 이전 버튼 -->
+                			<c:if test="${pageMaker.prev }">
+                				<li class="pageMaker_btn prev">
+                					<a href="${pageMaker.pageStart -1}">이전</a>
+                				</li>
+                			</c:if>
+                			
+                			<!-- 페이지 번호 -->
+                			<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
+                				<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
+                					<a href="${num}">${num}</a>
+                				</li>	
+                			</c:forEach>
+                		
+	                    	<!-- 다음 버튼 -->
+	                    	<c:if test="${pageMaker.next}">
+	                    		<li class="pageMaker_btn next">
+	                    			<a href="${pageMaker.pageEnd + 1 }">다음</a>
+	                    		</li>
+	                    	</c:if>
+	                    </ul>
+                	</div>
 
 	<form id="moveForm" action="/Review/list.do" method="get" >
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
@@ -202,6 +220,8 @@
 	</form>
 	
 </div>
+
+
 
 
 <script type="text/javascript">
@@ -225,7 +245,7 @@ $("#searchForm button").on("click", function(e){
 });
 
 /* 페이지 이동 버튼 */
-const moveForm = $('#moveForm');
+let moveForm = $('#moveForm');
 
 $(".pageMaker_btn a").on("click", function(e){
 	
@@ -236,16 +256,6 @@ $(".pageMaker_btn a").on("click", function(e){
 	moveForm.submit();
 	
 });
-
-
-	$(function() {
-
-		$(".dataRow").click(function() {
-			// 글번호 찾기
-			var goods_id = $(this).find(".goods_id").text();
-			location = "/Goods/view.do?goods_id=" + goods_id;
-		});
-	});
 	
 	$(document).ready(function() {
 		
@@ -265,7 +275,7 @@ $(".pageMaker_btn a").on("click", function(e){
 				$(this).find("img").attr('src', '/display?fileName=' + fileCallPath);
 				
 			} else {
-				
+	
 			}
 			
 		});

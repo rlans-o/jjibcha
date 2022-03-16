@@ -70,6 +70,7 @@ public class GoodsController {
 		PageVO pageMake = new PageVO(cri, total);
 		
 		model.addAttribute("pageMaker", pageMake);
+		log.info(pageMake);
 
 		return "/goods/Goodslist";
 	}

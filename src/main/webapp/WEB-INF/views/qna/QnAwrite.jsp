@@ -27,12 +27,6 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="qna_writer">작성자 :</label>
-			<input type="text" class="form-control" id="qna_writer" name="qna_writer"
-			required="required" pattern="[가-하a-zA-Z]{2,10}" maxlength="10"> 
-		</div>
-		
-		<div class="form-group">
 			<label for="qna_pw">비밀번호 :</label>
 			<input type="text" class="form-control" id="qna_pw" name="qna_pw"
 			required="required" pattern=".{3,50}" maxlength="50"> 

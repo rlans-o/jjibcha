@@ -145,6 +145,30 @@ a {
     font-weight: 600;	
 }	
 
+.content_div {
+	text-align: center;
+}
+
+.content_p{
+	overflow: hidden;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+ 	width: 100px;
+  	height: 20px;
+  	margin-left: 40px;
+}
+
+.price{
+		text-align: center;
+	}
+	.org_price del{
+		font-size: 13px;
+	}
+	.sell_price strong{
+		color: #da6262;
+    	font-size: 18px;
+	}
+
 </style>
 
 <div class="content_area">
@@ -177,7 +201,7 @@ a {
 	</div>
 
 <div class="ls_wrap">
-	<div class="ls_div_subject">상품</div>
+	<div class="ls_div_subject" style="text-align: center;">GOODS</div>
 	<div class="ls_div">
 		<c:forEach items="${goodsList}" var="ls">
 			<a href="/Goods/view.do?goods_id=${ls.goods_id }">
@@ -190,7 +214,19 @@ a {
 						</div>
 						<div class="ls_rating">평점 : ${ls.ratingAvg}</div>
 						<div class="ls_goods_name">${ls.goods_name}</div>
-					</div>
+						<div class="price">	
+							<div class="org_price">
+								<del>
+									<fmt:formatNumber value="${ls.goods_price}" pattern="#,### 원" />
+								</del>
+							</div>
+							<div class="sell_price">
+								<strong> <fmt:formatNumber value="${ls.goods_price * (1-ls.goods_discount)}"
+										pattern="#,### 원" />
+								</strong>
+							</div>
+						</div>	
+						</div>
 				</div>
 			</a>
 		</c:forEach>
@@ -208,7 +244,7 @@ a {
   
 <div class="container-fluid bg-3 text-center">    
 <div class="ls_wrap">
-	<div class="ls_div_subject">리뷰 상품</div>
+	<div class="ls_div_subject">REVIEW</div>
 	<div class="ls_div">
 		<c:forEach items="${replyList}" var="rl">
 			<a href="/Goods/view.do?goods_id=${rl.goods_id }">
@@ -221,7 +257,9 @@ a {
 						</div>
 						<div class="goods_name_div">${rl.goodsList[0].goods_name}</div>
 						<div class="ls_rating">평점 : ${rl.rating}</div>
-						<p class="content_p">${rl.content }</p>
+						<div class="content_div" >
+							<p class="content_p" >${rl.content }</p>
+						</div>	
 						<div class="add_reg">${rl.mem_id}  l <fmt:formatDate value="${rl.regDate}" pattern="yyyy-MM-dd" /></div>
 						
 					</div>
@@ -241,9 +279,9 @@ a {
 			<!-- 데이터 만큼 반복하는 시작 -->
 			<c:forEach items="${qnaList }" var="vo" >
 				<li class="list-group-item dataRow">
-					<a href="/QnA/view.do?qna_no=${vo.qna_no }&inc=1"
+					<a href="/QnA/view.do?qna_id=${vo.qna_id }&inc=1"
 					style="text-decoration: none;">
-					${vo.qna_title } - 작성자 : ${vo.qna_writer }
+					${vo.qna_title } - 작성자 : 
 					 (<fmt:formatDate value="${vo.qna_writerDate }" pattern="yyyy.MM.dd" />)
 						<span class="badge">${vo.qna_count }</span>
 					</a>
