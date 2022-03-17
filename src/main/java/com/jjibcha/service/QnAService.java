@@ -26,4 +26,7 @@ public interface QnAService {
 	// delete - no, pw
 	public void delete(QnAVO vo);
 	
+	/* QnA id 이름 */
+	public QnAVO getqna_id(int qna_id);
+	
 }

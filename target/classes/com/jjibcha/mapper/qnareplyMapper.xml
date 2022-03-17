@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  com.jjibcha.gi.mapper.ReplyMapper 인터페이스 선언 
+  			- src/main/java
+  			root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  			com.jjibcha.gi.mapper.qnaMapper.xml 실행 작성 
+  			- src/main/resources -->
+  
+  <mapper namespace="com.jjibcha.mapper.QnaReplyMapper">
+  
+  <!-- 페이징 처리 후 상품 조회 -->
+	<select id="list" resultType="com.jjibcha.vo.QnaReplyVO">
+   		select *
+		from qna_reply
+		<include refid="search" />
+		order by qnareplyId desc
+		limit #{skip}, #{amount}
+	</select>
+	
+	
+  	
+  	<!-- 전체 데이터 가져오기 : 검색 적용 -->
+  	<select id="getReplyRow" resultType="int">
+   		select count(*)
+   		from qna_reply
+   		<include refid="search" />
+  	</select>
+  	
+  	
+  	
+  	<sql id="search">
+<!--   	검색 추후에 적용 -->
+<!-- 	   <if test="word != null"> -->
+<!-- 					where (qna_name like concat ('%', #{word}, '%')) -->
+<!-- 		</if> -->
+		<!-- 조건 붙이기 아직x -->
+<!-- 		<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
+<!-- 	  		<foreach item="type" collection="typeArr"> -->
+<!-- 	  			<trim prefix="AND"> -->
+<!-- 	  				<choose> -->
+<!-- 	  					<when test="type == 'A'.toString()"> -->
+<!-- 	  						<trim prefixOverrides="or"> -->
+<!-- 			  					<foreach collection="authorArr" item="authorId"> -->
+<!-- 			  						<trim prefix="or"> -->
+<!-- 			  							authorId = #{authorId} -->
+<!-- 			  						</trim> -->
+<!-- 			  					</foreach>  						 -->
+<!-- 	  						</trim> -->
+<!-- 	  					</when> -->
+<!-- 	  					<when test="type == 'C'.toString()"> -->
+<!-- 	  						cateCode like '%' || #{cateCode} || '%' -->
+<!-- 	  					</when>  					 -->
+<!-- 	  					<when test="type == 'T'.toString()"> -->
+<!-- 	  						bookName like '%' || #{keyword} || '%' -->
+<!-- 	  					</when>  					 -->
+<!-- 	  				</choose> -->
+<!-- 	  			</trim> -->
+<!-- 	  		</foreach> -->
+<!-- 	  	</trim> -->
+		
+  	</sql>
+  
+	<!-- 댓글등록 -->
+  	<insert id="enrollReply">
+  	
+  		insert into qna_reply(qna_id, mem_id, content) 
+  		values(#{qna_id}, #{mem_id}, #{content})
+  	
+  	</insert>
+  	
+  	<select id="checkReply" resultType="integer">
+	
+		select qnareplyId from qna_reply 
+		where mem_id = #{mem_id} and qna_id = #{qna_id}
+	
+	</select>
+	
+	<!-- 댓글 페이징 -->
+  	<select id="getReplyList" resultType="com.jjibcha.vo.QnaReplyVO">
+		  		
+		select *
+		from qna_reply
+		where qna_id = #{qna_id}
+		order by regDate desc  		
+  		limit #{skip}, #{amount}
+  		
+  	</select>
+  	
+  	<select id="getReplyTotal" resultType="int">
+  	
+  		select count(*)
+  		from qna_reply
+  		where qna_id = #{qna_id}
+  	
+  	</select>
+  	
+  	<!-- 댓글수정 -->
+  	<update id="updateReply">
+  	
+  		update qna_reply 
+  		set content = #{content}
+  		where qnareplyId = #{qnareplyId}
+  		
+  	</update>
+  	
+  	<select id="getUpdateReply" resultType="com.jjibcha.vo.QnaReplyVO">
+	
+		select * from qna_reply
+		where qnareplyId = #{qnareplyId}
+		
+	</select>
+	
+	<!-- 댓글 삭제 -->
+  	<delete id="deleteReply">
+  	
+  		delete from qna_reply
+  		where qnareplyId = #{qnareplyId}
+  		
+  	</delete>
+  	
+  	
+  </mapper>

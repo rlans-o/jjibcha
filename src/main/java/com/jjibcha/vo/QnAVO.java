@@ -12,7 +12,7 @@ public class QnAVO {
 
 	private int qna_id;
 	
-	private List<UserVO> userList;
+	private String mem_id;
 	
 	private int goods_id;
 	
@@ -24,8 +24,6 @@ public class QnAVO {
 	private Date qna_writerDate;
 	
 	private int qna_count;
-	
-	private String qna_pw;
 	
 	private List<GoodsVO> goodsList;
 

@@ -2,6 +2,9 @@ package com.jjibcha.vo;
 
 import java.util.Arrays;
 
+import lombok.Data;
+
+@Data
 public class Criteria {
 	
 	/* 현재 페이지 번호 */
@@ -22,6 +25,9 @@ public class Criteria {
 	/* 상품 번호(댓글 기능에서 사용) */
 	private int goods_id;
 	
+	/* 상품 번호(댓글 기능에서 사용) */
+	private int qna_id;
+
 	/* Criteria 생성자 */
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
@@ -57,46 +63,5 @@ public class Criteria {
 		this.skip = (this.pageNum-1)*amount;
 	}
 
-	public int getSkip() {
-		return skip;
-	}
-
-	public void setSkip(int skip) {
-		this.skip = skip;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getWord() {
-		return word;
-	}
-
-	public void setWord(String word) {
-		this.word = word;
-	}
-
-	public int getGoods_id() {
-		return goods_id;
-	}
-
-	public void setGoods_id(int goods_id) {
-		this.goods_id = goods_id;
-	}
-
-	@Override
-	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + ", type=" + type + ", word="
-				+ word + ", goods_id=" + goods_id + ", getTypeArr()=" + Arrays.toString(getTypeArr())
-				+ ", getPageNum()=" + getPageNum() + ", getAmount()=" + getAmount() + ", getSkip()=" + getSkip()
-				+ ", getType()=" + getType() + ", getWord()=" + getWord() + ", getGoods_id()=" + getGoods_id()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
-	}
 	
 }

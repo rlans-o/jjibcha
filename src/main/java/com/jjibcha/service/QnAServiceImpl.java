@@ -83,5 +83,11 @@ public class QnAServiceImpl implements QnAService {
 		// TODO Auto-generated method stub
 		qnaMapper.delete(vo);
 	}
+	
+	@Override
+	public QnAVO getqna_id(int qna_id) {
+		
+		return qnaMapper.getqna_id(qna_id);
+	}
 
 }

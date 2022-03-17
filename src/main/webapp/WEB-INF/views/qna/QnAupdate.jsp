@@ -43,11 +43,6 @@ $(function () {
 			<textarea class="form-control" rows="5" id="qna_content" name="qna_content">${vo.qna_content }</textarea>
 		</div>
 		
-		<div class="form-group">
-			<label for="qna_writer">작성자 :</label>
-			<input type="text" class="form-control" id="qna_writer" name="qna_writer"
-			required="required" pattern="[가-하a-zA-Z]{2,10}" maxlength="10" value="${vo.qna_writer }"> 
-		</div>
 		
 		<button class="btn btn-primary">수정</button>
 		<button type="reset" class="btn btn-primary">새로입력</button>

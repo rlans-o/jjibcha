@@ -27,10 +27,11 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="qna_pw">비밀번호 :</label>
-			<input type="text" class="form-control" id="qna_pw" name="qna_pw"
-			required="required" pattern=".{3,50}" maxlength="50"> 
+			<label for="mem_id">작성자 :</label>
+			<input type="hidden" class="form-control" id="mem_id" name="mem_id"
+			value="${sessionScope.mem_id}"> 
 		</div>
+	
 		
 		<button class="btn btn-primary">등록</button>
 	

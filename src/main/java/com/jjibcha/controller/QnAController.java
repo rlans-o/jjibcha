@@ -1,10 +1,12 @@
 package com.jjibcha.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +15,7 @@ import com.jjibcha.service.QnAService;
 import com.jjibcha.service.UserService;
 import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.QnAVO;
+import com.jjibcha.vo.UserVO;
 
 import lombok.extern.log4j.Log4j;
 import net.webjjang.util.PageObject;
@@ -59,16 +62,19 @@ public class QnAController {
 		}
 	   
 	   // QnA 게시판 글쓰기 get
-	   @RequestMapping(value = "/QnA/write.do", method = RequestMethod.GET)
-		public String getQnAwrite() {
+	   @GetMapping(value = "/QnA/write.do")
+		public String getQnAwrite(HttpServletRequest request, QnAVO vo, Model model, String mem_id) {
 		   log.info("getQnAwrite");
+		   
+		  HttpSession session = request.getSession();
+		  
 		   
 		   return "/qna/QnAwrite";
 		}
 	   
 	   // QnA 게시판 글쓰기 post
 	   @RequestMapping(value = "/QnA/write.do", method = RequestMethod.POST)
-		public String postQnAwrite(QnAVO vo) {
+		public String postQnAwrite(QnAVO vo, HttpSession session) {
 		   log.info("postQnAwrite");
 		   
 		   qnaService.write(vo);
@@ -105,6 +111,16 @@ public class QnAController {
 		   qnaService.delete(vo);
 		   
 		   return "redirect:/QnA/list.do";
+		}
+	   
+	   /* 댓글 쓰기 */
+		@GetMapping("/qnareplyEnroll/{mem_id}")
+		public String qnareplyEnrollWindowGET(@PathVariable("mem_id")String mem_id, int qna_id, Model model) {
+			QnAVO qna = qnaService.getqna_id(qna_id);
+			model.addAttribute("qnaInfo", qna);
+			model.addAttribute("mem_id", mem_id);
+			
+			return "/qnareplyEnroll";
 		}
 	   
 	   

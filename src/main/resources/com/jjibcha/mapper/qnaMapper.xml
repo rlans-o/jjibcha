@@ -37,14 +37,14 @@
   	
   	<insert id="write" >
    		<![CDATA[  
-   		insert into qna(qna_id, qna_title, qna_content, qna_pw)
-   		values(#{qna_id}, #{qna_title}, #{qna_content}, #{qna_pw})   		
+   		insert into qna(qna_id, mem_id, qna_title, qna_content)
+   		values(#{qna_id}, #{mem_id}, #{qna_title}, #{qna_content})   		
    		]]> 
   	</insert>
   	
   	<select id="view" resultType="com.jjibcha.vo.QnAVO">
    		<![CDATA[  
-   		select qna_id, qna_title, qna_content, qna_writerDate, qna_count
+   		select qna_id, mem_id, qna_title, qna_content, qna_writerDate, qna_count
    		from qna 
    		where qna_id = #{qna_id}
    		]]> 
@@ -64,7 +64,7 @@
   		<![CDATA[
   		update qna
   		set qna_title = #{qna_title}, qna_content = #{qna_content}
-  		where qna_id = #{qna_id} and qna_pw = #{qna_pw}
+  		where qna_id = #{qna_id}
   		]]>
   	</update>
   	
@@ -72,8 +72,17 @@
   	<delete id="delete" >
   		<![CDATA[
   		delete from qna
-  		where qna_id = #{qna_id} and qna_pw = #{qna_pw}
+  		where qna_id = #{qna_id}
   		]]>
   	</delete>
+  	
+  	<select id="getqna_id" resultType="com.jjibcha.vo.QnAVO">
+	
+		select qna_id, qna_title 
+		from qna 
+		where qna_id = #{qna_id}
+	
+	
+	</select>
   	
   </mapper>
