@@ -41,7 +41,7 @@
 							<tr class="dataRow">
 								<td class="qna_id"><c:out value="${list.qna_id}"></c:out></td>
 								<td>${list.qna_title }</td>
-								<td>${list.userList[0].mem_id }</td>
+								<td>${list.mem_id }</td>
 								<td>
 									<fmt:formatDate value="${list.qna_writerDate }"
 									pattern="yyyy.MM.dd"/>
@@ -60,8 +60,9 @@
 
 			</table>
 		</div>
-
-		<a href="/QnA/write.do" class="btn btn-primary">등록</a>
+		<c:if test="${member != null }">
+			<a href="/QnA/write.do" class="btn btn-primary">등록</a>
+		</c:if>
 	</div>
 	
 	</div>

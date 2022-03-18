@@ -140,7 +140,7 @@
 </style>
 
 <div class="allblock">
-	<h1 align="center">게시판 글보기</h1>
+	<h1 align="center">QnA view</h1>
 	<table class="table">
 		<tr>
 			<th>제목</th>
@@ -152,7 +152,7 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${vo.userList[0].mem_id }</td>
+			<td>${vo.mem_id }</td>
 		</tr>
 		<tr>
 			<th>작성일</th>
@@ -163,9 +163,14 @@
 			<td>${vo.qna_count }</td>
 		</tr>
 		<tr>
-			<td colspan="2"><a href="/QnA/update.do?qna_id=${vo.qna_id}" class="btn btn-primary">수정</a>
-				<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a> 
-				<a href="/QnA/list.do" class="btn btn-primary">리스트</a></td>
+			<td colspan="2">
+			<input type="hidden" name="qna_id" value="${vo.qna_id }">
+				<c:if test="${member.mem_id == vo.mem_id }">
+					<a href="/QnA/update.do?qna_id=${vo.qna_id}" class="btn btn-primary">수정</a>
+					<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
+				</c:if> 
+				<a href="/QnA/list.do" class="btn btn-primary">리스트</a>
+			</td>
 		</tr>
 	</table>
 
@@ -173,7 +178,7 @@
 		<h2>답변</h2>
 	</div>
 	
-	<c:if test="${member != null}">
+	<c:if test="${member.adminCk == 1 }">
 		<div class="reply_button_wrap">
 			<button>답변 쓰기</button>
 		</div>

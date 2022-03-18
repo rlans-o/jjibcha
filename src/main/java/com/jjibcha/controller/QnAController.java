@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,19 +64,18 @@ public class QnAController {
 	   
 	   // QnA 게시판 글쓰기 get
 	   @GetMapping(value = "/QnA/write.do")
-		public String getQnAwrite(HttpServletRequest request, QnAVO vo, Model model, String mem_id) {
+		public String getQnAwrite(HttpServletRequest request, QnAVO vo, Model model, String mem_id, HttpSession session) {
 		   log.info("getQnAwrite");
 		   
-		  HttpSession session = request.getSession();
-		  
+		   Object loginInfo = session.getAttribute("mem_id");
 		   
 		   return "/qna/QnAwrite";
 		}
 	   
 	   // QnA 게시판 글쓰기 post
 	   @RequestMapping(value = "/QnA/write.do", method = RequestMethod.POST)
-		public String postQnAwrite(QnAVO vo, HttpSession session) {
-		   log.info("postQnAwrite");
+		public String postQnAwrite(@ModelAttribute QnAVO vo, HttpSession session) {
+		   log.info("postQnAwrite");  
 		   
 		   qnaService.write(vo);
 		   

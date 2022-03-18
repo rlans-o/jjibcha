@@ -155,7 +155,7 @@ a {
   	white-space: nowrap;
  	width: 100px;
   	height: 20px;
-  	margin-left: 40px;
+  	margin-left: 25px;
 }
 
 .price{
