@@ -21,7 +21,7 @@
   	<!-- 상품 리스트 -->
 	<select id="goodsGetList" resultType="com.jjibcha.vo.GoodsVO">
 	
-		select  goods_id, goods_name, goods_stock
+		select  *
 		from goods 
 		<if test="word != null">
 			where (goods_name like concat ('%', #{word}, '%'))

@@ -43,7 +43,7 @@
 </style>
 
 <div class="allblock">
-	<h1 align="center">상품 등록</h1>
+	<h1 align="center">GOODS 등록</h1>
 	<form id="enrollForm" action="/Admin/Goods/enroll.do" method="post"  enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="goods_name">상품 이름 : </label>

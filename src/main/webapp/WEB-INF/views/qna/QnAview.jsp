@@ -165,7 +165,7 @@
 		<tr>
 			<td colspan="2">
 			<input type="hidden" name="qna_id" value="${vo.qna_id }">
-				<c:if test="${member.mem_id == vo.mem_id }">
+				<c:if test="${member.mem_id == vo.mem_id || member.adminCk == 1}">
 					<a href="/QnA/update.do?qna_id=${vo.qna_id}" class="btn btn-primary">수정</a>
 					<a href="#" class="btn btn-primary" id="deleteBtn">삭제</a>
 				</c:if> 
@@ -246,7 +246,7 @@ $(document).ready(function() {
 	/* 답변 수정 버튼 */
 	$(document).on('click', '.update_reply_btn', function(e){
 		e.preventDefault();
-		let replyId = $(this).attr("href");		 
+		let qnareplyId = $(this).attr("href");		 
 		let popUrl = "/qnareplyUpdate?qnareplyId=" + qnareplyId + "&qna_id=" + '${vo.qna_id}' + "&mem_id=" + '${member.mem_id}';	
 		let popOption = "width = 490px, height=490px, top=300px, left=300px, scrollbars=yes"	
 		
@@ -288,7 +288,7 @@ $(document).ready(function() {
 	function makeReplyContent(obj){
 		
 		if(obj.list.length === 0){
-			$(".reply_not_div").html('<span>리뷰가 없습니다.</span>');
+			$(".reply_not_div").html('<span>답변이 없습니다.</span>');
 			$(".reply_content_ul").html('');
 		} else{
 			

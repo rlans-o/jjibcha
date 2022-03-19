@@ -31,7 +31,9 @@
   	
   	<!-- 검색에 사용되는 조건 처리문 -->
   	<sql id="search">
-  		
+  		<if test="word != null">
+					where (qna_title like concat ('%', #{word}, '%'))
+		</if>
   	</sql>
  
   	

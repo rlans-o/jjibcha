@@ -153,7 +153,7 @@
 		    	where mem_id like concat('%',#{word}, '%')
 		    </if>
 		    order by orderdate desc
-		    limit #{skip}, #{endRow}
+		    limit #{skip}, #{amount}
 		    
 	</select>	
 	

@@ -86,7 +86,7 @@
     font-size: 18px;
     line-height: 20px;
     position: absolute;
-    margin-left: 400px;
+    margin-left: 450px;
     background-color: #c3daf7;
 }
 
@@ -129,7 +129,7 @@
 
 <div class="admin_content_wrap">
 	<div class="admin_content_subject">
-		<span>상품 관리</span>
+		<span>GOODS manage</span>
 	</div>
 	
 	 <div class="goods_table_wrap">
@@ -261,7 +261,7 @@ $(document).ready(function(){
 let searchForm = $('#searchForm');
 let moveForm = $('#moveForm');
 
-/* 작거 검색 버튼 동작 */
+/*  검색 버튼 동작 */
 $("#searchForm button").on("click", function(e){
 	
 	e.preventDefault();

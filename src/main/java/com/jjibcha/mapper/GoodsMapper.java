@@ -51,10 +51,10 @@ public interface GoodsMapper {
 	public int delete(int goods_id);	
 	
 	/* 주문 상품 리스트 */
-	public List<OrderVO> getOrderList(PageObject pageObject);	
+	public List<OrderVO> getOrderList(Criteria cri);	
 	
 	/* 주문 총 갯수 */
-	public int getOrderTotal(PageObject pageObject);
+	public int getOrderTotal(Criteria cri);
 	
 	/* 상품 id 이름 */
 	public GoodsVO getGoodsidName(int goods_id);

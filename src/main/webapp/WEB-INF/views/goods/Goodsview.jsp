@@ -327,7 +327,8 @@ function makeReplyContent(obj){
 		
 		const list = obj.list;
 		const pf = obj.pageInfo;
-		const userId = '${member.mem_id}';		
+		const userId = '${member.mem_id}';	
+		const admin = '${member.adminCk == 1}'
 		
 		/* list */
 		

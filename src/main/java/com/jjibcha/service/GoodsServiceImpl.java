@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jjibcha.mapper.AttachMapper;
 import com.jjibcha.mapper.GoodsMapper;
+import com.jjibcha.mapper.ReplyMapper;
 import com.jjibcha.vo.AttachImageVO;
 import com.jjibcha.vo.Criteria;
 import com.jjibcha.vo.GoodsVO;
@@ -30,6 +31,9 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
 	private AttachMapper attachMapper;
+	
+	@Autowired
+	private ReplyMapper replyMapper;
 
 	@Override
 	public List<GoodsVO> list(Criteria cri) {
@@ -138,17 +142,15 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<OrderVO> getOrderList(PageObject pageObject) {
+	public List<OrderVO> getOrderList(Criteria cri) {
 
-		pageObject.setTotalRow(goodsMapper.getOrderTotal(pageObject));
-
-		return goodsMapper.getOrderList(pageObject);
+		return goodsMapper.getOrderList(cri);
 	}
 
 	@Override
-	public int getOrderTotal(PageObject pageObject) {
+	public int getOrderTotal(Criteria cri) {
 
-		return goodsMapper.getOrderTotal(pageObject);
+		return goodsMapper.getOrderTotal(cri);
 	}
 
 	@Override

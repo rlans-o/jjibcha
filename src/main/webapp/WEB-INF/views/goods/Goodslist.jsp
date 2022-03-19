@@ -103,7 +103,7 @@
 
 
 <div class="allblock">
-	<h1 align="center">상품 리스트</h1>
+	<h1 align="center">GOODS</h1>
 
 <div class="search_wrap">
 		<form id="searchForm" action="/Search" method="get">

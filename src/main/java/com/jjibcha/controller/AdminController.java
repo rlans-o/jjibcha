@@ -261,15 +261,15 @@ public class AdminController {
 	
 	/* 주문 현황 페이지 */
 	@GetMapping("/Admin/orderList")
-	public String orderListGET(PageObject pageObject, Model model) {
+	public String orderListGET(Criteria cri, Model model) {
 		
 		log.info("===========================getorderList");
 		
-		List<OrderVO> list = goodsService.getOrderList(pageObject);
+		List<OrderVO> list = goodsService.getOrderList(cri);
 		log.info("list : "+list);
 		if (!list.isEmpty()) {
 			model.addAttribute("list", list);
-			model.addAttribute("pageObject", pageObject);
+			model.addAttribute("pageMaker", new PageVO(cri, goodsService.getOrderTotal(cri)));
 		} else {
 			model.addAttribute("listCheck", "empty");
 		}

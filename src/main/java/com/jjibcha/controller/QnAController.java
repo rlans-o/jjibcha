@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jjibcha.service.QnAService;
+import com.jjibcha.service.QnaReplyService;
 import com.jjibcha.service.UserService;
 import com.jjibcha.vo.Criteria;
+import com.jjibcha.vo.GoodsVO;
+import com.jjibcha.vo.PageVO;
 import com.jjibcha.vo.QnAVO;
+import com.jjibcha.vo.QnaReplyVO;
+import com.jjibcha.vo.ReplyVO;
 import com.jjibcha.vo.UserVO;
 
 import lombok.extern.log4j.Log4j;
@@ -34,6 +39,9 @@ public class QnAController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private QnaReplyService qnaReplyService;
+	
 	// QnA 게시판 페이지
 	   @RequestMapping(value = "/QnA/list.do", method = RequestMethod.GET)
 	   // PageObject에서 데이터가 넘어오지 않으면 기본페이지 1 , 페이지당 데이터의 갯수는 10으로 한다.
@@ -47,6 +55,12 @@ public class QnAController {
 		   // 2페이지 이상이되면 페이지네이션을 표시한다.
 		   model.addAttribute("cri", cri);
 		   model.addAttribute("memberInfo", userService.getMemberInfo(mem_id));
+		   
+		   int total = qnaService.getRow(cri);
+			
+			PageVO pageMake = new PageVO(cri, total);
+			
+			model.addAttribute("pageMaker", pageMake);
 		   
 		   return "/qna/QnA";
 		}
@@ -113,7 +127,7 @@ public class QnAController {
 		   return "redirect:/QnA/list.do";
 		}
 	   
-	   /* 댓글 쓰기 */
+	   /* 답변 쓰기 */
 		@GetMapping("/qnareplyEnroll/{mem_id}")
 		public String qnareplyEnrollWindowGET(@PathVariable("mem_id")String mem_id, int qna_id, Model model) {
 			QnAVO qna = qnaService.getqna_id(qna_id);
@@ -121,6 +135,17 @@ public class QnAController {
 			model.addAttribute("mem_id", mem_id);
 			
 			return "/qnareplyEnroll";
+		}
+		
+		/* 답변 수정 팝업창 */
+		@GetMapping("/qnareplyUpdate")
+		public String replyUpdateWindowGET(QnaReplyVO vo, Model model) {
+			QnAVO qna = qnaService.getqna_id(vo.getQna_id());
+			model.addAttribute("qnaInfo", qna);
+			model.addAttribute("qnareplyInfo", qnaReplyService.getUpdateReply(vo.getQnareplyId()));
+			model.addAttribute("mem_id", vo.getMem_id());
+			
+			return "/qnareplyUpdate";
 		}
 	   
 	   

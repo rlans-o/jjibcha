@@ -142,9 +142,65 @@ ul{
 }
 
 	/* 검색 영역 */
-
+.search_wrap{
+	margin-top:15px;
+}
+.search_input{
+    position: relative;
+    text-align:center;	
+}
 .search_input input[name='word']{
+	padding: 4px 10px;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+.search_btn{
+	height: 32px;
+    width: 80px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    position: absolute;
+    margin-left: 450px;
+    background-color: #c3daf7;
+}
 
+
+	/* 페이지 버튼 인터페이스 */
+.pageMaker_wrap{
+	position: absolute;
+	top: 400px;
+	left: 600px;
+	text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.pageMaker{
+    list-style: none;
+    display: inline-block;
+}	
+.pageMaker_btn {
+    float: left;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 20px;
+}
+.active{
+	border : 2px solid black;
+	font-weight:400;
+}
+.next, .prev {
+    border: 1px solid #ccc;
+    padding: 0 10px;
+}
+.pageMaker_btn a:link {color: black;}
+.pageMaker_btn a:visited {color: black;}
+.pageMaker_btn a:active {color: black;}
+.pageMaker_btn a:hover {color: black;}
+.next a, .prev a {
+    color: #ccc;
 }
 
 /* float 속성 해제 */
@@ -166,7 +222,7 @@ ul{
 
 <div class="admin_content_wrap">
 	<div class="admin_content_subject">
-		<span>주문 현황</span>
+		<span>ORDER</span>
 	</div>
 	<div class="author_table_wrap">
 		<!-- 게시물 O -->
@@ -213,7 +269,7 @@ ul{
 	<div class="search_wrap">
 		<form id="searchForm" action="/Admin/orderList" method="get">
 			<div class="search_input">
-				<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
+				<input type="text" name="word" value='<c:out value="${pageMaker.cri.word}"></c:out>'>
 				<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
 				<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
 				<button class='btn search_btn'>검 색</button>
@@ -247,6 +303,7 @@ ul{
 	</ul>
 
 </div>
+
 
 <form id="moveForm" action="/Admin/orderList" method="get">
 	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"> 
