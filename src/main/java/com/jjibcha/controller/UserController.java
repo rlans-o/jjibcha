@@ -88,7 +88,9 @@ public class UserController {
 			session.setAttribute("member", login);
 		} else {
 			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", 0);
+			rttr.addFlashAttribute("msg", false);
+			
+			return "redirect:/User/login.do";
 		}
 
 		return "redirect:/index";

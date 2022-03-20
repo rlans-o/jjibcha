@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 	
-	<h1>예외 처리 페이지</h1>
+	<h1>잘못 된 방식으로 접근 했습니다. 뒤로 가기를 눌러주세요.</h1>
 	<h4>${exception.message }</h4>
 	
 <%-- 	<h4><c:out value="${exception.message }"></c:out></h4> --%>
